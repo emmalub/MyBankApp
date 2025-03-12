@@ -1,4 +1,5 @@
 using DataAccessLayer.Models;
+using DataAccessLayer.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,6 +15,12 @@ namespace MyBankApp
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
             builder.Services.AddDbContext<BankAppDataContext>(options =>
                 options.UseSqlServer(connectionString));
+
+            //mina start//
+            builder.Services.AddScoped<CustomerRepository>();
+
+            //mina slut//
+
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
             builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
@@ -22,6 +29,7 @@ namespace MyBankApp
             builder.Services.AddRazorPages();
 
             builder.Services.AddTransient<DataInitializer>();
+           
 
             var app = builder.Build();
 
