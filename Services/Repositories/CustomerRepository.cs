@@ -13,22 +13,26 @@ namespace DataAccessLayer.Repositories
     /// </summary>
     public class CustomerRepository
     {
-        private readonly BankAppDataContext _context;
+        private readonly BankAppDataContext _dbContext;
 
-        public CustomerRepository(BankAppDataContext context)
+        public CustomerRepository(BankAppDataContext dbContext)
         {
-            _context = context;
+            _dbContext = dbContext;
         }
 
         public int GetCustomerCount()
         {
-            return _context.Customers.Count();
+            return _dbContext.Customers.Count();
         }
 
         public async Task<List<Customer>> GetAllCustomersAsync()
         {
-            return await _context.Customers.ToListAsync();
+            return await _dbContext.Customers.ToListAsync();
+        }
+
+        public IQueryable<Customer> GetAllCustomers()
+        {
+            return _dbContext.Customers.AsQueryable();
         }
     }
-
 }

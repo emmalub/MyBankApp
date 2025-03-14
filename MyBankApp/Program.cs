@@ -2,6 +2,8 @@ using DataAccessLayer.Models;
 using DataAccessLayer.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Services.Services;
+
 
 namespace MyBankApp
 {
@@ -18,18 +20,17 @@ namespace MyBankApp
 
             //mina start//
             builder.Services.AddScoped<CustomerRepository>();
+            builder.Services.AddTransient<ICustomerService, CustomerService>();
 
             //mina slut//
 
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-
             builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<BankAppDataContext>();
             builder.Services.AddRazorPages();
 
             builder.Services.AddTransient<DataInitializer>();
-           
 
             var app = builder.Build();
 
