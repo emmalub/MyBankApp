@@ -8,7 +8,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccessLayer.Repositories
 {
-
+    /// <summary>
+    /// Detta lager ansvarar för datalagring och hantering av CRUD-operationer.
+    /// </summary>
     public class CustomerRepository
     {
         private readonly BankAppDataContext _context;
