@@ -8,7 +8,8 @@
         public string City { get; set; }
         public string Country { get; set; }
 
-        //public List<CustomerViewModel> Customers { get; set; }
+        public string Name => $"{Givenname} {Surname}";
+    //public List<CustomerViewModel> Customers { get; set; }
 
-    }
+}
 }

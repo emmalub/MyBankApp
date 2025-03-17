@@ -22,19 +22,20 @@ namespace MyBankApp.Pages
         }
         public List<CustomerViewModel> Customers { get; set; }
 
+
         public void OnGet(string sortColumn, string sortOrder)
         {
             Customers = _customerService.GetSortedCustomers(sortColumn, sortOrder)
-                .Take(50)
-                .Select(c => new CustomerViewModel
-                {
-                    Id = c.CustomerId,
-                    Givenname = c.Givenname,
-                    Surname = c.Surname,
-                    City = c.City,
-                    Country = c.Country
-                }).ToList();
+           .Take(50)
+           .Select(c => new CustomerViewModel
+           {
+               Id = c.CustomerId,
+               Givenname = c.Givenname,
+               Surname = c.Surname,
+               Country = c.Country,
+               City = c.City
+           })
+           .ToList();
         }
-
     }
 }

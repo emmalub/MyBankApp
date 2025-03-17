@@ -27,37 +27,31 @@ namespace Services.Services
 
         public List<Customer> GetSortedCustomers(string sortColumn, string sortOrder)
         {
-            var query = _repository.GetAllCustomers();
+            var query = _repository.GetAllCustomers().AsQueryable();
 
             if (sortColumn == "Id")
                 if (sortOrder == "asc")
-                    query = query.OrderBy(s => s.CustomerId);
+                    query = query.OrderBy(c => c.CustomerId);
                 else if (sortOrder == "desc")
-                    query = query.OrderByDescending(s => s.CustomerId);
+                    query = query.OrderByDescending(c => c.CustomerId);
 
             if (sortColumn == "Name")
                 if (sortOrder == "asc")
-                    query = query.OrderBy(s => s.Givenname);
+                    query.OrderBy(c => c.Givenname).ThenBy(c => c.Surname);
                 else if (sortOrder == "desc")
-                    query = query.OrderByDescending(s => s.Givenname);
-
-            if (sortColumn == "Surname")
-                if (sortOrder == "asc")
-                    query = query.OrderBy(s => s.Surname);
-                else if (sortOrder == "desc")
-                    query = query.OrderByDescending(s => s.Surname);
+                    query = query.OrderByDescending(c => c.Givenname).ThenBy(c => c.Surname);
 
             if (sortColumn == "Country")
                 if (sortOrder == "asc")
-                    query = query.OrderBy(s => s.Country);
+                    query = query.OrderBy(c => c.Country);
                 else if (sortOrder == "desc")
-                    query = query.OrderByDescending(s => s.Country);
+                    query = query.OrderByDescending(c => c.Country);
 
             if (sortColumn == "City")
                 if (sortOrder == "asc")
-                    query = query.OrderBy(s => s.City);
+                    query = query.OrderBy(c => c.City);
                 else if (sortOrder == "desc")
-                    query = query.OrderByDescending(s => s.City);
+                    query = query.OrderByDescending(c => c.City);
             
             return query.ToList();
         }

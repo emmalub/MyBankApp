@@ -77,11 +77,12 @@
         {
             <tr>
                 <td>@supp.Id</td>
-                <td>@supp.Givenname</td>
-                <td>@supp.Surname</td>
+                <td>@supp.Name</td>
                 <td>@supp.City</td>
                 <td>@supp.Country</td>
-                <td><a asp-page="/Supplier" asp-route-id="@supp.Id" class="btn btn-primary">View</a></td>
+                <td><a asp-page="/Customer" asp-route-id="@supp.Id" class="custom-btn fs-5">
+                    <i class="fa-solid fa-eye"></i>DETAILS</a></td>
+                @* <td><a asp-page="/Customer" asp-route-id="@supp.Id" class="btn btn-primary">View</a></td> *@
             </tr>
         }
     </tbody>
