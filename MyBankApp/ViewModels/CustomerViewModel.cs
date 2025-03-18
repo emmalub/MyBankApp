@@ -10,6 +10,6 @@
 
         public string Name => $"{Givenname} {Surname}";
     //public List<CustomerViewModel> Customers { get; set; }
-
+        
 }
 }

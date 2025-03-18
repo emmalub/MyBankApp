@@ -34,5 +34,12 @@ namespace DataAccessLayer.Repositories
         {
             return _dbContext.Customers.AsQueryable();
         }
+
+        public int GetSwedishCustomerCount()
+        {
+            return _dbContext.Customers
+                .Where(c => c.Country == "Sweden")  
+                .Count(); 
+        }
     }
 }
