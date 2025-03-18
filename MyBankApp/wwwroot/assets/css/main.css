@@ -902,6 +902,20 @@ section,
     margin: 0 auto;*/ /* Centrera bilden inom boxen */
     /*max-width: 100%;*/ /* Se till att bilden inte blir för stor på små skärmar */
 /*}*/
+
+.flag-icon-large {
+    font-size: 120px;
+}
+
+.icon-box {
+    text-align: center;
+    line-height: 150px; /* Justera efter behov för att centrera vertikalt */
+}
+
+    .icon-box .flag-icon {
+        font-size: 120px; /* Justera storleken på flaggan efter behov */
+    }
+
 .hero .icon-box {
     background-color: var(--surface-color);
     padding: 50px 30px;
@@ -919,6 +933,7 @@ section,
         font-weight: 700;
         margin-bottom: 15px;
         font-size: 18px;
+        text-align: center;
     }
 
         .hero .icon-box .title a {
