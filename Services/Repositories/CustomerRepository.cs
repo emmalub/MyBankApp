@@ -45,5 +45,23 @@ namespace DataAccessLayer.Repositories
                 .Where(c => c.Country == "Sweden")  
                 .Count(); 
         }
+        public int GetNorwegianCustomerCount()
+        {
+            return _dbContext.Customers
+                .Where(c => c.Country == "Norway")
+                .Count();
+        }
+        public int GetDanishCustomerCount()
+        {
+            return _dbContext.Customers
+                .Where(c => c.Country == "Denmark")
+                .Count();
+        }
+        public int GetFinnishCustomerCount()
+        {
+            return _dbContext.Customers
+                .Where(c => c.Country == "Finland")
+                .Count();
+        }
     }
 }
