@@ -8,6 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\assets\img\flagga-dk.jpg" />
+    <None Include="wwwroot\assets\img\flagga-fi.png" />
+    <None Include="wwwroot\assets\img\flagga-no.png" />
+    <None Include="wwwroot\assets\img\flagga-sv.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="9.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="9.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="9.0.2" />

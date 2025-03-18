@@ -895,6 +895,13 @@ section,
         background: color-mix(in srgb, var(--accent-color), transparent 15%);
     }
 
+/*.hero .flag-icon {
+    width: 100px;*/  /* Justera storleken på flaggan */
+    /*height: auto;*/ /* Bevara bildens proportioner */
+    /*display: block;
+    margin: 0 auto;*/ /* Centrera bilden inom boxen */
+    /*max-width: 100%;*/ /* Se till att bilden inte blir för stor på små skärmar */
+/*}*/
 .hero .icon-box {
     background-color: var(--surface-color);
     padding: 50px 30px;
