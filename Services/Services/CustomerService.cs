@@ -25,9 +25,14 @@ namespace Services.Services
 
 
 
-        public IQueryable<Customer> GetSortedCustomers(string sortColumn, string sortOrder)
+        public IQueryable<Customer> GetSortedCustomers(string sortColumn, string sortOrder, string q)
         {
             var query = _repository.GetAllCustomers().AsQueryable();
+
+            if (!string.IsNullOrEmpty(q))
+            {
+                query = query.Where(c => c.Givenname.Contains(q) || c.Surname.Contains(q) || c.City.Contains(q) || c.Country.Contains(q));
+            }
 
             switch (sortColumn)
             {
@@ -57,5 +62,5 @@ namespace Services.Services
             return query;
         }
 
-    }
+           }
 }

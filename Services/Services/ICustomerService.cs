@@ -10,6 +10,6 @@ namespace Services.Services
 {
     public interface ICustomerService
     {
-        IQueryable<Customer> GetSortedCustomers(string sortColumn, string sortOrder);
+        IQueryable<Customer> GetSortedCustomers(string sortColumn, string sortOrder, string q);
     }
 }

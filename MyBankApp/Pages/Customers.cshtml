@@ -2,12 +2,19 @@
 @model MyBankApp.Pages.CustomersModel
 @{
 }
+
+@*Search*@
+<form method="get">
+    <input type="text" name="q" value="@Request.Query["q"]" placeholder="Search customers..." />    <input type="submit" value="Search" />
+</form>
+
 <table class="table table-striped">
     <thead>
         <tr>
             <th scope="col">
                 Id
                 <a asp-page="/Customers"
+                   asp-route-q="@Model.Q"
                    asp-route-sortColumn="Id"
                    asp-route-sortOrder="asc"
                    style="text-decoration:none">
@@ -15,6 +22,7 @@
 
                 </a>
                 <a asp-page="/Customers"
+                   asp-route-q="@Model.Q"
                    asp-route-sortColumn="Id"
                    asp-route-sortOrder="desc"
                    style="text-decoration:none">
@@ -24,6 +32,7 @@
             <th scope="col">
                 Customer Name
                 <a asp-page="/Customers"
+                   asp-route-q="@Model.Q"
                    asp-route-sortColumn="Name"
                    asp-route-sortOrder="asc"
                    style="text-decoration:none">
@@ -31,6 +40,7 @@
 
                 </a>
                 <a asp-page="/Customers"
+                   asp-route-q="@Model.Q"
                    asp-route-sortColumn="Name"
                    asp-route-sortOrder="desc"
                    style="text-decoration:none">
@@ -40,6 +50,7 @@
             <th scope="col">
                 Customer City
                 <a asp-page="/Customers"
+                   asp-route-q="@Model.Q"
                    asp-route-sortColumn="City"
                    asp-route-sortOrder="asc"
                    style="text-decoration:none">
@@ -47,6 +58,7 @@
 
                 </a>
                 <a asp-page="/Customers"
+                   asp-route-q="@Model.Q"
                    asp-route-sortColumn="City"
                    asp-route-sortOrder="desc"
                    style="text-decoration:none">
@@ -56,6 +68,7 @@
             <th scope="col">
                 Customer Country
                 <a asp-page="/Customers"
+                   asp-route-q="@Model.Q"
                    asp-route-sortColumn="Country"
                    asp-route-sortOrder="asc"
                    style="text-decoration:none">
@@ -63,6 +76,7 @@
 
                 </a>
                 <a asp-page="/Customers"
+                   asp-route-q="@Model.Q"
                    asp-route-sortColumn="Country"
                    asp-route-sortOrder="desc"
                    style="text-decoration:none">

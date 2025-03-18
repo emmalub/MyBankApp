@@ -27,8 +27,9 @@ namespace MyBankApp.Pages
         public string SortOrder { get; set; }
         public List<CustomerViewModel> Customers { get; set; }
         public int PageSize { get; set; } = 25;
+        public string Q { get; set; }
 
-        public void OnGet(string sortColumn = "Name", string sortOrder = "asc", int pageNo = 1)
+        public void OnGet(string sortColumn = "Name", string sortOrder = "asc", int pageNo = 1, string q = "")
         {
             if (pageNo < 1)
                 pageNo = 1;
@@ -37,7 +38,9 @@ namespace MyBankApp.Pages
             SortColumn = sortColumn;
             SortOrder = sortOrder;
 
-            var query = _customerService.GetSortedCustomers(SortColumn, SortOrder);
+            Q = q;
+
+            var query = _customerService.GetSortedCustomers(SortColumn, SortOrder, q);
 
             int totalCustomers = query.Count();
             TotalPages = (int)Math.Ceiling(totalCustomers / (double)PageSize);
