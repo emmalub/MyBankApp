@@ -11,6 +11,7 @@ namespace MyBankApp.Pages
 
         public int SwedishCustomerCount { get; set; }
         public int CustomerCount { get; set; }
+        public int AccountCount { get; set; }
 
         public IndexModel(CustomerRepository customerRepository)
         {
@@ -20,7 +21,7 @@ namespace MyBankApp.Pages
         public void OnGet()
         {
             CustomerCount = _customerRepository.GetCustomerCount();
-
+            AccountCount = _customerRepository.GetAccountCount();
             SwedishCustomerCount = _customerRepository.GetSwedishCustomerCount();
         }
     }
