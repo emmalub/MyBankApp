@@ -25,35 +25,36 @@ namespace Services.Services
 
 
 
-        public List<Customer> GetSortedCustomers(string sortColumn, string sortOrder)
+        public IQueryable<Customer> GetSortedCustomers(string sortColumn, string sortOrder)
         {
             var query = _repository.GetAllCustomers().AsQueryable();
 
-            if (sortColumn == "Id")
-                if (sortOrder == "asc")
-                    query = query.OrderBy(c => c.CustomerId);
-                else if (sortOrder == "desc")
-                    query = query.OrderByDescending(c => c.CustomerId);
+            switch (sortColumn)
+            {
+                case "Id":
+                    query = (sortOrder == "asc") ? query.OrderBy(c => c.CustomerId) : query.OrderByDescending(c => c.CustomerId);
+                    break;
 
-            if (sortColumn == "Name")
-                if (sortOrder == "asc")
-                    query.OrderBy(c => c.Givenname).ThenBy(c => c.Surname);
-                else if (sortOrder == "desc")
-                    query = query.OrderByDescending(c => c.Givenname).ThenBy(c => c.Surname);
+                case "Name":
+                    query = (sortOrder == "asc") ?
+                        query.OrderBy(c => c.Givenname).ThenBy(c => c.Surname) :
+                        query.OrderByDescending(c => c.Givenname).ThenByDescending(c => c.Surname);
+                    break;
 
-            if (sortColumn == "Country")
-                if (sortOrder == "asc")
-                    query = query.OrderBy(c => c.Country);
-                else if (sortOrder == "desc")
-                    query = query.OrderByDescending(c => c.Country);
+                case "Country":
+                    query = (sortOrder == "asc") ? query.OrderBy(c => c.Country) : query.OrderByDescending(c => c.Country);
+                    break;
 
-            if (sortColumn == "City")
-                if (sortOrder == "asc")
-                    query = query.OrderBy(c => c.City);
-                else if (sortOrder == "desc")
-                    query = query.OrderByDescending(c => c.City);
-            
-            return query.ToList();
+                case "City":
+                    query = (sortOrder == "asc") ? query.OrderBy(c => c.City) : query.OrderByDescending(c => c.City);
+                    break;
+
+                default:
+                    query = query.OrderBy(c => c.CustomerId); 
+                    break;
+            }
+
+            return query;
         }
 
     }
