@@ -11,5 +11,8 @@ namespace Services.Services
     public interface ICustomerService
     {
         IQueryable<Customer> GetSortedCustomers(string sortColumn, string sortOrder, string q);
+
+        Customer GetCustomerDetails(int customerId);
+        Customer GetCustomerWithDispositions(int id);
     }
 }

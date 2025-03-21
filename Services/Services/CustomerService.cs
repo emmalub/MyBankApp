@@ -62,7 +62,19 @@ namespace Services.Services
             return query;
         }
 
-
-
-           }
+        public Customer GetCustomerDetails(int customerId)
+        {
+            return _repository.GetAllCustomers()
+                .Include(c => c.Dispositions)
+                .ThenInclude(d => d.Account)
+                .FirstOrDefault(c => c.CustomerId == customerId);
+        }
+        public Customer GetCustomerWithDispositions(int id)
+        {
+            return _repository.GetAllCustomers()
+                .Include(c => c.Dispositions)
+                .ThenInclude(d => d.Account)
+                .FirstOrDefault(c => c.CustomerId == id);
+        }
+    }
 }

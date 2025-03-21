@@ -25,7 +25,7 @@ namespace MyBankApp.Pages
         public int TotalPages { get; set; } = 1;
         public string SortColumn { get; set; }
         public string SortOrder { get; set; }
-        public List<CustomerViewModel> Customers { get; set; }
+        public List<CustomerViewModel> Customers { get; set; } = new List<CustomerViewModel>();
         public int PageSize { get; set; } = 25;
         public string Q { get; set; }
 
