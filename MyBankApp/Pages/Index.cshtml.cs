@@ -8,6 +8,10 @@ namespace MyBankApp.Pages
     public class IndexModel : PageModel
     {
         private readonly CustomerRepository _customerRepository;
+        public IndexModel(CustomerRepository customerRepository)
+        {
+            _customerRepository = customerRepository;
+        }
 
         public int SwedishCustomerCount { get; set; }
         public int NorwegianCustomerCount { get; set; }
@@ -16,10 +20,6 @@ namespace MyBankApp.Pages
         public int CustomerCount { get; set; }
         public int AccountCount { get; set; }
 
-        public IndexModel(CustomerRepository customerRepository)
-        {
-            _customerRepository = customerRepository;
-        }
 
         public void OnGet()
         {

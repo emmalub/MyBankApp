@@ -19,7 +19,7 @@ namespace DataAccessLayer.Repositories
         {
             _dbContext = dbContext;
         }
-
+      
         public int GetCustomerCount()
         {
             return _dbContext.Customers.Count();

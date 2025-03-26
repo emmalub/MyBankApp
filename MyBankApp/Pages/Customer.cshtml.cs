@@ -6,24 +6,23 @@ using Services.Services;
 
 namespace MyBankApp.Pages
 {
+    [BindProperties]
     public class CustomerModel : PageModel
     {
         private readonly ICustomerService _customerService;
+        public CustomerViewModel Customer { get; set; }
 
         public CustomerModel(ICustomerService customerService)
         {
             _customerService = customerService;
         }
 
-        public CustomerViewModel Customer { get; set; }
-
-
-        public void OnGet(int customerId)
+        public IActionResult OnGet(int id)
         {
-            var customer = _customerService.GetCustomerDetails(customerId);
+            var customer = _customerService.GetCustomerDetails(id);
             if (customer == null)
             {
-                RedirectToPage("/Customers");
+                return RedirectToPage("/Customers");
             }
 
             Customer = new CustomerViewModel
@@ -50,7 +49,7 @@ namespace MyBankApp.Pages
                 .Where(d => d.Account != null)
                 .Sum(d => d.Account.Balance)
             };
-            return;
+            return Page();
         }
     }
 }
