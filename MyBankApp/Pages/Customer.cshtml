@@ -2,7 +2,6 @@
 @model MyBankApp.Pages.CustomerModel
 @{
 }
-
 <div class="container emp-profile">
     <form method="post">
         <div class="row d-flex justify-content-center">
@@ -13,12 +12,13 @@
             </div>
             <div class="column-md-5">
                 <div class="profile-work">
+                    <h2>Customer:</h2>
                     <h1>
                         @Model.Customer.Givenname @Model.Customer.Surname
                     </h1>
-                    <h2>
+                    <h3>
                         Total Balance: @Model.Customer.TotalBalance
-                    </h2>
+                    </h3>
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>

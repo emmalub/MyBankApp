@@ -766,7 +766,7 @@ h6 {
 
 .profile-work {
     padding: 2%;
-    margin-top: -15%;
+    margin-top: -3%;
     margin-left: -5%;
 }
 
@@ -781,10 +781,15 @@ h6 {
         font-size: 52px;
         color: var(--accent-color);
         font-weight: 600;
-        margin-top: 10%;
+        margin-top: 1%;
     }
 
     .profile-work h2 {
+        color: var(--accent-color);
+        font-weight: 400;
+        font-size: 32px;
+    }
+    .profile-work h3 {
         color: #909090;
         font-weight: 400;
         font-size: 18px;
