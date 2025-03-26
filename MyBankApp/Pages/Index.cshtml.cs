@@ -2,15 +2,19 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using DataAccessLayer.Repositories;
 using DataAccessLayer.Models;
+using Services.Repositories;
+
 
 namespace MyBankApp.Pages
 {
     public class IndexModel : PageModel
     {
         private readonly CustomerRepository _customerRepository;
-        public IndexModel(CustomerRepository customerRepository)
+        private readonly AccountRepository _accountRepository;
+        public IndexModel(CustomerRepository customerRepository, AccountRepository accountRepository)
         {
             _customerRepository = customerRepository;
+            _accountRepository = accountRepository;
         }
 
         public int SwedishCustomerCount { get; set; }
@@ -24,7 +28,7 @@ namespace MyBankApp.Pages
         public void OnGet()
         {
             CustomerCount = _customerRepository.GetCustomerCount();
-            AccountCount = _customerRepository.GetAccountCount();
+            AccountCount = _accountRepository.GetAccountCount();
             SwedishCustomerCount = _customerRepository.GetSwedishCustomerCount();
             NorwegianCustomerCount = _customerRepository.GetNorwegianCustomerCount();
             DanishCustomerCount = _customerRepository.GetDanishCustomerCount();

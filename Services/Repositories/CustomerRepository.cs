@@ -24,10 +24,7 @@ namespace DataAccessLayer.Repositories
         {
             return _dbContext.Customers.Count();
         }
-        public int GetAccountCount()
-        {
-            return _dbContext.Accounts.Count();
-        }
+  
         public async Task<List<Customer>> GetAllCustomersAsync()
         {
             return await _dbContext.Customers.ToListAsync();

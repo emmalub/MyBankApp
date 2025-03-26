@@ -2,6 +2,7 @@ using DataAccessLayer.Models;
 using DataAccessLayer.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Services.Repositories;
 using Services.Services;
 
 
@@ -21,6 +22,8 @@ namespace MyBankApp
             //mina start//
             builder.Services.AddScoped<CustomerRepository>();
             builder.Services.AddTransient<ICustomerService, CustomerService>();
+            builder.Services.AddScoped<AccountRepository>();
+            builder.Services.AddTransient<IAccountService, AccountService>();
 
             //mina slut//
 
