@@ -622,14 +622,14 @@ h6 {
     width: 250px;
     padding: 8px 12px;
     border: 2px solid #D4A5FF;*/ /* Din lila färg */
-    /*border-radius: 5px;
+/*border-radius: 5px;
     outline: none;
     transition: border-color 0.3s;
 }
 
     .search-input:focus {
         border-color: #FC6424;*/ /* Orange färg vid fokus */
-    /*}*/
+/*}*/
 
 .search-btn {
     background-color: #FC6424;
@@ -673,7 +673,6 @@ h6 {
     font-size: 16px;
     color: var(--accent-color);
     opacity: 0;
-
 }
 
     .search-input:focus {
@@ -739,11 +738,6 @@ h6 {
     cursor: pointer;
 }
 
-.proile-rating {
-    font-size: 12px;
-    color: #818182;
-    margin-top: 5%;
-}
 
     .proile-rating span {
         color: #495057;
@@ -756,18 +750,24 @@ h6 {
 }
 
     .profile-head .nav-tabs .nav-link {
+        color: var(--accent-color);
         font-weight: 600;
         border: none;
     }
 
         .profile-head .nav-tabs .nav-link.active {
+            color: var(--accent-color) !important;
             border: none;
-            border-bottom: 2px solid #0062cc;
+            border-bottom: 2px solid #432783;
+        }
+        .profile-head .nav-tabs .nav-link:hover {
+            color: #FF9C00 !important;
         }
 
 .profile-work {
-    padding: 14%;
+    padding: 2%;
     margin-top: -15%;
+    margin-left: -5%;
 }
 
     .profile-work p {
@@ -777,25 +777,37 @@ h6 {
         margin-top: 10%;
     }
 
-    .profile-work a {
-        text-decoration: none;
-        color: #495057;
+    .profile-work h1 {
+        font-size: 52px;
+        color: var(--accent-color);
         font-weight: 600;
-        font-size: 14px;
+        margin-top: 10%;
+    }
+
+    .profile-work h2 {
+        color: #909090;
+        font-weight: 400;
+        font-size: 18px;
     }
 
     .profile-work ul {
         list-style: none;
     }
 
-.profile-tab label {
+
+.accounts-tab label {
     font-weight: 600;
+    color: var(--default-font);
+    margin-top: 0;
+    margin-left: -20%;
 }
 
-.profile-tab p {
-    font-weight: 600;
-    color: #0062cc;
+.accounts-tab p {
+    font-weight: 400;
+    color: var(--default-font);
 }
+
+
 
 /*--------------------------------------------------------------
 # Global Footer
@@ -1163,11 +1175,11 @@ section,
     }
 
 /*.hero .flag-icon {
-    width: 100px;*/  /* Justera storleken på flaggan */
-    /*height: auto;*/ /* Bevara bildens proportioner */
-    /*display: block;
+    width: 100px;*/ /* Justera storleken på flaggan */
+/*height: auto;*/ /* Bevara bildens proportioner */
+/*display: block;
     margin: 0 auto;*/ /* Centrera bilden inom boxen */
-    /*max-width: 100%;*/ /* Se till att bilden inte blir för stor på små skärmar */
+/*max-width: 100%;*/ /* Se till att bilden inte blir för stor på små skärmar */
 /*}*/
 
 .flag-icon-large {
@@ -1607,13 +1619,21 @@ section,
 # Call To Action Section
 --------------------------------------------------------------*/
 .custom-btn i {
-    font-size: 1rem;
+    font-size: 1.2rem;
+    font-weight: 800;
     margin-right: 12px;
+    margin-left: -25px;
+}
+.custom-btn p {
+    font-size: 1rem;
+    font-weight: 400;
+    margin-right: 12px;
+    margin-left: -25px;
 }
 
 .custom-btn {
     background: none;
-    color: #6f6e6e;
+    color: var(--accent-color);
     border: none;
     padding: 0;
     font-size: 5px;
