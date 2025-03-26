@@ -1,4 +1,5 @@
-﻿namespace MyBankApp.ViewModels
+﻿
+namespace MyBankApp.ViewModels
 {
     public class CustomerViewModel
     {
@@ -13,9 +14,9 @@
         public int Age { get; set; }
         
         public string Gender { get; set; }
-        public string PersonalNumber { get; set; }
+        public string SocialSecurity { get; set; }
         public string Name => $"{Givenname} {Surname}";
-    //public List<CustomerViewModel> Customers { get; set; }
-        
-}
+        public List<AccountViewModel> Accounts { get; set; } = new();
+        public decimal TotalBalance { get; set; }
+    }
 }

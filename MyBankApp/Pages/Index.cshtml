@@ -1,4 +1,6 @@
 ﻿@page
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
@@ -15,8 +17,16 @@
                 <p>Welcome to a new bright day with us!</p>
             </div>
         </div>
+
         <div class="text-center" data-aos="zoom-out" data-aos-delay="100">
-            <a href="/Identity/Account/Login" class="btn-get-started">Login</a>
+            @if (!SignInManager.IsSignedIn(User))
+            {
+                <a href="/Identity/Account/Login" class="btn-get-started">
+                    Login
+                </a>
+            }
+
+            @* <a href="/Identity/Account/Login" class="btn-get-started">Login</a> *@
 
         </div>
 

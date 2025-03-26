@@ -2,3 +2,31 @@
 @model MyBankApp.Pages.CustomerModel
 @{
 }
+<h2>Customer Details</h2>
+<p>Name: @Model.Customer.Givenname @Model.Customer.Surname</p>
+<p>Email: @Model.Customer.Email</p>
+<p>Phone: @Model.Customer.Phone</p>
+<p>Address: @Model.Customer.Address</p>
+<p>Gender: @Model.Customer.Gender</p>
+<p>Age: @Model.Customer.Age</p>
+<p>Personal Number: @Model.Customer.SocialSecurity</p>
+<p>Total Balance: @Model.Customer.TotalBalance</p>
+
+<h3>Accounts</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Account ID</th>
+            <th>Balance</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var account in Model.Customer.Accounts)
+        {
+            <tr>
+                <td>@account.AccountId</td>
+                <td>@account.Balance</td>
+            </tr>
+        }
+    </tbody>
+</table>

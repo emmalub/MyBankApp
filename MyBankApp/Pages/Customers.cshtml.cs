@@ -13,7 +13,6 @@ namespace MyBankApp.Pages
     [Authorize(Roles = "Cashier")]
     public class CustomersModel : PageModel
     {
-        //private readonly BankAppDataContext _dbContext;
         private readonly ICustomerService _customerService;
 
         public CustomersModel(ICustomerService customerService)

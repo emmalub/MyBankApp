@@ -87,15 +87,15 @@
     </thead>
     <tbody>
 
-        @foreach (var supp in Model.Customers)
+        @foreach (var c in Model.Customers)
         {
             <tr>
-                <td>@supp.Id</td>
-                <td>@supp.Name</td>
-                <td>@supp.City</td>
-                <td>@supp.Country</td>
+                <td>@c.Id</td>
+                <td>@c.Name</td>
+                <td>@c.City</td>
+                <td>@c.Country</td>
                 <td>
-                    <a asp-page="/Customer" asp-route-id="@supp.Id" class="custom-btn fs-5">
+                    <a asp-page="/Customer" asp-route-id="@c.Id" class="custom-btn fs-5">
                         <i class="fa-solid fa-eye"></i>DETAILS
                     </a>
                 </td>

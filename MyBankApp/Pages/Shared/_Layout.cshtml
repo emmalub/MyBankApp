@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>PB - PeoplesBank</title>
@@ -38,13 +39,14 @@
 
     @*Fontawesome CDN*@
     <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
-          integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
-          crossorigin="anonymous" referrerpolicy="no-referrer" />
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flag-icon-css/css/flag-icon.min.css">
 </head>
-
+ @inject SignInManager<IdentityUser> SignInManager
+    @inject UserManager<IdentityUser> UserManager
 <body class="index-page">
 
     <header id="header" class="header d-flex align-items-center sticky-top">
@@ -86,9 +88,19 @@
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <a class="btn-getstarted" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
 
-            <a class="btn-getstarted" href="/Identity/Account/Login">Login</a>
-
+                <form id="logout-form" asp-area="Identity" asp-page="/Account/Logout" method="post" style="display:none;">
+                    <input type="hidden" name="returnUrl" value="@Url.Page("/Index", new { area = "" })" />
+                </form>
+                @* <a class="btn-getstarted" href="/Identity/Account/Logout">Logout</a> *@
+            }
+            else
+            {
+                <a class="btn-getstarted" href="/Identity/Account/Login">Login</a>
+            }
         </div>
     </header>
 
