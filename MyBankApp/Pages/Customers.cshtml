@@ -9,8 +9,16 @@
 
     <div class="container">
 
-        <form method="get">
-            <input type="text" name="q" value="@Request.Query["q"]" placeholder="Search customers..." />    <input type="submit" value="Search" />
+        @* <form method="get" class="search-form"> *@
+        @*     <input type="text" name="q" value="@Request.Query["q"]" placeholder="Search customers..." />     *@
+        @*     <input type="submit" value="Search" class="search-btn"/> *@
+        @* </form> *@
+
+        <form method="get" class="search-form">
+            <div class="search-container">
+                <i class="fa fa-search search-icon"></i>
+                <input type="text" name="q" value="@Request.Query["q"]" placeholder="Search customer.." class="search-input" />
+            </div>
         </form>
 
         <div class="table-responsive">
