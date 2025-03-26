@@ -4,105 +4,115 @@
 }
 
 @*Search*@
-<form method="get">
-    <input type="text" name="q" value="@Request.Query["q"]" placeholder="Search customers..." />    <input type="submit" value="Search" />
-</form>
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th scope="col">
-                Id
-                <a asp-page="/Customers"
-                   asp-route-q="@Model.Q"
-                   asp-route-sortColumn="Id"
-                   asp-route-sortOrder="asc"
-                   style="text-decoration:none">
-                    <i class="fa-solid fa-angle-up"></i>
+<div class="content">
 
-                </a>
-                <a asp-page="/Customers"
-                   asp-route-q="@Model.Q"
-                   asp-route-sortColumn="Id"
-                   asp-route-sortOrder="desc"
-                   style="text-decoration:none">
-                    <i class="fa-solid fa-angle-down"></i>
-                </a>
-            </th>
-            <th scope="col">
-                Customer Name
-                <a asp-page="/Customers"
-                   asp-route-q="@Model.Q"
-                   asp-route-sortColumn="Name"
-                   asp-route-sortOrder="asc"
-                   style="text-decoration:none">
-                    <i class="fa-solid fa-angle-up"></i>
+    <div class="container">
 
-                </a>
-                <a asp-page="/Customers"
-                   asp-route-q="@Model.Q"
-                   asp-route-sortColumn="Name"
-                   asp-route-sortOrder="desc"
-                   style="text-decoration:none">
-                    <i class="fa-solid fa-angle-down"></i>
-                </a>
-            </th>
-            <th scope="col">
-                Customer City
-                <a asp-page="/Customers"
-                   asp-route-q="@Model.Q"
-                   asp-route-sortColumn="City"
-                   asp-route-sortOrder="asc"
-                   style="text-decoration:none">
-                    <i class="fa-solid fa-angle-up"></i>
+        <form method="get">
+            <input type="text" name="q" value="@Request.Query["q"]" placeholder="Search customers..." />    <input type="submit" value="Search" />
+        </form>
 
-                </a>
-                <a asp-page="/Customers"
-                   asp-route-q="@Model.Q"
-                   asp-route-sortColumn="City"
-                   asp-route-sortOrder="desc"
-                   style="text-decoration:none">
-                    <i class="fa-solid fa-angle-down"></i>
-                </a>
-            </th>
-            <th scope="col">
-                Customer Country
-                <a asp-page="/Customers"
-                   asp-route-q="@Model.Q"
-                   asp-route-sortColumn="Country"
-                   asp-route-sortOrder="asc"
-                   style="text-decoration:none">
-                    <i class="fa-solid fa-angle-up"></i>
+        <div class="table-responsive">
 
-                </a>
-                <a asp-page="/Customers"
-                   asp-route-q="@Model.Q"
-                   asp-route-sortColumn="Country"
-                   asp-route-sortOrder="desc"
-                   style="text-decoration:none">
-                    <i class="fa-solid fa-angle-down"></i>
-                </a>
-            </th>
-        </tr>
-    </thead>
-    <tbody>
+            <table class="table table-striped custom-table">
+                <thead>
+                    <tr>
+                        <th scope="col">
+                            Id
+                            <a asp-page="/Customers"
+                               asp-route-q="@Model.Q"
+                               asp-route-sortColumn="Id"
+                               asp-route-sortOrder="asc"
+                               style="text-decoration:none">
+                                <i class="fa-solid fa-angle-up"></i>
 
-        @foreach (var c in Model.Customers)
-        {
-            <tr>
-                <td>@c.Id</td>
-                <td>@c.Name</td>
-                <td>@c.City</td>
-                <td>@c.Country</td>
-                <td>
-                    <a asp-page="/Customer" asp-route-id="@c.Id" class="custom-btn fs-5">
-                        <i class="fa-solid fa-eye"></i>
-                    </a>
-                </td>
-            </tr>
-        }
-        </tbody>
-        </table>
+                            </a>
+                            <a asp-page="/Customers"
+                               asp-route-q="@Model.Q"
+                               asp-route-sortColumn="Id"
+                               asp-route-sortOrder="desc"
+                               style="text-decoration:none">
+                                <i class="fa-solid fa-angle-down"></i>
+                            </a>
+                        </th>
+                        <th scope="col">
+                            Customer Name
+                            <a asp-page="/Customers"
+                               asp-route-q="@Model.Q"
+                               asp-route-sortColumn="Name"
+                               asp-route-sortOrder="asc"
+                               style="text-decoration:none">
+                                <i class="fa-solid fa-angle-up"></i>
+
+                            </a>
+                            <a asp-page="/Customers"
+                               asp-route-q="@Model.Q"
+                               asp-route-sortColumn="Name"
+                               asp-route-sortOrder="desc"
+                               style="text-decoration:none">
+                                <i class="fa-solid fa-angle-down"></i>
+                            </a>
+                        </th>
+                        <th scope="col">
+                            Customer City
+                            <a asp-page="/Customers"
+                               asp-route-q="@Model.Q"
+                               asp-route-sortColumn="City"
+                               asp-route-sortOrder="asc"
+                               style="text-decoration:none">
+                                <i class="fa-solid fa-angle-up"></i>
+
+                            </a>
+                            <a asp-page="/Customers"
+                               asp-route-q="@Model.Q"
+                               asp-route-sortColumn="City"
+                               asp-route-sortOrder="desc"
+                               style="text-decoration:none">
+                                <i class="fa-solid fa-angle-down"></i>
+                            </a>
+                        </th>
+                        <th scope="col">
+                            Customer Country
+                            <a asp-page="/Customers"
+                               asp-route-q="@Model.Q"
+                               asp-route-sortColumn="Country"
+                               asp-route-sortOrder="asc"
+                               style="text-decoration:none">
+                                <i class="fa-solid fa-angle-up"></i>
+
+                            </a>
+                            <a asp-page="/Customers"
+                               asp-route-q="@Model.Q"
+                               asp-route-sortColumn="Country"
+                               asp-route-sortOrder="desc"
+                               style="text-decoration:none">
+                                <i class="fa-solid fa-angle-down"></i>
+                            </a>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var c in Model.Customers)
+                    {
+                        <tr>
+                            <td>@c.Id</td>
+                            <td>@c.Name</td>
+                            <td>@c.City</td>
+                            <td>@c.Country</td>
+                            <td>
+                                <a asp-page="/Customer" asp-route-id="@c.Id" class="custom-btn fs-5">
+                                    <i class="fa-solid fa-eye"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
 <!-- Pagination Controls -->
 <div class="d-flex justify-content-center">
@@ -121,8 +131,7 @@
 
     @if (Model.CurrentPage < Model.TotalPages)
     {
-        <a 
-           asp-page="/Customers"
+        <a asp-page="/Customers"
            asp-route-sortColumn="@Model.SortColumn"
            asp-route-sortOrder="@Model.SortOrder"
            asp-route-pageNo="@(Model.CurrentPage + 1)"
