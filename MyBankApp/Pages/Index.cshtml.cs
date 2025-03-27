@@ -23,6 +23,15 @@ namespace MyBankApp.Pages
         public int FinnishCustomerCount { get; set; }
         public int CustomerCount { get; set; }
         public int AccountCount { get; set; }
+        public int DanishAccountCount { get; set; }
+        public int FinnishAccountCount { get; set; }
+        public int SwedishAccountCount { get; set; }
+        public int NorwegianAccountCount { get; set; }
+        public decimal NorwegianCapital { get; set; }
+        public decimal DanishCapital { get; set; }
+        public decimal FinnishCapital { get; set; }
+        public decimal SwedishCapital { get; set; }
+
 
 
         public void OnGet()
@@ -33,6 +42,14 @@ namespace MyBankApp.Pages
             NorwegianCustomerCount = _customerRepository.GetNorwegianCustomerCount();
             DanishCustomerCount = _customerRepository.GetDanishCustomerCount();
             FinnishCustomerCount = _customerRepository.GetFinnishCustomerCount();
-        }
+            DanishAccountCount = _accountRepository.GetDanishAccountCount();
+            FinnishAccountCount = _accountRepository.GetFinnishAccountCount();
+            SwedishAccountCount = _accountRepository.GetSwedishAccountCount();
+            NorwegianAccountCount = _accountRepository.GetNorwegianAccountCount();
+            NorwegianCapital = _accountRepository.GetNorwegianCapital();
+            DanishCapital = _accountRepository.GetDanishCapital();
+            FinnishCapital = _accountRepository.GetFinnishCapital();
+            SwedishCapital = _accountRepository.GetSwedishCapital();
+        }    
     }
 }

@@ -35,5 +35,61 @@ namespace Services.Repositories
         {
             return _dbContext.Accounts.Count();
         }
+
+        public int GetDanishAccountCount()
+        {
+            return _dbContext.Accounts
+                .Where(a => a.Dispositions.Any(d => d.Customer.Country == "Denmark"))
+                .Count();
+        }
+
+        public int GetFinnishAccountCount()
+        {
+            return _dbContext.Accounts
+                          .Where(a => a.Dispositions.Any(d => d.Customer.Country == "Finland"))
+                          .Count();
+        }
+
+        public int GetSwedishAccountCount()
+        {
+            return _dbContext.Accounts
+                          .Where(a => a.Dispositions.Any(d => d.Customer.Country == "Swedish"))
+                          .Count();
+        }
+
+        public int GetNorwegianAccountCount()
+        {
+            return _dbContext.Accounts
+                          .Where(a => a.Dispositions.Any(d => d.Customer.Country == "Norway"))
+                          .Count();
+        }
+
+        public decimal GetNorwegianCapital()
+        {
+            return _dbContext.Accounts
+                          .Where(a => a.Dispositions.Any(d => d.Customer.Country == "Norway"))
+                          .Sum(a => a.Balance);
+        }
+
+        public decimal GetDanishCapital()
+        {
+            return _dbContext.Accounts
+                          .Where(a => a.Dispositions.Any(d => d.Customer.Country == "Denmark"))
+                          .Sum(a => a.Balance);
+        }
+
+        public decimal GetFinnishCapital()
+        {
+            return _dbContext.Accounts
+                                      .Where(a => a.Dispositions.Any(d => d.Customer.Country == "Finland"))
+                                      .Sum(a => a.Balance);
+        }
+
+        public decimal GetSwedishCapital()
+        {
+            return _dbContext.Accounts
+                                      .Where(a => a.Dispositions.Any(d => d.Customer.Country == "Sweden"))
+                                      .Sum(a => a.Balance);
+        }
     }
 }
