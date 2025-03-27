@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.DTOs
 {
-    public class AccountDetailsDTO
+    public class AccountDTO
     {
         public int AccountId { get; set; }
         public decimal Balance { get; set; }
+        public DateOnly Created { get; set; }
+        public decimal LoansTotal { get; set; }
+        public List<LoanDTO>? Loans { get; set; }
         public List<TransactionDTO> Transactions { get; set; } = new List<TransactionDTO>();
     }
 

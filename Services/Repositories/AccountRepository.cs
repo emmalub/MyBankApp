@@ -20,12 +20,15 @@ namespace Services.Repositories
         }
         public IQueryable<Account> GetAllAccounts()
         {
-            return _dbContext.Accounts.AsQueryable();
+            return _dbContext.Accounts
+                .Include(a => a.Loans)
+                .AsQueryable();
         }
             
         public Account GetAccountById(int accountId)
         {
             return _dbContext.Accounts
+                .Include(a => a.Loans)
                 .First(a => a.AccountId == accountId);
         }
         public int GetAccountCount()

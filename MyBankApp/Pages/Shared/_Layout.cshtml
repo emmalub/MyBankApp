@@ -65,7 +65,10 @@
                     {
                         <li><a asp-page="/Customers">Customers</a></li>
                     }
-                    <li><a href="/Accounts">Accounts</a></li>
+                    @if (User.IsInRole("Cashier")||User.IsInRole("Admin"))
+                    {
+                        <li><a href="/Accounts">Accounts</a></li>
+                    }
                     <li class="dropdown">
                         <a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
                         <ul>

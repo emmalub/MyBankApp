@@ -24,7 +24,7 @@
                             Id
                             <a asp-page="/Accounts"
                                asp-route-q="@Model.Q"
-                               asp-route-sortColumn="Id"
+                               asp-route-sortColumn="AccountId"
                                asp-route-sortOrder="asc"
                                style="text-decoration:none">
                                 <i class="fa-solid fa-angle-up"></i>
@@ -32,7 +32,7 @@
                             </a>
                             <a asp-page="/Accounts"
                                asp-route-q="@Model.Q"
-                               asp-route-sortColumn="Id"
+                               asp-route-sortColumn="AccountId"
                                asp-route-sortOrder="desc"
                                style="text-decoration:none">
                                 <i class="fa-solid fa-angle-down"></i>
@@ -42,7 +42,7 @@
                             Balance
                             <a asp-page="/Accounts"
                                asp-route-q="@Model.Q"
-                               asp-route-sortColumn="Name"
+                               asp-route-sortColumn="Balance"
                                asp-route-sortOrder="asc"
                                style="text-decoration:none">
                                 <i class="fa-solid fa-angle-up"></i>
@@ -50,25 +50,7 @@
                             </a>
                             <a asp-page="/Accounts"
                                asp-route-q="@Model.Q"
-                               asp-route-sortColumn="Name"
-                               asp-route-sortOrder="desc"
-                               style="text-decoration:none">
-                                <i class="fa-solid fa-angle-down"></i>
-                            </a>
-                        </th>
-                        <th scope="col">
-                            Dispositions
-                            <a asp-page="/Accounts"
-                               asp-route-q="@Model.Q"
-                               asp-route-sortColumn="City"
-                               asp-route-sortOrder="asc"
-                               style="text-decoration:none">
-                                <i class="fa-solid fa-angle-up"></i>
-
-                            </a>
-                            <a asp-page="/Accounts"
-                               asp-route-q="@Model.Q"
-                               asp-route-sortColumn="City"
+                               asp-route-sortColumn="Balance"
                                asp-route-sortOrder="desc"
                                style="text-decoration:none">
                                 <i class="fa-solid fa-angle-down"></i>
@@ -78,7 +60,7 @@
                             Loans
                             <a asp-page="/Accounts"
                                asp-route-q="@Model.Q"
-                               asp-route-sortColumn="Country"
+                               asp-route-sortColumn="LoansTotal"
                                asp-route-sortOrder="asc"
                                style="text-decoration:none">
                                 <i class="fa-solid fa-angle-up"></i>
@@ -86,7 +68,25 @@
                             </a>
                             <a asp-page="/Accounts"
                                asp-route-q="@Model.Q"
-                               asp-route-sortColumn="Country"
+                               asp-route-sortColumn="LoansTotal"
+                               asp-route-sortOrder="desc"
+                               style="text-decoration:none">
+                                <i class="fa-solid fa-angle-down"></i>
+                            </a>
+                        </th>
+                        <th scope="col">
+                            Account opened
+                            <a asp-page="/Accounts"
+                               asp-route-q="@Model.Q"
+                               asp-route-sortColumn="Created"
+                               asp-route-sortOrder="asc"
+                               style="text-decoration:none">
+                                <i class="fa-solid fa-angle-up"></i>
+
+                            </a>
+                            <a asp-page="/Accounts"
+                               asp-route-q="@Model.Q"
+                               asp-route-sortColumn="Created"
                                asp-route-sortOrder="desc"
                                style="text-decoration:none">
                                 <i class="fa-solid fa-angle-down"></i>
@@ -101,8 +101,8 @@
                         <tr>
                             <td>@a.AccountId</td>
                             <td>@a.Balance</td>
-                            <td>@a.Dispositions</td>
-                            <td>@a.Loans</td>
+                            <td>@a.LoansTotal</td>
+                            <td>@a.Created</td>
                             <td>
                                 <a asp-page="/Accounts" asp-route-id="@a.AccountId" class="custom-btn fs-5">
                                     <i class="fa-solid fa-eye"></i>
@@ -120,7 +120,7 @@
 <div class="d-flex justify-content-center">
     @if (Model.CurrentPage > 1)
     {
-        <a asp-page="/Customers"
+        <a asp-page="/Accounts"
            asp-route-sortColumn="@Model.SortColumn"
            asp-route-sortOrder="@Model.SortOrder"
            asp-route-pageNo="@(Model.CurrentPage - 1)"
@@ -133,7 +133,7 @@
 
     @if (Model.CurrentPage < Model.TotalPages)
     {
-        <a asp-page="/Customers"
+        <a asp-page="/Accounts"
            asp-route-sortColumn="@Model.SortColumn"
            asp-route-sortOrder="@Model.SortOrder"
            asp-route-pageNo="@(Model.CurrentPage + 1)"

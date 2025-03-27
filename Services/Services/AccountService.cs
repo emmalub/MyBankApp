@@ -18,30 +18,53 @@ namespace Services.Services
         {
             _repository = repository;
         }
-
-        public IQueryable<Account> GetSortedAccounts(string sortColumn, string sortOrder, string q)
+        public List<AccountDTO> GetAllAccounts()
         {
-            var query = _repository.GetAllAccounts().AsQueryable();
-
-            if (!string.IsNullOrEmpty(q))
-            {
-                query = query.Where(a =>
-                     a.AccountId.ToString().Contains(q) ||
-                     a.Balance.ToString().Contains(q));
-            }
-
-
-            // Sortering
-            query = sortColumn switch
-            {
-                "Balance" => sortOrder == "desc" ? query.OrderByDescending(a => a.Balance) : query.OrderBy(a => a.Balance),
-                _ => sortOrder == "desc" ? query.OrderByDescending(a => a.AccountId) : query.OrderBy(a => a.AccountId)
-            };
+            return _repository.GetAllAccounts()
+                .Include(a => a.Loans)
+                .Select(a => new AccountDTO
+                {
+                    AccountId = a.AccountId,
+                    Balance = a.Balance,
+                    Created = a.Created,
+                    LoansTotal = a.Loans.Sum(l => l.Amount) 
+                })
+                .ToList();
+        }
+        public IQueryable<AccountDTO> GetSortedAccounts(string sortColumn, string sortOrder, string q)
+        {
+            var query = _repository.GetAllAccounts()
+       .Select(a => new AccountDTO
+       {
+           AccountId = a.AccountId,
+           Balance = a.Balance,
+           Created = a.Created,
+           LoansTotal = a.Loans.Sum(l => l.Amount) // ✅ Summerar lånens belopp
+       });
 
             return query;
+
+            //var query = _repository.GetAllAccounts().AsQueryable();
+
+            //if (!string.IsNullOrEmpty(q))
+            //{
+            //    query = query.Where(a =>
+            //         a.AccountId.ToString().Contains(q) ||
+            //         a.Balance.ToString().Contains(q));
+            //}
+
+
+            //// Sortering
+            //query = sortColumn switch
+            //{
+            //    "Balance" => sortOrder == "desc" ? query.OrderByDescending(a => a.Balance) : query.OrderBy(a => a.Balance),
+            //    _ => sortOrder == "desc" ? query.OrderByDescending(a => a.AccountId) : query.OrderBy(a => a.AccountId)
+            //};
+
+            //return query;
         }
 
-        public AccountDetailsDTO GetAccountDetails(int accountId)
+        public AccountDTO GetAccountDetails(int accountId)
         {
             var account = _repository.GetAllAccounts()
                 .Include(a => a.Transactions) // Ladda transaktioner
@@ -50,10 +73,18 @@ namespace Services.Services
             if (account == null)
                 return null;
 
-            return new AccountDetailsDTO
+            return new AccountDTO
             {
                 AccountId = account.AccountId,
                 Balance = account.Balance,
+                Created = account.Created,
+                Loans = account.Loans.Select(l => new LoanDTO
+                {
+                    LoanId = l.LoanId,
+                    Amount = l.Amount,
+                    Status = l.Status,
+                    Payments = l.Payments,
+                }).ToList(),
                 Transactions = account.Transactions
                     .Select(t => new TransactionDTO
                     {

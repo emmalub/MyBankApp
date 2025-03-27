@@ -50,12 +50,12 @@ namespace MyBankApp.Pages
             Accounts = query
                 .Skip((CurrentPage - 1) * PageSize)
                 .Take(PageSize)
-                .Select(c => new AccountViewModel
+                .Select(a => new AccountViewModel
                 {
-                    AccountId = c.AccountId,
-                    Balance = c.Balance,
-                    Dispositions = c.Dispositions,
-                    Loans = c.Loans
+                    AccountId = a.AccountId,
+                    Balance = a.Balance,
+                    Created = a.Created,
+                    LoansTotal = a.LoansTotal
                 })
                 .ToList();
         }

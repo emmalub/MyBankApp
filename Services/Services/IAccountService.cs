@@ -10,8 +10,8 @@ namespace Services.Services
 {
     public interface IAccountService
     {
-        IQueryable<Account> GetSortedAccounts(string sortColumn, string sortOrder, string q);
+        IQueryable<AccountDTO> GetSortedAccounts(string sortColumn, string sortOrder, string q);
 
-        public AccountDetailsDTO GetAccountDetails(int accountId);
+        public AccountDTO GetAccountDetails(int accountId);
     }
 }
