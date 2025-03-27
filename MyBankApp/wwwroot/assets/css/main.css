@@ -20,7 +20,7 @@
 /* Global Colors - The following color variables are used throughout the website. Updating them here will change the color scheme of the entire website */
 :root {
     --background-color: #ffffff; /* Background color for the entire website, including individual sections */
-    --default-color: #444444; /* Default color used for the majority of the text content across the entire website */
+    --default-color: #6c757d; /* Default color used for the majority of the text content across the entire website */
     --heading-color: #432783; /* Color for headings, subheadings and title throughout the website */
     --accent-color: #432783; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
     --surface-color: #ffffff; /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
@@ -534,10 +534,18 @@ h6 {
     # Custom Table Styling
 --------------------------------------------------------------*/
 .custom-table {
-    min-width: 900px;
+    width: 100%;
+    min-width: unset;
 }
 
-    .custom-table thead tr, .custom-table thead th {
+.small-table {
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto;
+    margin-left: -6%;
+}
+   
+        .custom-table thead tr, .custom-table thead th {
         padding-bottom: 30px;
         border-top: none;
         border-bottom: none !important;
@@ -548,11 +556,11 @@ h6 {
     }
 
     .custom-table tbody th, .custom-table tbody td {
-        color: #777;
+        color: var(--default-font);
         font-weight: 400;
         padding-bottom: 20px;
         padding-top: 20px;
-        font-weight: 300;
+        font-size: 15px;
         border: none;
         -webkit-transition: .3s all ease;
         -o-transition: .3s all ease;
@@ -583,6 +591,11 @@ h6 {
     }
 
         .custom-table tbody tr:hover td, .custom-table tbody tr:focus td {
+            color: var(--accent-color);
+            transform: scale(1.02);
+            transition: transform 0.3s ease-in-out;
+        }
+        .custom-table tbody tr:hover td, .custom-table tbody tr:focus p {
             color: var(--accent-color);
         }
 
@@ -1185,29 +1198,21 @@ section,
         background: color-mix(in srgb, var(--accent-color), transparent 15%);
     }
 
-/*.hero .flag-icon {
-    width: 100px;*/ /* Justera storleken på flaggan */
-/*height: auto;*/ /* Bevara bildens proportioner */
-/*display: block;
-    margin: 0 auto;*/ /* Centrera bilden inom boxen */
-/*max-width: 100%;*/ /* Se till att bilden inte blir för stor på små skärmar */
-/*}*/
-
 .flag-icon-large {
     font-size: 120px;
 }
 
 .icon-box {
     text-align: center;
-    line-height: 150px; /* Justera efter behov för att centrera vertikalt */
+    line-height: 150px; 
 }
 
     .icon-box .flag-icon {
-        font-size: 120px; /* Justera storleken på flaggan efter behov */
+        font-size: 100px; 
     }
 
 .hero .icon-box {
-    background-color: var(--surface-color);
+/*    background-color: var(--surface-color);*/
     padding: 50px 30px;
     position: relative;
     overflow: hidden;
@@ -1220,10 +1225,10 @@ section,
 }
 
     .hero .icon-box h1 {
-        font-size: 22px;
+        font-size: 18px;
         font-weight: 400;
         margin-top: -35px;
-        margin-bottom: 15px;
+        margin-bottom: 10px;
         text-align: center;
     }
 
