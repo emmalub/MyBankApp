@@ -1,0 +1,177 @@
+﻿@page
+@model MyBankApp.Pages.AccountModel
+@{
+}
+<div class="content">
+
+    <div class="container">
+
+
+        <form method="get" class="search-form">
+            <div class="search-container">
+                <i class="fa fa-search search-icon"></i>
+                <input type="text" name="q" value="@Request.Query["q"]" placeholder="Search transaction.." class="search-input" />
+            </div>
+        </form>
+
+        <h2>Account Details</h2>
+
+        <div class="table-responsive">
+
+            @if (Model.Account != null)
+            {
+                <p><strong>Account Number:</strong> @Model.Account.AccountId</p>
+                <p><strong>Balance:</strong> @Model.Account.Balance</p>
+
+                <h3>Transactions</h3>
+                <table class="table table-striped custom-table">
+                    <thead>
+                        <tr>
+                            <th scope"col">
+                                Date
+                                <a asp-page="/Account"
+                                   asp-route-q="@Model.Q"
+                                   asp-route-sortColumn="Date"
+                                   asp-route-sortOrder="asc"
+                                   style="text-decoration:none">
+                                    <i class="fa-solid fa-angle-up"></i>
+                                </a>
+
+                                <a asp-page="/Account"
+                                   asp-route-q="@Model.Q"
+                                   asp-route-sortColumn="Date"
+                                   asp-route-sortOrder="desc"
+                                   style="text-decoration:none">
+                                    <i class="fa-solid fa-angle-down"></i>
+                                </a>
+                            </th>
+                            <th scope"col">
+                                Amount
+                                <a asp-page="/Account"
+                                   asp-route-q="@Model.Q"
+                                   asp-route-sortColumn="Amount"
+                                   asp-route-sortOrder="asc"
+                                   style="text-decoration:none">
+                                    <i class="fa-solid fa-angle-up"></i>
+                                </a>
+
+                                <a asp-page="/Account"
+                                   asp-route-q="@Model.Q"
+                                   asp-route-sortColumn="Amount"
+                                   asp-route-sortOrder="desc"
+                                   style="text-decoration:none">
+                                    <i class="fa-solid fa-angle-down"></i>
+                                </a>
+                            </th>
+                            <th scope"col">
+                                Type
+                                <a asp-page="/Account"
+                                   asp-route-q="@Model.Q"
+                                   asp-route-sortColumn="Type"
+                                   asp-route-sortOrder="asc"
+                                   style="text-decoration:none">
+                                    <i class="fa-solid fa-angle-up"></i>
+                                </a>
+
+                                <a asp-page="/Account"
+                                   asp-route-q="@Model.Q"
+                                   asp-route-sortColumn="Type"
+                                   asp-route-sortOrder="desc"
+                                   style="text-decoration:none">
+                                    <i class="fa-solid fa-angle-down"></i>
+                                </a>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="transactions-table-body">
+                        @foreach (var t in Model.Transactions)
+                        {
+                            <tr>
+                                <td>@t.Date.ToString("yyyy-MM-dd")</td>
+                                <td>@t.Amount</td>
+                                <td>@t.Type</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                <!-- Button to load more transactions -->
+                @if (Model.TotalTransactions > Model.Transactions.Count)
+                {
+                    <button id="custom-btn" class="btn btn-primary" data-page="2">Load More Transactions</button>
+                }
+            }
+            else
+            {
+                <p>No account details found.</p>
+            }
+
+
+            @*                         <th scope="col"> *@
+            @*                             Transaction Date *@
+            @*                             <a asp-page="/Account" *@
+            @*                                asp-route-q="@Model.Q" *@
+            @*                                asp-route-sortColumn="TransactionDate" *@
+            @*                                asp-route-sortOrder="asc" *@
+            @*                                style="text-decoration:none"> *@
+            @*                                 <i class="fa-solid fa-angle-up"></i> *@
+
+            @*                             </a> *@
+            @*                             <a asp-page="/Account" *@
+            @*                                asp-route-q="@Model.Q" *@
+            @*                                asp-route-sortColumn="TransactionDate" *@
+            @*                                asp-route-sortOrder="desc" *@
+            @*                                style="text-decoration:none"> *@
+            @*                                 <i class="fa-solid fa-angle-down"></i> *@
+            @*                             </a> *@
+            @*                         </th> *@
+
+            @*                     </tr> *@
+            @*                 </thead> *@
+            @*             </table> *@
+            @*         </div> *@
+            @*     </div> *@
+            @* </div> *@
+
+
+
+            <script>
+                $(document).ready(function () {
+                    // Hämta accountId från Razor
+                    var accountId = @Model.Account.AccountId; // Razor infogar värdet här
+
+                    // Hantera Load More-knappen
+                    $('#load-more').click(function () {
+                        var pageNo = $(this).data('page');
+
+                        // AJAX-anrop för att hämta fler transaktioner
+                        $.ajax({
+                            url: '/Account?handler=MoreTransactions',
+                            type: 'GET',
+                            data: {
+                                accountId: accountId,
+                                pageNo: pageNo
+                            },
+                            success: function (data) {
+                                // Lägg till nya transaktioner i tabellen
+                                var tableBody = $('#transactions-table-body');
+                                data.forEach(function (transaction) {
+                                    var row = $('<tr></tr>');
+                                    row.append('<td>' + transaction.date + '</td>');
+                                    row.append('<td>' + transaction.amount + '</td>');
+                                    row.append('<td>' + transaction.type + '</td>');
+                                    tableBody.append(row);
+                                });
+
+                                // Uppdatera sidnummer och kolla om fler transaktioner finns
+                                $('#load-more').data('page', pageNo + 1);
+
+                                // Om alla transaktioner är laddade, dölja "Load More"-knappen
+                                if (data.length < 20) {
+                                    $('#load-more').hide();
+                                }
+                            }
+                        });
+                    });
+                });
+            </script>

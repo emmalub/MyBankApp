@@ -12,6 +12,8 @@ namespace DataAccessLayer.DTOs
         public decimal Balance { get; set; }
         public DateOnly Created { get; set; }
         public decimal LoansTotal { get; set; }
+        public decimal Transaction { get; set; }
+        public DateOnly TransactionDate { get; set; }
         public List<LoanDTO>? Loans { get; set; }
         public List<TransactionDTO> Transactions { get; set; } = new List<TransactionDTO>();
     }

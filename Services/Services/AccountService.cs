@@ -34,34 +34,47 @@ namespace Services.Services
         public IQueryable<AccountDTO> GetSortedAccounts(string sortColumn, string sortOrder, string q)
         {
             var query = _repository.GetAllAccounts()
-       .Select(a => new AccountDTO
+                .Select(a => new AccountDTO
        {
            AccountId = a.AccountId,
            Balance = a.Balance,
            Created = a.Created,
-           LoansTotal = a.Loans.Sum(l => l.Amount) // ✅ Summerar lånens belopp
+           LoansTotal = a.Loans.Sum(l => l.Amount)
        });
+            switch (sortColumn)
+            {
+                case "AccountId":
+                    query = (sortOrder == "asc") ? 
+                        query.OrderBy(a => a.AccountId) : 
+                        query.OrderByDescending(c => c.AccountId);
+                    break;
+
+                case "Balance":
+                    query = (sortOrder == "asc") ?
+                        query.OrderBy(a => a.Balance) :
+                        query.OrderByDescending(c => c.Balance);
+                    break;
+
+                case "Created":
+                    query = (sortOrder == "asc") ? 
+                        query.OrderBy(a => a.Created) : 
+                        query.OrderByDescending(c => c.Created);
+                    break;
+
+                case "LoansTotal":
+                    query = (sortOrder == "asc") ? 
+                        query.OrderBy(a => a.LoansTotal) : 
+                        query.OrderByDescending(a => a.LoansTotal);
+                    break;
+
+                default:
+                    query = query.OrderBy(c => c.AccountId);
+                    break;
+            }
 
             return query;
 
-            //var query = _repository.GetAllAccounts().AsQueryable();
-
-            //if (!string.IsNullOrEmpty(q))
-            //{
-            //    query = query.Where(a =>
-            //         a.AccountId.ToString().Contains(q) ||
-            //         a.Balance.ToString().Contains(q));
-            //}
-
-
-            //// Sortering
-            //query = sortColumn switch
-            //{
-            //    "Balance" => sortOrder == "desc" ? query.OrderByDescending(a => a.Balance) : query.OrderBy(a => a.Balance),
-            //    _ => sortOrder == "desc" ? query.OrderByDescending(a => a.AccountId) : query.OrderBy(a => a.AccountId)
-            //};
-
-            //return query;
+        
         }
 
         public AccountDTO GetAccountDetails(int accountId)
