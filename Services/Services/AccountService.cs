@@ -1,6 +1,7 @@
 ﻿using DataAccessLayer.DTOs;
 using DataAccessLayer.Models;
 using Microsoft.EntityFrameworkCore;
+using MyBankApp.Infrastructure.Paging;
 using Services.Repositories;
 using System;
 using System.Collections.Generic;
@@ -27,25 +28,26 @@ namespace Services.Services
                     AccountId = a.AccountId,
                     Balance = a.Balance,
                     Created = a.Created,
-                    LoansTotal = a.Loans.Sum(l => l.Amount) 
+                    LoansTotal = a.Loans.Sum(l => l.Amount)
                 })
                 .ToList();
         }
-        public IQueryable<AccountDTO> GetSortedAccounts(string sortColumn, string sortOrder, string q)
+
+        public PagedResult<AccountDTO> GetSortedAccounts(string sortColumn, string sortOrder, string q, int page, int pageSize)
         {
             var query = _repository.GetAllAccounts()
                 .Select(a => new AccountDTO
-       {
-           AccountId = a.AccountId,
-           Balance = a.Balance,
-           Created = a.Created,
-           LoansTotal = a.Loans.Sum(l => l.Amount)
-       });
+                {
+                    AccountId = a.AccountId,
+                    Balance = a.Balance,
+                    Created = a.Created,
+                    LoansTotal = a.Loans.Sum(l => l.Amount)
+                });
             switch (sortColumn)
             {
                 case "AccountId":
-                    query = (sortOrder == "asc") ? 
-                        query.OrderBy(a => a.AccountId) : 
+                    query = (sortOrder == "asc") ?
+                        query.OrderBy(a => a.AccountId) :
                         query.OrderByDescending(c => c.AccountId);
                     break;
 
@@ -56,14 +58,14 @@ namespace Services.Services
                     break;
 
                 case "Created":
-                    query = (sortOrder == "asc") ? 
-                        query.OrderBy(a => a.Created) : 
+                    query = (sortOrder == "asc") ?
+                        query.OrderBy(a => a.Created) :
                         query.OrderByDescending(c => c.Created);
                     break;
 
                 case "LoansTotal":
-                    query = (sortOrder == "asc") ? 
-                        query.OrderBy(a => a.LoansTotal) : 
+                    query = (sortOrder == "asc") ?
+                        query.OrderBy(a => a.LoansTotal) :
                         query.OrderByDescending(a => a.LoansTotal);
                     break;
 
@@ -72,9 +74,7 @@ namespace Services.Services
                     break;
             }
 
-            return query;
-
-        
+            return query.GetPaged(page, pageSize);
         }
 
         public AccountDTO GetAccountDetails(int accountId)
@@ -101,7 +101,7 @@ namespace Services.Services
                 Transactions = account.Transactions
                     .Select(t => new TransactionDTO
                     {
-                        Date = t.Date.ToDateTime(new TimeOnly(0,0)),
+                        Date = t.Date.ToDateTime(new TimeOnly(0, 0)),
                         Amount = t.Amount,
                         Type = t.Type
                     }).ToList()

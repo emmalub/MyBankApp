@@ -24,11 +24,6 @@ namespace DataAccessLayer.Repositories
         {
             return _dbContext.Customers.Count();
         }
-  
-        public async Task<List<Customer>> GetAllCustomersAsync()
-        {
-            return await _dbContext.Customers.ToListAsync();
-        }
 
         public IQueryable<Customer> GetAllCustomers()
         {

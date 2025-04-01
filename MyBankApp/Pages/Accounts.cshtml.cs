@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MyBankApp.ViewModels;
 using Services.Services;
+using static MyBankApp.ViewModels.AccountViewModel;
 
 namespace MyBankApp.Pages
 {
@@ -34,30 +35,16 @@ namespace MyBankApp.Pages
         {
             if (pageNo < 1)
                 pageNo = 1;
-            CurrentPage = pageNo;
 
+            CurrentPage = pageNo;
             SortColumn = sortColumn;
             SortOrder = sortOrder;
-
             Q = q;
 
-            var query = _accountService.GetSortedAccounts(SortColumn, SortOrder, q);
+            var pagedResult = _accountService.GetSortedAccounts(SortColumn, SortOrder, q, pageNo, PageSize);
 
-            int totalAccounts = query.Count();
-            TotalPages = (int)Math.Ceiling(totalAccounts / (double)PageSize);
-
-
-            Accounts = query
-                .Skip((CurrentPage - 1) * PageSize)
-                .Take(PageSize)
-                .Select(a => new AccountViewModel
-                {
-                    AccountId = a.AccountId,
-                    Balance = a.Balance,
-                    Created = a.Created,
-                    LoansTotal = a.LoansTotal
-                })
-                .ToList();
+            Accounts = AccountMapper.MapToViewModel(pagedResult.Results);
+            TotalPages = pagedResult.TotalPages;
         }
     }
 }

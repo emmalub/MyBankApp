@@ -6,6 +6,13 @@
 
     <div class="container">
 
+        <div class="table-responsive">
+
+            @if (Model.Account != null)
+            {
+                <h1>Transactions</h1>
+                <p><strong>Account Number:</strong> @Model.Account.AccountId</p>
+                <p><strong>Balance:</strong> @Model.Account.Balance</p>
 
         <form method="get" class="search-form">
             <div class="search-container">
@@ -13,17 +20,6 @@
                 <input type="text" name="q" value="@Request.Query["q"]" placeholder="Search transaction.." class="search-input" />
             </div>
         </form>
-
-        <h2>Account Details</h2>
-
-        <div class="table-responsive">
-
-            @if (Model.Account != null)
-            {
-                <p><strong>Account Number:</strong> @Model.Account.AccountId</p>
-                <p><strong>Balance:</strong> @Model.Account.Balance</p>
-
-                <h3>Transactions</h3>
                 <table class="table table-striped custom-table">
                     <thead>
                         <tr>

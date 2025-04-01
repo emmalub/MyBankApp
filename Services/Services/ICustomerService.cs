@@ -5,14 +5,17 @@ using System.Text;
 using System.Threading.Tasks;
 using DataAccessLayer.Models;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using MyBankApp.Infrastructure.Paging;
+using DataAccessLayer.DTOs;
 
 namespace Services.Services
 {
     public interface ICustomerService
     {
-        IQueryable<Customer> GetSortedCustomers(string sortColumn, string sortOrder, string q);
+        PagedResult<CustomerDTO> GetSortedCustomers(string sortColumn, string sortOrder, string q, int page, int pageSize);
 
         Customer GetCustomerDetails(int customerId);
         Customer GetCustomerWithDispositions(int id);
+
     }
 }

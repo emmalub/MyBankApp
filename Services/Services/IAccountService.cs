@@ -1,5 +1,6 @@
 ﻿using DataAccessLayer.DTOs;
 using DataAccessLayer.Models;
+using MyBankApp.Infrastructure.Paging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +11,9 @@ namespace Services.Services
 {
     public interface IAccountService
     {
-        IQueryable<AccountDTO> GetSortedAccounts(string sortColumn, string sortOrder, string q);
+        PagedResult<AccountDTO> GetSortedAccounts(string sortColumn, string sortOrder, string q, int page, int pageSize);
 
         public AccountDTO GetAccountDetails(int accountId);
+
     }
 }

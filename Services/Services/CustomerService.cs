@@ -1,6 +1,8 @@
 ﻿using DataAccessLayer.Models;
 using DataAccessLayer.Repositories;
 using Microsoft.EntityFrameworkCore;
+using MyBankApp.Infrastructure.Paging;
+using DataAccessLayer.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,32 +14,40 @@ namespace Services.Services
 {
     public class CustomerService : ICustomerService
     {
-        //private readonly ICustomerService _customerSerice;
         private readonly CustomerRepository _repository;
-        //private readonly BankAppDataContext _dbContext;
 
        
         public CustomerService(CustomerRepository repository)
         {
             _repository = repository;
-            //_dbContext = dbContext;
         }
 
-
-
-        public IQueryable<Customer> GetSortedCustomers(string sortColumn, string sortOrder, string q)
+        public PagedResult<CustomerDTO> GetSortedCustomers(string sortColumn, string sortOrder, string q, int page, int pageSize)
         {
-            var query = _repository.GetAllCustomers().AsQueryable();
+            //var query = _repository.GetAllCustomers().AsQueryable();
 
-            if (!string.IsNullOrEmpty(q))
-            {
-                query = query.Where(c => c.Givenname.Contains(q) || c.Surname.Contains(q) || c.City.Contains(q) || c.Country.Contains(q));
-            }
+            //if (!string.IsNullOrEmpty(q))
+            //{
+            //    query = query.Where(c => c.Givenname.Contains(q) || 
+            //                             c.Surname.Contains(q) || 
+            //                             c.City.Contains(q) || 
+            //                             c.Country.Contains(q));
+            //}
+
+            var query = _repository.GetAllCustomers()
+                .Select(c => new CustomerDTO
+                {
+                    Id = c.CustomerId,
+                    Givenname = c.Givenname,
+                    Surname = c.Surname,
+                    Country = c.Country,
+                    City = c.City
+                });
 
             switch (sortColumn)
             {
                 case "Id":
-                    query = (sortOrder == "asc") ? query.OrderBy(c => c.CustomerId) : query.OrderByDescending(c => c.CustomerId);
+                    query = (sortOrder == "asc") ? query.OrderBy(c => c.Id) : query.OrderByDescending(c => c.Id);
                     break;
 
                 case "Name":
@@ -55,11 +65,11 @@ namespace Services.Services
                     break;
 
                 default:
-                    query = query.OrderBy(c => c.CustomerId); 
+                    query = query.OrderBy(c => c.Id); 
                     break;
             }
 
-            return query;
+            return query.GetPaged(page, pageSize);
         }
 
         public Customer GetCustomerDetails(int customerId)

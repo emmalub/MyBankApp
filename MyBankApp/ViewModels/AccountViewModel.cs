@@ -1,4 +1,5 @@
-﻿using DataAccessLayer.Models;
+﻿using DataAccessLayer.DTOs;
+using DataAccessLayer.Models;
 
 namespace MyBankApp.ViewModels
 {
@@ -11,7 +12,21 @@ namespace MyBankApp.ViewModels
         public decimal Transaction { get; set; }
         public DateOnly TransactionDate { get; set; }
         public virtual ICollection<Disposition> Dispositions { get; set; } = new List<Disposition>();
-
         public virtual ICollection<Loan> Loans { get; set; } = new List<Loan>();
+
+        // GÖR OM TILL AUTOMAPPER SEN
+        public static class AccountMapper
+        {
+            public static List<AccountViewModel> MapToViewModel(List<AccountDTO> accountDTOs)
+            {
+                return accountDTOs.Select(a => new AccountViewModel
+                {
+                    AccountId = a.AccountId,
+                    Balance = a.Balance,
+                    Created = a.Created,
+                    LoansTotal = a.LoansTotal
+                }).ToList();
+            }
+        }
     }
 }
