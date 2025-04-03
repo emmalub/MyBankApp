@@ -14,12 +14,7 @@
                 <p><strong>Account Number:</strong> @Model.Account.AccountId</p>
                 <p><strong>Balance:</strong> @Model.Account.Balance</p>
 
-        <form method="get" class="search-form">
-            <div class="search-container">
-                <i class="fa fa-search search-icon"></i>
-                <input type="text" name="q" value="@Request.Query["q"]" placeholder="Search transaction.." class="search-input" />
-            </div>
-        </form>
+    
                 <table class="table table-striped custom-table">
                     <thead>
                         <tr>
