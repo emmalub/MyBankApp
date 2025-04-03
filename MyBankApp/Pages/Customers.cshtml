@@ -15,10 +15,12 @@
                     <input type="text" name="q" value="@Request.Query["q"]" placeholder="Search customer.." class="search-input" />
                 </div>
             </form>
+
             @if (!string.IsNullOrEmpty(Model.ErrorMessage))
             {
                 <div class="alert alert-warning">@Model.ErrorMessage</div>
             }
+
             <div class="table-responsive">
 
                 <table class="table table-striped custom-table">

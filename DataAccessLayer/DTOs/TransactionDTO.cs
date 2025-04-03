@@ -10,6 +10,7 @@ namespace DataAccessLayer.DTOs
     {
         public DateTime Date { get; set; }
         public decimal Amount { get; set; }
-        public string Type { get; set; } // T.ex. "Deposit", "Withdrawal"
+        public string? Type { get; set; } // T.ex. "Deposit", "Withdrawal"
+        public decimal Balance { get; set; }
     }
 }

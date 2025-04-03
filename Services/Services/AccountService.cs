@@ -33,7 +33,7 @@ namespace Services.Services
                 .ToList();
         }
 
-        public PagedResult<AccountDTO> GetSortedAccounts(string sortColumn, string sortOrder, string q, int page, int pageSize)
+        public PagedResult<AccountDTO> GetSortedAccounts(string sortColumn, string sortOrder, string q, int page)
         {
             var query = _repository.GetAllAccounts()
                 .Select(a => new AccountDTO
@@ -43,6 +43,15 @@ namespace Services.Services
                     Created = a.Created,
                     LoansTotal = a.Loans.Sum(l => l.Amount)
                 });
+
+            if (!string.IsNullOrEmpty(q))
+            {
+                int.TryParse(q, out int id);
+
+                query = query.Where(a =>
+                a.AccountId == id);
+            }
+
             switch (sortColumn)
             {
                 case "AccountId":
@@ -74,7 +83,7 @@ namespace Services.Services
                     break;
             }
 
-            return query.GetPaged(page, pageSize);
+            return query.GetPaged(page, 25);
         }
 
         public AccountDTO GetAccountDetails(int accountId)

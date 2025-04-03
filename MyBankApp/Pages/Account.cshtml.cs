@@ -58,7 +58,8 @@ namespace MyBankApp.Pages
     {
         Date = t.Date,
         Amount = t.Amount,
-        Type = t.Type
+        Type = t.Type, 
+        Balance = t.Balance,
     })
     .AsQueryable();
 

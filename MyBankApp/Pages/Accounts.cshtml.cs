@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using DataAccessLayer.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MyBankApp.ViewModels;
@@ -14,7 +15,6 @@ namespace MyBankApp.Pages
     //eller...
     //   [Authorize(Roles = "Cashier")]
     [Authorize(Roles = "Cashier, Admin")]
-
     public class AccountsModel : PageModel
     {
         private readonly IAccountService _accountService;
@@ -30,21 +30,40 @@ namespace MyBankApp.Pages
         public List<AccountViewModel> Accounts { get; set; } = new();
         public int PageSize { get; set; } = 25;
         public string Q { get; set; }
-
+        public int PageCount { get; set; }
+        public string ErrorMessage { get; set; }
         public void OnGet(string sortColumn = "Name", string sortOrder = "asc", int pageNo = 1, string q = "")
         {
+            Q = q;
+
+            SortColumn = sortColumn;
+            SortOrder = sortOrder;
+            
             if (pageNo < 1)
                 pageNo = 1;
 
             CurrentPage = pageNo;
-            SortColumn = sortColumn;
-            SortOrder = sortOrder;
-            Q = q;
 
-            var pagedResult = _accountService.GetSortedAccounts(SortColumn, SortOrder, q, pageNo, PageSize);
+            var result = _accountService.GetSortedAccounts(SortColumn, SortOrder, q, pageNo);
 
-            Accounts = AccountMapper.MapToViewModel(pagedResult.Results);
-            TotalPages = pagedResult.TotalPages;
+
+            Accounts = result.Results
+            .Select(a => new AccountViewModel
+            {
+                AccountId = a.AccountId,
+                Balance = a.Balance,
+                Created = a.Created,
+                LoansTotal = a.LoansTotal,
+            }).ToList();
+
+
+            PageCount = result.PageCount;
+
+            if (!Accounts.Any())
+            {
+                ErrorMessage = "No customer found with the given search criteria.";
+            }
+
         }
     }
 }

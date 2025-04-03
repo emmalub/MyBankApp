@@ -11,7 +11,7 @@ namespace Services.Services
 {
     public interface IAccountService
     {
-        PagedResult<AccountDTO> GetSortedAccounts(string sortColumn, string sortOrder, string q, int page, int pageSize);
+        PagedResult<AccountDTO> GetSortedAccounts(string sortColumn, string sortOrder, string q, int page);
 
         public AccountDTO GetAccountDetails(int accountId);
 
