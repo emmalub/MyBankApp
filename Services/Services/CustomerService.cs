@@ -22,7 +22,7 @@ namespace Services.Services
             _repository = repository;
         }
 
-        public PagedResult<CustomerDTO> GetSortedCustomers(string sortColumn, string sortOrder, string q, int page, int pageSize)
+        public PagedResult<CustomerDTO> GetSortedCustomers(string sortColumn, string sortOrder, string q, int page)
         {
             //var query = _repository.GetAllCustomers().AsQueryable();
 
@@ -43,6 +43,18 @@ namespace Services.Services
                     Country = c.Country,
                     City = c.City
                 });
+
+            if (!string.IsNullOrEmpty(q))
+            {
+                int.TryParse(q, out int id);
+
+                query = query.Where(c =>
+                c.Id == id ||
+                c.Givenname.Contains(q) || 
+                c.Surname.Contains(q) || 
+                c.City.Contains(q) || 
+                c.Country.Contains(q));
+            }
 
             switch (sortColumn)
             {
@@ -68,8 +80,9 @@ namespace Services.Services
                     query = query.OrderBy(c => c.Id); 
                     break;
             }
+           
+            return query.GetPaged(page, 25);
 
-            return query.GetPaged(page, pageSize);
         }
 
         public Customer GetCustomerDetails(int customerId)

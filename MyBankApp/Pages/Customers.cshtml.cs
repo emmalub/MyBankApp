@@ -24,22 +24,46 @@ namespace MyBankApp.Pages
         public List<CustomerViewModel> Customers { get; set; } = new List<CustomerViewModel>();
         public int PageSize { get; set; } = 25;
         public string Q { get; set; }
+        public int PageCount { get; set; }
+        public string ErrorMessage { get; set; }
 
         public void OnGet(string sortColumn = "Name", string sortOrder = "asc", int pageNo = 1, string q = "")
         {
-            if (pageNo < 1)
-                pageNo = 1;
-            
-            CurrentPage = pageNo;
-            SortColumn = sortColumn;
-            SortOrder = sortOrder;
-
             Q = q;
 
-            var pagedResult = _customerService.GetSortedCustomers(SortColumn, SortOrder, q, pageNo, PageSize);
+            SortColumn = sortColumn;
+            SortOrder = sortOrder;
+            
+            if (pageNo == 0)
+                pageNo = 1;
 
-            Customers = CustomerMapper.MapToViewModel(pagedResult.Results);
-            TotalPages = pagedResult.TotalPages;
+            CurrentPage = pageNo;
+
+            var result = _customerService.GetSortedCustomers(sortColumn, sortOrder, q, pageNo);
+           
+            Customers = result.Results
+            .Select(c => new CustomerViewModel
+            {
+                Id = c.Id,
+                Name = c.Name,
+                City = c.City,
+                Country = c.Country,
+            }).ToList();
+
+
+            PageCount = result.PageCount;
+
+            if (!Customers.Any())
+            {
+                ErrorMessage = "No customer found with the given search criteria.";
+            }
+
+            //var pagedResult = _customerService.GetSortedCustomers(SortColumn, SortOrder, q, pageNo, pageSize);
+
+
+            //Customers = CustomerMapper.MapToViewModel(pagedResult.Results);
+            //TotalPages = pagedResult.TotalPages;
+
         }
     }
 }

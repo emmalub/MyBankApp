@@ -20,7 +20,7 @@
 /* Global Colors - The following color variables are used throughout the website. Updating them here will change the color scheme of the entire website */
 :root {
     --background-color: #ffffff; /* Background color for the entire website, including individual sections */
-    --default-color: #6c757d; /* Default color used for the majority of the text content across the entire website */
+    --default-color: #909294; /* Default color used for the majority of the text content across the entire website */
     --heading-color: #432783; /* Color for headings, subheadings and title throughout the website */
     --accent-color: #432783; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
     --surface-color: #ffffff; /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
@@ -692,7 +692,38 @@ h6 {
         width: 200px; /* Justera bredden vid fokus */
         opacity: 1;
     }
+/*--------------------------------------------------------------
+    Pagination Styling
+--------------------------------------------------------------*/
+.pagination-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0;
+    color: var(--default-color);
+}
 
+.pagination-links a {
+    text-decoration: none; 
+    color: var(--default-color); 
+    margin: 0 5px; 
+    font-size: 14px;
+}
+
+    .pagination-links a.active {
+        font-weight: bold; 
+        color: var(--accent-color);
+    }
+
+.pagination-links span {
+    margin: 0 5px;
+    font-size: 18px;
+    color: var(--accent-color);
+}
+.pagination-icon {
+    font-size: 18px; 
+    color: var(--accent-color);
+}
 
 /*--------------------------------------------------------------
     # Profile Styling

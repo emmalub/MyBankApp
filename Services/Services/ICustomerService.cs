@@ -12,7 +12,7 @@ namespace Services.Services
 {
     public interface ICustomerService
     {
-        PagedResult<CustomerDTO> GetSortedCustomers(string sortColumn, string sortOrder, string q, int page, int pageSize);
+        PagedResult<CustomerDTO> GetSortedCustomers(string sortColumn, string sortOrder, string q, int page);
 
         Customer GetCustomerDetails(int customerId);
         Customer GetCustomerWithDispositions(int id);

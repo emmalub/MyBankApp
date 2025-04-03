@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Services.Repositories;
 using Services.Services;
+using System.Reflection;
 
 
 namespace MyBankApp
@@ -24,7 +25,7 @@ namespace MyBankApp
             builder.Services.AddTransient<ICustomerService, CustomerService>();
             builder.Services.AddScoped<AccountRepository>();
             builder.Services.AddTransient<IAccountService, AccountService>();
-
+            builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
             //mina slut//
 
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
