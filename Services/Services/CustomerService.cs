@@ -8,18 +8,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 
 
 namespace Services.Services
 {
     public class CustomerService : ICustomerService
     {
+        private readonly IMapper _mapper;
         private readonly CustomerRepository _repository;
 
        
-        public CustomerService(CustomerRepository repository)
+        public CustomerService(IMapper mapper, CustomerRepository repository)
         {
+            _mapper = mapper;
             _repository = repository;
+        }
+
+        public List<CustomerDTO> GetAllCustomers()
+        {
+            var customers = _repository.GetAllCustomers(); // Hämtar Customer-objekt
+            return _mapper.Map<List<CustomerDTO>>(customers); // Konverterar till CustomerDTO
         }
 
         public PagedResult<CustomerDTO> GetSortedCustomers(string sortColumn, string sortOrder, string q, int page)

@@ -25,7 +25,7 @@ namespace MyBankApp
             builder.Services.AddTransient<ICustomerService, CustomerService>();
             builder.Services.AddScoped<AccountRepository>();
             builder.Services.AddTransient<IAccountService, AccountService>();
-            builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             //mina slut//
 
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();

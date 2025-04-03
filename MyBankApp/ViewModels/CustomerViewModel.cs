@@ -20,18 +20,18 @@ namespace MyBankApp.ViewModels
         public decimal TotalBalance { get; set; }
 
         // GÖR OM TILL AUTOMAPPER SEN
-        public static class CustomerMapper
-        {
-            public static List<CustomerViewModel> MapToViewModel(List<CustomerDTO> customerDTOs)
-            {
-                return customerDTOs.Select(customer => new CustomerViewModel
-                {
-                    Id = customer.Id,
-                    Name = customer.Name,
-                    City = customer.City,
-                    Country = customer.Country
-                }).ToList();
-            }
-        }
+        //public static class CustomerMapper
+        //{
+        //    public static List<CustomerViewModel> MapToViewModel(List<CustomerDTO> customerDTOs)
+        //    {
+        //        return customerDTOs.Select(customer => new CustomerViewModel
+        //        {
+        //            Id = customer.Id,
+        //            Name = customer.Name,
+        //            City = customer.City,
+        //            Country = customer.Country
+        //        }).ToList();
+        //    }
+        //}
     }
 }

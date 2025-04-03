@@ -112,7 +112,8 @@ namespace Services.Services
                     {
                         Date = t.Date.ToDateTime(new TimeOnly(0, 0)),
                         Amount = t.Amount,
-                        Type = t.Type
+                        Type = t.Type,
+                        Balance = t.Balance,
                     }).ToList()
             };
         }
