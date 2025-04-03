@@ -14,7 +14,7 @@
                 <p><strong>Account Number:</strong> @Model.Account.AccountId</p>
                 <p><strong>Balance:</strong> @Model.Account.Balance</p>
 
-    
+
                 <table class="table table-striped custom-table">
                     <thead>
                         <tr>
@@ -108,7 +108,7 @@
                 <!-- Button to load more transactions -->
                 @if (Model.TotalTransactions > Model.Transactions.Count)
                 {
-                    <button id="custom-btn" class="btn btn-primary" data-page="2">Load More Transactions</button>
+                    <button id="load-more" data-account-id="@Model.Account?.AccountId" class="btn btn-primary" data-page="2">Load More Transactions</button>
                 }
             }
             else
@@ -116,72 +116,6 @@
                 <p>No account details found.</p>
             }
 
-
-            @*                         <th scope="col"> *@
-            @*                             Transaction Date *@
-            @*                             <a asp-page="/Account" *@
-            @*                                asp-route-q="@Model.Q" *@
-            @*                                asp-route-sortColumn="TransactionDate" *@
-            @*                                asp-route-sortOrder="asc" *@
-            @*                                style="text-decoration:none"> *@
-            @*                                 <i class="fa-solid fa-angle-up"></i> *@
-
-            @*                             </a> *@
-            @*                             <a asp-page="/Account" *@
-            @*                                asp-route-q="@Model.Q" *@
-            @*                                asp-route-sortColumn="TransactionDate" *@
-            @*                                asp-route-sortOrder="desc" *@
-            @*                                style="text-decoration:none"> *@
-            @*                                 <i class="fa-solid fa-angle-down"></i> *@
-            @*                             </a> *@
-            @*                         </th> *@
-
-            @*                     </tr> *@
-            @*                 </thead> *@
-            @*             </table> *@
-            @*         </div> *@
-            @*     </div> *@
-            @* </div> *@
-
-
-
-            <script>
-                $(document).ready(function () {
-                    // Hämta accountId från Razor
-                    var accountId = @Model.Account.AccountId; // Razor infogar värdet här
-
-                    // Hantera Load More-knappen
-                    $('#load-more').click(function () {
-                        var pageNo = $(this).data('page');
-
-                        // AJAX-anrop för att hämta fler transaktioner
-                        $.ajax({
-                            url: '/Account?handler=MoreTransactions',
-                            type: 'GET',
-                            data: {
-                                accountId: accountId,
-                                pageNo: pageNo
-                            },
-                            success: function (data) {
-                                // Lägg till nya transaktioner i tabellen
-                                var tableBody = $('#transactions-table-body');
-                                data.forEach(function (transaction) {
-                                    var row = $('<tr></tr>');
-                                    row.append('<td>' + transaction.date + '</td>');
-                                    row.append('<td>' + transaction.amount + '</td>');
-                                    row.append('<td>' + transaction.type + '</td>');
-                                    tableBody.append(row);
-                                });
-
-                                // Uppdatera sidnummer och kolla om fler transaktioner finns
-                                $('#load-more').data('page', pageNo + 1);
-
-                                // Om alla transaktioner är laddade, dölja "Load More"-knappen
-                                if (data.length < 20) {
-                                    $('#load-more').hide();
-                                }
-                            }
-                        });
-                    });
-                });
-            </script>
+        </div>
+    </div>
+</div>

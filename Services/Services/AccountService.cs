@@ -83,7 +83,7 @@ namespace Services.Services
                     break;
             }
 
-            return query.GetPaged(page, 25);
+            return query.GetPaged(page, 50);
         }
 
         public AccountDTO GetAccountDetails(int accountId)

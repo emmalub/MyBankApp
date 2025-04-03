@@ -79,7 +79,7 @@ namespace Services.Services
                     break;
             }
            
-            return query.GetPaged(page, 25);
+            return query.GetPaged(page, 50);
 
         }
 

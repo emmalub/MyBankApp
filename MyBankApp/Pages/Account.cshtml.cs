@@ -21,7 +21,7 @@ namespace MyBankApp.Pages
         public int TotalPages { get; set; } = 1;
         public string SortColumn { get; set; }
         public string SortOrder { get; set; }
-        private const int PageSize = 50;
+        private const int PageSize = 20;
         public string Q { get; set; }
 
         public AccountModel(IAccountService accountService)
@@ -49,19 +49,21 @@ namespace MyBankApp.Pages
 
             if (Account.Transactions == null)
             {
-                Transactions = new List<TransactionDTO>(); 
+                Transactions = new List<TransactionDTO>();
                 return;
             }
 
+            TotalTransactions = Account.Transactions.Count();
+
             var transactionsQuery = Account.Transactions
-    .Select(t => new TransactionDTO
-    {
-        Date = t.Date,
-        Amount = t.Amount,
-        Type = t.Type, 
-        Balance = t.Balance,
-    })
-    .AsQueryable();
+                .Select(t => new TransactionDTO
+                {
+                    Date = t.Date,
+                    Amount = t.Amount,
+                    Type = t.Type,
+                    Balance = t.Balance,
+                })
+                .AsQueryable();
 
             // Hantera sortering
             if (!string.IsNullOrEmpty(sortColumn))
@@ -77,6 +79,9 @@ namespace MyBankApp.Pages
                     case "Type":
                         transactionsQuery = (sortOrder == "asc") ? transactionsQuery.OrderBy(t => t.Type) : transactionsQuery.OrderByDescending(t => t.Type);
                         break;
+                    case "Balance":
+                        transactionsQuery = (sortOrder == "asc") ? transactionsQuery.OrderBy(t => t.Balance) : transactionsQuery.OrderByDescending(t => t.Balance);
+                        break;
                 }
             }
 
@@ -87,7 +92,7 @@ namespace MyBankApp.Pages
                 .ToList();
         }
 
-        public IActionResult OnGetMoreTransactions(int accountId, int pageNo)
+        public IActionResult MoreTransactions(int accountId, int pageNo)
         {
             // Load more transactions via AJAX
             var account = _accountService.GetAccountDetails(accountId);
