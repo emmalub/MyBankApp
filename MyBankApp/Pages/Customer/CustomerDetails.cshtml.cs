@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using MyBankApp.ViewModels;
 using Services.Services;
 
-namespace MyBankApp.Pages
+namespace MyBankApp.Pages.Customer
 {
     [BindProperties]
     public class CustomerModel : PageModel

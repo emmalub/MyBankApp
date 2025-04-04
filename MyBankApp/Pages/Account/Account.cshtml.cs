@@ -8,7 +8,7 @@ using Microsoft.Identity.Client;
 using MyBankApp.ViewModels;
 using Services.Services;
 
-namespace MyBankApp.Pages
+namespace MyBankApp.Pages.Account
 {
     public class AccountModel : PageModel
     {
@@ -71,16 +71,16 @@ namespace MyBankApp.Pages
                 switch (sortColumn)
                 {
                     case "Date":
-                        transactionsQuery = (sortOrder == "asc") ? transactionsQuery.OrderBy(t => t.Date) : transactionsQuery.OrderByDescending(t => t.Date);
+                        transactionsQuery = sortOrder == "asc" ? transactionsQuery.OrderBy(t => t.Date) : transactionsQuery.OrderByDescending(t => t.Date);
                         break;
                     case "Amount":
-                        transactionsQuery = (sortOrder == "asc") ? transactionsQuery.OrderBy(t => t.Amount) : transactionsQuery.OrderByDescending(t => t.Amount);
+                        transactionsQuery = sortOrder == "asc" ? transactionsQuery.OrderBy(t => t.Amount) : transactionsQuery.OrderByDescending(t => t.Amount);
                         break;
                     case "Type":
-                        transactionsQuery = (sortOrder == "asc") ? transactionsQuery.OrderBy(t => t.Type) : transactionsQuery.OrderByDescending(t => t.Type);
+                        transactionsQuery = sortOrder == "asc" ? transactionsQuery.OrderBy(t => t.Type) : transactionsQuery.OrderByDescending(t => t.Type);
                         break;
                     case "Balance":
-                        transactionsQuery = (sortOrder == "asc") ? transactionsQuery.OrderBy(t => t.Balance) : transactionsQuery.OrderByDescending(t => t.Balance);
+                        transactionsQuery = sortOrder == "asc" ? transactionsQuery.OrderBy(t => t.Balance) : transactionsQuery.OrderByDescending(t => t.Balance);
                         break;
                 }
             }

@@ -1,37 +1,32 @@
-﻿using DataAccessLayer.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MyBankApp.ViewModels;
 using Services.Services;
-using static MyBankApp.ViewModels.AccountViewModel;
+using static MyBankApp.ViewModels.CustomerViewModel;
 
-namespace MyBankApp.Pages
+
+namespace MyBankApp.Pages.Customer
 {
-    //Nu har du möjlighet att bestämma vilka sidor dina user roles ha tillgång till...
-    //  På relevant sida lägg bara till koden:
-
-    //   [Authorize(Roles = "Admin")]
-    //eller...
-    //   [Authorize(Roles = "Cashier")]
-    [Authorize(Roles = "Cashier, Admin")]
-    public class AccountsModel : PageModel
+    [Authorize(Roles = "Cashier")]
+    public class CustomersModel : PageModel
     {
-        private readonly IAccountService _accountService;
+        private readonly ICustomerService _customerService;
 
-        public AccountsModel(IAccountService accountService)
+        public CustomersModel(ICustomerService customerService)
         {
-            _accountService = accountService;
+            _customerService = customerService;
         }
         public int CurrentPage { get; set; }
         public int TotalPages { get; set; } = 1;
         public string SortColumn { get; set; }
         public string SortOrder { get; set; }
-        public List<AccountViewModel> Accounts { get; set; } = new();
+        public List<CustomerViewModel> Customers { get; set; } = new List<CustomerViewModel>();
         public int PageSize { get; set; } = 25;
         public string Q { get; set; }
         public int PageCount { get; set; }
         public string ErrorMessage { get; set; }
+
         public void OnGet(string sortColumn = "Name", string sortOrder = "asc", int pageNo = 1, string q = "")
         {
             Q = q;
@@ -39,30 +34,35 @@ namespace MyBankApp.Pages
             SortColumn = sortColumn;
             SortOrder = sortOrder;
             
-            if (pageNo < 1)
+            if (pageNo == 0)
                 pageNo = 1;
 
             CurrentPage = pageNo;
 
-            var result = _accountService.GetSortedAccounts(SortColumn, SortOrder, q, pageNo);
-
-
-            Accounts = result.Results
-            .Select(a => new AccountViewModel
+            var result = _customerService.GetSortedCustomers(sortColumn, sortOrder, q, pageNo);
+           
+            Customers = result.Results
+            .Select(c => new CustomerViewModel
             {
-                AccountId = a.AccountId,
-                Balance = a.Balance,
-                Created = a.Created,
-                LoansTotal = a.LoansTotal,
+                Id = c.Id,
+                Name = c.Name,
+                City = c.City,
+                Country = c.Country,
             }).ToList();
 
 
             PageCount = result.PageCount;
 
-            if (!Accounts.Any())
+            if (!Customers.Any())
             {
                 ErrorMessage = "No customer found with the given search criteria.";
             }
+
+            //var pagedResult = _customerService.GetSortedCustomers(SortColumn, SortOrder, q, pageNo, pageSize);
+
+
+            //Customers = CustomerMapper.MapToViewModel(pagedResult.Results);
+            //TotalPages = pagedResult.TotalPages;
 
         }
     }

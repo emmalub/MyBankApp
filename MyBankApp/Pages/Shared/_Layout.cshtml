@@ -63,11 +63,11 @@
                     <li><a href="/Index" class="active">Home<br></a></li>
                     @if (User.IsInRole("Cashier"))
                     {
-                        <li><a asp-page="/Customers">Customers</a></li>
+                        <li><a asp-page="/Customer/Customers">Customers</a></li>
                     }
                     @if (User.IsInRole("Cashier")||User.IsInRole("Admin"))
                     {
-                        <li><a href="/Accounts">Accounts</a></li>
+                        <li><a href="/Account/Accounts">Accounts</a></li>
                     }
                     <li class="dropdown">
                         <a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
