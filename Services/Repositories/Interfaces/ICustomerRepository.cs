@@ -1,0 +1,17 @@
+﻿using DataAccessLayer.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Services.Repositories.Interfaces
+{
+
+    public interface ICustomerRepository
+    {
+        int GetCustomerCount();
+        IQueryable<Customer> GetAllCustomers();
+        int GetCustomerCountByCountry(string country);
+    }
+}

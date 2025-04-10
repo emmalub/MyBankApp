@@ -241,45 +241,51 @@ document.addEventListener("DOMContentLoaded", function () {
  * Load more transactions 
  */
 
-$(document).ready(function () {
-    $('#load-more').click(function () {
-        var pageNo = $(this).data('page'); // Hämta aktuell sida
-        var accountId = $(this).data('account-id'); // Hämta accountId från knappen
+//$(document).ready(function () {
+//    $('#load-more').click(function () {
+//        var button = $(this);
+//        var accountId = button.data('account-id');
+//        var skip = button.data('skip') || 0;
 
-        $.ajax({
-            url: '/Account?handler=MoreTransactions',
-            type: 'GET',
-            data: {
-                accountId: accountId, // Skickar accountId
-                pageNo: pageNo // Skickar sidnummer
-            },
-            success: function (data) {
-                var tableBody = $('#transactions-table-body');
+//        $.ajax({
+//            url: '/Account?handler=Transactions',
+//            type: 'GET',
+//            data: {
+//                accountId: accountId,
+//                skip: skip
+//            },
+//            success: function (data) {
+//                var tableBody = $('#transactions-table-body');
 
-                // Lägg till nya transaktioner i tabellen
-                data.forEach(function (transaction) {
-                    var row = $('<tr></tr>');
-                    row.append('<td>' + transaction.date + '</td>');
-                    row.append('<td>' + transaction.amount + '</td>');
-                    row.append('<td>' + transaction.type + '</td>');
-                    row.append('<td>' + transaction.balance + '</td>');
-                    tableBody.append(row);
-                });
+//                if (data.length === 0) {
+//                    button.hide(); // Dölj knappen om inga fler transaktioner finns
+//                    return;
+//                }
 
-                // Uppdatera sidnummer för knappen
-                $('#load-more').data('page', pageNo + 1);
+//                data.forEach(function (transaction) {
+//                    var row = $('<tr></tr>');
+//                    row.append('<td>' + formatDate(transaction.date) + '</td>');
+//                    row.append('<td>' + transaction.amount.toFixed(2) + ' kr</td>');
+//                    row.append('<td>' + transaction.type + '</td>');
+//                    row.append('<td>' + transaction.balance.toFixed(2) + ' kr</td>');
+//                    tableBody.append(row);
+//                });
 
-                // Om alla transaktioner är laddade, dölja knappen
-                if (data.length < 20) {
-                    $('#load-more').hide(); // Dölj knappen om inga fler transaktioner finns
-                }
-            },
-            error: function () {
-                alert("An error occurred while loading more transactions.");
-            }
-        });
-    });
-});
+//                // Öka skip med 20 inför nästa laddning
+//                button.data('skip', skip + 20);
+//            },
+//            error: function () {
+//                alert("Kunde inte hämta fler transaktioner.");
+//            }
+//        });
+//    });
+
+//    // Enkel datumformatterare (om datumet är i ISO-format)
+//    function formatDate(isoString) {
+//        const date = new Date(isoString);
+//        return date.toLocaleDateString('sv-SE');
+//    }
+//});
 
 
 

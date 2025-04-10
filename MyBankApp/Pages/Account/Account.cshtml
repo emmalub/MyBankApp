@@ -119,3 +119,50 @@
         </div>
     </div>
 </div>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#load-more').click(function () {
+                var button = $(this);
+                var accountId = button.data('account-id');
+                var skip = button.data('skip') || 0;
+
+                $.ajax({
+                    url: '/Account?handler=Transactions',
+                    type: 'GET',
+                    data: {
+                        accountId: accountId,
+                        skip: skip
+                    },
+                    success: function (data) {
+                        var tableBody = $('#transactions-table-body');
+
+                        if (data.length === 0) {
+                            button.hide(); // Dölj knappen om inga fler transaktioner finns
+                            return;
+                        }
+
+                        data.forEach(function (transaction) {
+                            var row = $('<tr></tr>');
+                            row.append('<td>' + formatDate(transaction.date) + '</td>');
+                            row.append('<td>' + transaction.amount.toFixed(2) + ' kr</td>');
+                            row.append('<td>' + transaction.type + '</td>');
+                            row.append('<td>' + transaction.balance.toFixed(2) + ' kr</td>');
+                            tableBody.append(row);
+                        });
+
+                        button.data('skip', skip + 20);
+                    },
+                    error: function () {
+                        alert("Kunde inte hämta fler transaktioner.");
+                    }
+                });
+            });
+
+            function formatDate(isoString) {
+                const date = new Date(isoString);
+                return date.toLocaleDateString('sv-SE');
+            }
+        });
+    </script>
+}

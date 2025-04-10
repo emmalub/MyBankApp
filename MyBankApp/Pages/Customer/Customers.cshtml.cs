@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MyBankApp.ViewModels;
-using Services.Services;
+using Services.Services.Interfaces;
 using static MyBankApp.ViewModels.CustomerViewModel;
 
 

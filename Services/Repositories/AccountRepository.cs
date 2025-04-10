@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using DataAccessLayer.DTOs;
 using AutoMapper;
+using Services.Repositories.Interfaces;
 
 
 
@@ -56,8 +57,8 @@ namespace Services.Repositories
                 _dbContext.SaveChanges();
             }
         }
-            
-        // Additional methods for getting account counts and capital by country
+
+        // methods for getting account counts and capital by country
         public int GetAccountCount()
         {
             return _dbContext.Accounts.Count();

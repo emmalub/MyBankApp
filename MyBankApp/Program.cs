@@ -1,10 +1,10 @@
 using DataAccessLayer.Models;
-using DataAccessLayer.Repositories;
+using Services.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Services.Repositories;
+using Services.Repositories.Interfaces;
 using Services.Services;
-using System.Reflection;
+using Services.Services.Interfaces;
 
 
 namespace MyBankApp
@@ -21,11 +21,19 @@ namespace MyBankApp
                 options.UseSqlServer(connectionString));
 
             //mina start//
-            builder.Services.AddScoped<CustomerRepository>();
-            builder.Services.AddTransient<ICustomerService, CustomerService>();
+            // Register repositories
+            builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+            builder.Services.AddScoped<IAccountRepository, AccountRepository>();
             builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
-            builder.Services.AddScoped<AccountRepository>();
+            builder.Services.AddScoped<IStatisticsRepository, StatisticsRepository>();
+
+            // Register services
+            builder.Services.AddTransient<ICustomerService, CustomerService>();
             builder.Services.AddTransient<IAccountService, AccountService>();
+            builder.Services.AddScoped<ITransactionService, TransactionService>();
+            builder.Services.AddScoped<IStatisticsService, StatisticsService>();
+
+            // Add AutoMapper
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             //mina slut//
 

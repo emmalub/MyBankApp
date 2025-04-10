@@ -5,13 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using DataAccessLayer.Models;
 using Microsoft.EntityFrameworkCore;
+using Services.Repositories.Interfaces;
 
-namespace DataAccessLayer.Repositories
+
+namespace Services.Repositories
 {
     /// <summary>
     /// Detta lager ansvarar för datalagring och hantering av CRUD-operationer.
     /// </summary>
-    public class CustomerRepository
+    public class CustomerRepository : ICustomerRepository
     {
         private readonly BankAppDataContext _dbContext;
 
@@ -23,6 +25,12 @@ namespace DataAccessLayer.Repositories
         public int GetCustomerCount()
         {
             return _dbContext.Customers.Count();
+        }
+        public int GetCustomerCountByCountry(string country)
+        {
+            return _dbContext.Customers
+                .Where(c => c.Country == country)
+                .Count();
         }
 
         public IQueryable<Customer> GetAllCustomers()

@@ -1,7 +1,7 @@
 ﻿
 using DataAccessLayer.DTOs;
 
-namespace Services.Services
+namespace Services.Services.Interfaces
 {
     public interface ITransactionService
     {

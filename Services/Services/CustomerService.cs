@@ -1,14 +1,10 @@
 ﻿using DataAccessLayer.Models;
-using DataAccessLayer.Repositories;
 using Microsoft.EntityFrameworkCore;
 using MyBankApp.Infrastructure.Paging;
 using DataAccessLayer.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using AutoMapper;
+using Services.Services.Interfaces;
+using Services.Repositories.Interfaces;
 
 
 namespace Services.Services
@@ -16,24 +12,24 @@ namespace Services.Services
     public class CustomerService : ICustomerService
     {
         private readonly IMapper _mapper;
-        private readonly CustomerRepository _repository;
+        private readonly ICustomerRepository _customerRepo;
 
        
-        public CustomerService(IMapper mapper, CustomerRepository repository)
+        public CustomerService(IMapper mapper, ICustomerRepository repository)
         {
             _mapper = mapper;
-            _repository = repository;
+            _customerRepo = repository;
         }
 
         public List<CustomerDTO> GetAllCustomers()
         {
-            var customers = _repository.GetAllCustomers(); // Hämtar Customer-objekt
+            var customers = _customerRepo.GetAllCustomers(); // Hämtar Customer-objekt
             return _mapper.Map<List<CustomerDTO>>(customers); // Konverterar till CustomerDTO
         }
 
         public PagedResult<CustomerDTO> GetSortedCustomers(string sortColumn, string sortOrder, string q, int page)
         {
-            var query = _repository.GetAllCustomers()
+            var query = _customerRepo.GetAllCustomers()
                 .Select(c => new CustomerDTO
                 {
                     Id = c.CustomerId,
@@ -94,14 +90,14 @@ namespace Services.Services
 
         public Customer GetCustomerDetails(int customerId)
         {
-            return _repository.GetAllCustomers()
+            return _customerRepo.GetAllCustomers()
                 .Include(c => c.Dispositions)
                 .ThenInclude(d => d.Account)
                 .FirstOrDefault(c => c.CustomerId == customerId);
         }
         public Customer GetCustomerWithDispositions(int id)
         {
-            return _repository.GetAllCustomers()
+            return _customerRepo.GetAllCustomers()
                 .Include(c => c.Dispositions)
                 .ThenInclude(d => d.Account)
                 .FirstOrDefault(c => c.CustomerId == id);

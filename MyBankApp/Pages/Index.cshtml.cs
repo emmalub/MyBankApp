@@ -1,20 +1,16 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using DataAccessLayer.Repositories;
-using DataAccessLayer.Models;
-using Services.Repositories;
+using Services.Services.Interfaces;
 
 
 namespace MyBankApp.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly CustomerRepository _customerRepository;
-        private readonly AccountRepository _accountRepository;
-        public IndexModel(CustomerRepository customerRepository, AccountRepository accountRepository)
+        private readonly IStatisticsService _statisticsService;
+
+        public IndexModel(IStatisticsService statisticsService)
         {
-            _customerRepository = customerRepository;
-            _accountRepository = accountRepository;
+            _statisticsService = statisticsService;
         }
 
         public int SwedishCustomerCount { get; set; }
@@ -36,20 +32,23 @@ namespace MyBankApp.Pages
 
         public void OnGet()
         {
-            CustomerCount = _customerRepository.GetCustomerCount();
-            AccountCount = _accountRepository.GetAccountCount();
-            SwedishCustomerCount = _customerRepository.GetSwedishCustomerCount();
-            NorwegianCustomerCount = _customerRepository.GetNorwegianCustomerCount();
-            DanishCustomerCount = _customerRepository.GetDanishCustomerCount();
-            FinnishCustomerCount = _customerRepository.GetFinnishCustomerCount();
-            DanishAccountCount = _accountRepository.GetDanishAccountCount();
-            FinnishAccountCount = _accountRepository.GetFinnishAccountCount();
-            SwedishAccountCount = _accountRepository.GetSwedishAccountCount();
-            NorwegianAccountCount = _accountRepository.GetNorwegianAccountCount();
-            NorwegianCapital = _accountRepository.GetNorwegianCapital();
-            DanishCapital = _accountRepository.GetDanishCapital();
-            FinnishCapital = _accountRepository.GetFinnishCapital();
-            SwedishCapital = _accountRepository.GetSwedishCapital();
+            CustomerCount = _statisticsService.GetTotalCustomers();
+            SwedishCustomerCount = _statisticsService.GetSwedishCustomerCount();
+            NorwegianCustomerCount = _statisticsService.GetNorwegianCustomerCount();
+            DanishCustomerCount = _statisticsService.GetDanishCustomerCount();
+            FinnishCustomerCount = _statisticsService.GetFinnishCustomerCount();
+
+            SwedishAccountCount = _statisticsService.GetSwedishAccountCount();
+            NorwegianAccountCount = _statisticsService.GetNorwegianAccountCount();
+            DanishAccountCount = _statisticsService.GetDanishAccountCount();
+            FinnishAccountCount = _statisticsService.GetFinnishAccountCount();
+
+            SwedishCapital = _statisticsService.GetSwedishCapital();
+            NorwegianCapital = _statisticsService.GetNorwegianCapital();
+            DanishCapital = _statisticsService.GetDanishCapital();
+            FinnishCapital = _statisticsService.GetFinnishCapital();
+
+            AccountCount = _statisticsService.GetTotalAccounts();
         }    
     }
 }

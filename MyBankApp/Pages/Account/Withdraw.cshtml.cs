@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
-using Services.Services;
 using DataAccessLayer.Models;
+using Services.Services.Interfaces;
 
 
 namespace MyBankApp.Pages.Account

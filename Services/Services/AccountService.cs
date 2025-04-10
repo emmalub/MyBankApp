@@ -9,23 +9,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using Services.Services.Interfaces;
+using Services.Repositories.Interfaces;
 
 
 namespace Services.Services
 {
     public class AccountService : IAccountService
     {
-        private readonly AccountRepository _repository;
+        private readonly IAccountRepository _accountRepo;
         private readonly IMapper _mapper;
 
-        public AccountService(AccountRepository repository, IMapper mapper)
+        public AccountService(IAccountRepository repository, IMapper mapper)
         {
-            _repository = repository;
+            _accountRepo = repository;
             _mapper = mapper;
         }
         public List<AccountDTO> GetAllAccounts()
         {
-            return _repository.GetAllAccounts()
+            return _accountRepo.GetAllAccounts()
                 .Include(a => a.Loans)
                 .Select(a => new AccountDTO
                 {
@@ -40,7 +42,7 @@ namespace Services.Services
 
         public PagedResult<AccountDTO> GetSortedAccounts(string sortColumn, string sortOrder, string q, int page)
         {
-            var query = _repository.GetAllAccounts()
+            var query = _accountRepo.GetAllAccounts()
                 .Select(a => new AccountDTO
                 {
                     AccountId = a.AccountId,
@@ -93,7 +95,7 @@ namespace Services.Services
 
         public AccountDTO GetAccountDetails(int accountId)
         {
-            var account = _repository.GetAllAccounts()
+            var account = _accountRepo.GetAllAccounts()
                 .Include(a => a.Transactions) // Ladda transaktioner
                 .FirstOrDefault(a => a.AccountId == accountId);
 
@@ -122,7 +124,5 @@ namespace Services.Services
                     }).ToList()
             };
         }
-       
     }
-
 }

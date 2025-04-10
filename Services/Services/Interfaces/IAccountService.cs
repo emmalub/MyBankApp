@@ -14,7 +14,7 @@ public enum ResponseCode
     CommentEmpty,
     AccountNotFound
 }
-namespace Services.Services
+namespace Services.Services.Interfaces
 {
     public interface IAccountService
     {

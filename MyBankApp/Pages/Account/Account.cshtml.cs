@@ -6,13 +6,14 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Data.SqlClient;
 using Microsoft.Identity.Client;
 using MyBankApp.ViewModels;
-using Services.Services;
+using Services.Services.Interfaces;
 
 namespace MyBankApp.Pages.Account
 {
     public class AccountModel : PageModel
     {
         private readonly IAccountService _accountService;
+        private readonly ITransactionService _transactionService;
 
         public AccountDTO Account { get; set; }
         public List<TransactionDTO> Transactions { get; set; }
@@ -24,9 +25,10 @@ namespace MyBankApp.Pages.Account
         private const int PageSize = 20;
         public string Q { get; set; }
 
-        public AccountModel(IAccountService accountService)
+        public AccountModel(IAccountService accountService, ITransactionService transactionService)
         {
             _accountService = accountService;
+            _transactionService = transactionService;
         }
 
         public void OnGet(int accountId, string sortColumn = "Name", string sortOrder = "asc", int pageNo = 1, string q = "")
@@ -92,22 +94,27 @@ namespace MyBankApp.Pages.Account
                 .ToList();
         }
 
-        public IActionResult MoreTransactions(int accountId, int pageNo)
+        public JsonResult OnGetTransactions(int accountId, int pageNo)
         {
-            // Load more transactions via AJAX
-            var account = _accountService.GetAccountDetails(accountId);
+            int skip = (pageNo - 1) * 20;
 
-            if (account == null)
-                return NotFound();
-
-            var transactions = account.Transactions
-                .OrderByDescending(t => t.Date)
-                .Skip((pageNo - 1) * PageSize)
-                .Take(PageSize)
-                .ToList();
-
+            var transactions = _transactionService.GetTransactions(accountId, skip, 20);
             return new JsonResult(transactions);
+
         }
+            //var account = _accountService.GetAccountDetails(accountId);
+
+            //if (account == null)
+            //    return NotFound();
+
+            //var transactions = account.Transactions
+            //    .OrderByDescending(t => t.Date)
+            //    .Skip((pageNo - 1) * PageSize)
+            //    .Take(PageSize)
+            //    .ToList();
+
+            //return new JsonResult(transactions);
+        
         //    private readonly IAccountService _accountService;
 
         //    public AccountModel(IAccountService accountService)

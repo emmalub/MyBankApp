@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using MyBankApp.ViewModels;
-using Services.Services;
+using Services.Services.Interfaces;
 
 namespace MyBankApp.Pages.Customer
 {

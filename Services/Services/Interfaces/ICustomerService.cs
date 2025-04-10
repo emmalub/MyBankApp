@@ -8,7 +8,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using MyBankApp.Infrastructure.Paging;
 using DataAccessLayer.DTOs;
 
-namespace Services.Services
+namespace Services.Services.Interfaces
 {
     public interface ICustomerService
     {

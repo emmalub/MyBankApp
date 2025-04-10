@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DataAccessLayer.Models;
 
-namespace Services.Repositories
+namespace Services.Repositories.Interfaces
 {
     public interface ITransactionRepository
     {
