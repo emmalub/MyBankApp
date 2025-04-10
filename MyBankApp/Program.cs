@@ -23,6 +23,7 @@ namespace MyBankApp
             //mina start//
             builder.Services.AddScoped<CustomerRepository>();
             builder.Services.AddTransient<ICustomerService, CustomerService>();
+            builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
             builder.Services.AddScoped<AccountRepository>();
             builder.Services.AddTransient<IAccountService, AccountService>();
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

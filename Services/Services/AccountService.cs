@@ -8,16 +8,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
+
 
 namespace Services.Services
 {
     public class AccountService : IAccountService
     {
         private readonly AccountRepository _repository;
+        private readonly IMapper _mapper;
 
-        public AccountService(AccountRepository repository)
+        public AccountService(AccountRepository repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
         public List<AccountDTO> GetAllAccounts()
         {
@@ -32,6 +36,7 @@ namespace Services.Services
                 })
                 .ToList();
         }
+     
 
         public PagedResult<AccountDTO> GetSortedAccounts(string sortColumn, string sortOrder, string q, int page)
         {
@@ -117,6 +122,7 @@ namespace Services.Services
                     }).ToList()
             };
         }
+       
     }
 
 }

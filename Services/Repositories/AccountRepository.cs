@@ -5,18 +5,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using DataAccessLayer.DTOs;
+using AutoMapper;
 
 
 
 namespace Services.Repositories
 {
-    public class AccountRepository
+    public class AccountRepository : IAccountRepository
     {
         private readonly BankAppDataContext _dbContext;
+        private readonly IMapper _mapper;
 
-        public AccountRepository(BankAppDataContext dbContext)
+        public AccountRepository(BankAppDataContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
+            _mapper = mapper;
         }
         public IQueryable<Account> GetAllAccounts()
         {
@@ -24,13 +28,36 @@ namespace Services.Repositories
                 .Include(a => a.Loans)
                 .AsQueryable();
         }
-            
-        public Account GetAccountById(int accountId)
+      
+        public AccountDTO GetById(int accountId)
         {
-            return _dbContext.Accounts
+            var account = _dbContext.Accounts
                 .Include(a => a.Loans)
                 .First(a => a.AccountId == accountId);
+
+            return _mapper.Map<AccountDTO>(account);
         }
+        public void UpdateAccount(Account account)
+        {
+            var existingAccount = _dbContext.Accounts.FirstOrDefault(a => a.AccountId == account.AccountId);
+
+            if (existingAccount != null)
+            {
+                existingAccount.Balance = account.Balance;
+                _dbContext.SaveChanges();
+            }
+        }
+        public void UpdateBalance(int accountId, decimal newBalance)
+        {
+            var account = _dbContext.Accounts.FirstOrDefault(a => a.AccountId == accountId);
+            if (account != null)
+            {
+                account.Balance = newBalance;
+                _dbContext.SaveChanges();
+            }
+        }
+            
+        // Additional methods for getting account counts and capital by country
         public int GetAccountCount()
         {
             return _dbContext.Accounts.Count();
