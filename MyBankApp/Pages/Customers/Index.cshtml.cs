@@ -6,7 +6,7 @@ using Services.Services.Interfaces;
 using static MyBankApp.ViewModels.CustomerViewModel;
 
 
-namespace MyBankApp.Pages.Customer
+namespace MyBankApp.Pages.Customers
 {
     [Authorize(Roles = "Cashier")]
     public class CustomersModel : PageModel

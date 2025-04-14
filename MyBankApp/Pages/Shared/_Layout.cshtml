@@ -63,7 +63,7 @@
                     <li><a href="/Index" class="active">Home<br></a></li>
                     @if (User.IsInRole("Cashier"))
                     {
-                        <li><a asp-page="/Customer/Customers">Customers</a></li>
+                        <li><a asp-page="/Customers/Index">Customers</a></li>
                     }
                     @if (User.IsInRole("Cashier")||User.IsInRole("Admin"))
                     {
