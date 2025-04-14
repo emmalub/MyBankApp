@@ -18,11 +18,13 @@ namespace Services.Services
     {
         private readonly IAccountRepository _accountRepo;
         private readonly ITransactionRepository _transactionRepo;
+        private readonly IMapper _mapper;
 
-        public TransactionService(IAccountRepository accountRepo, ITransactionRepository transactionRepo)
+        public TransactionService(IAccountRepository accountRepo, ITransactionRepository transactionRepo, IMapper mapper)
         {
             _accountRepo = accountRepo;
             _transactionRepo = transactionRepo;
+            _mapper = mapper;
         }
         public List<TransactionDTO> GetTransactions(int accountId, int skip = 0, int take = 20)
         {
@@ -36,36 +38,91 @@ namespace Services.Services
                 Date = t.Date.ToDateTime(TimeOnly.MinValue)
             }).ToList();
         }
+
+        // NYTT 14/4
+        public IQueryable<TransactionDTO> GetSortedTransactions(int accountId, string sortColumn, string sortOrder)
+        {
+            var query = _transactionRepo.GetByAccountId(accountId).AsQueryable(); 
+            
+            
+            switch (sortColumn)
+            {
+                case "Date":
+                    query = sortOrder == "asc" ? query.OrderBy(t => t.Date.ToDateTime(TimeOnly.MinValue)) : query.OrderByDescending(t => t.Date.ToDateTime(TimeOnly.MinValue));
+                    break;
+                case "Amount":
+                    query = sortOrder == "asc" ? query.OrderBy(t => t.Amount) : query.OrderByDescending(t => t.Amount);
+                    break;
+                case "Type":
+                    query = sortOrder == "asc" ? query.OrderBy(t => t.Type) : query.OrderByDescending(t => t.Type);
+                    break;
+                case "Balance":
+                    query = sortOrder == "asc" ? query.OrderBy(t => t.Balance) : query.OrderByDescending(t => t.Balance);
+                    break;
+                default:
+                    query = query.OrderBy(t => t.Date.ToDateTime(TimeOnly.MinValue));
+                    break;
+            }
+            return query.Select(t => new TransactionDTO
+            {
+                Type = t.Type,
+                Amount = t.Amount,
+                Balance = t.Balance,
+                Date = t.Date.ToDateTime(TimeOnly.MinValue)
+            });
+        }
+        public List<TransactionDTO> PaginateTransactions(IQueryable<TransactionDTO> transactions, int pageNo)
+        {
+            const int PageSize = 20;
+
+            var transactionsToPaginate = transactions
+                .Skip((pageNo - 1) * PageSize)
+                .Take(PageSize)
+                .ToList();
+
+
+            return transactionsToPaginate;
+        }
+
+
+        // SLUT NYTT 14/4
+
+
+
         public ResponseCode Withdraw(int accountId, decimal amount)
         {
             var accountDto = _accountRepo.GetById(accountId);
 
             if (accountDto == null)
                 return ResponseCode.AccountNotFound;
+            
+            if (accountDto.Balance < amount)
+                return ResponseCode.BalanceTooLow;
 
             if (amount < 100 || amount > 10000)
                 return ResponseCode.IncorrectAmount;
 
-            if (accountDto.Balance < amount)
-                return ResponseCode.BalanceTooLow;
+            var account = _mapper.Map<Account>(accountDto);
 
-            var newBalance = accountDto.Balance - amount;
-            _accountRepo.UpdateBalance(accountId, newBalance);
+            account.Balance -= amount;
+            _accountRepo.UpdateAccount(account);
 
             var transaction = new Transaction
             {
                 AccountId = accountId,
                 Amount = -amount,
+                Balance = account.Balance - amount,
+                Type = "Debit",
+                Operation = "Debit in cash",
                 Date = DateOnly.FromDateTime(DateTime.UtcNow),
-                Type = "Withdraw",
-                Balance = newBalance 
             };
+
 
             _transactionRepo.Add(transaction);
             return ResponseCode.OK;
         }
 
-        public ResponseCode Deposit(int accountId, decimal amount, string comment)
+        public ResponseCode Deposit(int accountId, decimal amount)
         {
             var accountDto = _accountRepo.GetById(accountId);
 
@@ -74,21 +131,22 @@ namespace Services.Services
 
             if (amount < 100 || amount > 10000)
                 return ResponseCode.IncorrectAmount;
+           
+            var account = _mapper.Map<Account>(accountDto);
 
-            if (string.IsNullOrWhiteSpace(comment))
-                return ResponseCode.CommentEmpty;
-
-            var newBalance = accountDto.Balance - amount;
-            _accountRepo.UpdateBalance(accountId, newBalance);
+            account.Balance += amount;
+            _accountRepo.UpdateAccount(account);
 
             var transaction = new Transaction
             {
                 AccountId = accountId,
                 Amount = amount,
+                Balance = account.Balance + amount,
+                Type = "Credit",
+                Operation = "Credit in cash",
                 Date = DateOnly.FromDateTime(DateTime.UtcNow),
-                Type = "Deposit",
-                Balance = newBalance // saldo efter insättning
             };
+
 
             _transactionRepo.Add(transaction);
             return ResponseCode.OK;

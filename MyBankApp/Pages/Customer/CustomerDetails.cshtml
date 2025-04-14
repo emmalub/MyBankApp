@@ -1,5 +1,5 @@
 ﻿@page
-@model MyBankApp.Pages.Customer.CustomerModel
+@model MyBankApp.Pages.Customer.CustomerDetailsModel
 @{
 }
 <div class="container emp-profile">
@@ -116,7 +116,7 @@
                                                     <td>@a.AccountId</td>
                                                     <td>@a.Balance</td>
                                                     <td>
-                                                        <a asp-page="/Account"
+                                                        <a asp-page="/Account/AccountIndex"
                                                            asp-route-accountId="@a.AccountId"
                                                            class="custom-btn fs-5">
                                                             <i class="fa-solid fa-eye"></i>

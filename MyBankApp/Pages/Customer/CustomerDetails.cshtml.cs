@@ -7,12 +7,13 @@ using Services.Services.Interfaces;
 namespace MyBankApp.Pages.Customer
 {
     [BindProperties]
-    public class CustomerModel : PageModel
+    public class CustomerDetailsModel : PageModel
     {
         private readonly ICustomerService _customerService;
         public CustomerViewModel Customer { get; set; }
+        public int CustomerId { get; set; }
 
-        public CustomerModel(ICustomerService customerService)
+        public CustomerDetailsModel(ICustomerService customerService)
         {
             _customerService = customerService;
         }
@@ -22,7 +23,7 @@ namespace MyBankApp.Pages.Customer
             var customer = _customerService.GetCustomerDetails(id);
             if (customer == null)
             {
-                return RedirectToPage("/Customers");
+                return RedirectToPage("/Customer/Customers");
             }
 
             Customer = new CustomerViewModel

@@ -32,7 +32,7 @@ namespace Services.Services
                 })
                 .ToList();
         }
-     
+
 
         public PagedResult<AccountDTO> GetSortedAccounts(string sortColumn, string sortOrder, string q, int page)
         {
@@ -118,5 +118,6 @@ namespace Services.Services
                     }).ToList()
             };
         }
+      
     }
 }

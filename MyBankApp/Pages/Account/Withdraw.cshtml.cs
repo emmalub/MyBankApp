@@ -24,6 +24,7 @@ namespace MyBankApp.Pages.Account
         public decimal Amount { get; set; }
         public decimal Balance { get; set; }
         public int CustomerId { get; set; }
+        public int AccountId { get; set; }
 
         public void OnGet(int accountId, int customerId)
         {
@@ -42,33 +43,25 @@ namespace MyBankApp.Pages.Account
 
         public IActionResult OnPost(int accountId, int customerId)
         {
-            CustomerId = customerId;
+            var status = _transactionService.Withdraw(accountId, Amount);
 
             if (!ModelState.IsValid)
-                return Page();
-
-            var status = _transactionService.Withdraw(accountId, Amount);
-            switch (status)
             {
-                case ResponseCode.OK:
-                    return RedirectToPage("/Customer", new { id = customerId });
+                return Page();
+            }
 
-                case ResponseCode.BalanceTooLow:
-                    ModelState.AddModelError("Amount", "Can't be more than current balance!");
-                    break;
+            if (status == ResponseCode.OK)
+            {
+                return RedirectToPage("/Customer/CustomerDetails", new { id = CustomerId });
+            }
 
-                case ResponseCode.IncorrectAmount:
-                    ModelState.AddModelError("Amount", "Amount must be between 100–10,000.");
-                    break;
-
-                case ResponseCode.AccountNotFound:
-                    ModelState.AddModelError("Amount", "Account not found.");
-                    break;
-
-                // du kan lägga till fler fall här om du utökar ResponseCode senare
-                default:
-                    ModelState.AddModelError(string.Empty, "Something went wrong.");
-                    break;
+            if (status == ResponseCode.IncorrectAmount)
+            {
+                ModelState.AddModelError("Amount", "The amount must be between 100 and 10,000.");
+            }
+            else if (status == ResponseCode.AccountNotFound)
+            {
+                ModelState.AddModelError("Account", "The account was not found.");
             }
 
             return Page();

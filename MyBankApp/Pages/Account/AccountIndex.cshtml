@@ -1,5 +1,5 @@
 ﻿@page
-@model MyBankApp.Pages.Account.AccountModel
+@model MyBankApp.Pages.Account.AccountIndexModel
 @{
 }
 <div class="content">
@@ -20,16 +20,16 @@
                         <tr>
                             <th scope"col">
                                 Date
-                                <a asp-page="/Account"
-                                   asp-route-q="@Model.Q"
+                                <a asp-page="/AccountIndex"
+                                   asp-route-accountId="@Model.Account.AccountId"
                                    asp-route-sortColumn="Date"
                                    asp-route-sortOrder="asc"
                                    style="text-decoration:none">
                                     <i class="fa-solid fa-angle-up"></i>
                                 </a>
 
-                                <a asp-page="/Account"
-                                   asp-route-q="@Model.Q"
+                                <a asp-page="/AccountIndex"
+                                   asp-route-accountId="@Model.Account.AccountId"
                                    asp-route-sortColumn="Date"
                                    asp-route-sortOrder="desc"
                                    style="text-decoration:none">
@@ -38,16 +38,16 @@
                             </th>
                             <th scope"col">
                                 Amount
-                                <a asp-page="/Account"
-                                   asp-route-q="@Model.Q"
+                                <a asp-page="/AccountIndex"
+                                   asp-route-accountId="@Model.Account.AccountId"
                                    asp-route-sortColumn="Amount"
                                    asp-route-sortOrder="asc"
                                    style="text-decoration:none">
                                     <i class="fa-solid fa-angle-up"></i>
                                 </a>
 
-                                <a asp-page="/Account"
-                                   asp-route-q="@Model.Q"
+                                <a asp-page="/AccountIndex"
+                                   asp-route-accountId="@Model.Account.AccountId"
                                    asp-route-sortColumn="Amount"
                                    asp-route-sortOrder="desc"
                                    style="text-decoration:none">
@@ -56,16 +56,16 @@
                             </th>
                             <th scope"col">
                                 Type
-                                <a asp-page="/Account"
-                                   asp-route-q="@Model.Q"
+                                <a asp-page="/AccountIndex"
+                                   asp-route-accountId="@Model.Account.AccountId"
                                    asp-route-sortColumn="Type"
                                    asp-route-sortOrder="asc"
                                    style="text-decoration:none">
                                     <i class="fa-solid fa-angle-up"></i>
                                 </a>
 
-                                <a asp-page="/Account"
-                                   asp-route-q="@Model.Q"
+                                <a asp-page="/AccountIndex"
+                                   asp-route-accountId="@Model.Account.AccountId"
                                    asp-route-sortColumn="Type"
                                    asp-route-sortOrder="desc"
                                    style="text-decoration:none">
@@ -74,16 +74,16 @@
                             </th>
                             <th scope"col">
                                 Balance
-                                <a asp-page="/Account"
-                                   asp-route-q="@Model.Q"
+                                <a asp-page="/AccountIndex"
+                                   asp-route-accountId="@Model.Account.AccountId"
                                    asp-route-sortColumn="Type"
                                    asp-route-sortOrder="asc"
                                    style="text-decoration:none">
                                     <i class="fa-solid fa-angle-up"></i>
                                 </a>
 
-                                <a asp-page="/Account"
-                                   asp-route-q="@Model.Q"
+                                <a asp-page="/AccountIndex"
+                                   asp-route-accountId="@Model.Account.AccountId"
                                    asp-route-sortColumn="Type"
                                    asp-route-sortOrder="desc"
                                    style="text-decoration:none">
@@ -121,27 +121,24 @@
 </div>
 @section Scripts {
     <script>
-        $(document).ready(function () {
+               $(document).ready(function () {
             $('#load-more').click(function () {
                 var button = $(this);
                 var accountId = button.data('account-id');
-                var skip = button.data('skip') || 0;
+                var pageNo = button.data('page'); // Hämta den aktuella sidan
+                var skip = (pageNo - 1) * 20; // Beräkna hur många transaktioner vi ska hoppa över
 
                 $.ajax({
-                    url: '/Account?handler=Transactions',
+                    url: '/AccountIndex?handler=Transactions',
                     type: 'GET',
                     data: {
                         accountId: accountId,
-                        skip: skip
+                        pageNo: pageNo
                     },
                     success: function (data) {
                         var tableBody = $('#transactions-table-body');
 
-                        if (data.length === 0) {
-                            button.hide(); // Dölj knappen om inga fler transaktioner finns
-                            return;
-                        }
-
+                        // Lägg till nya transaktioner i tabellen
                         data.forEach(function (transaction) {
                             var row = $('<tr></tr>');
                             row.append('<td>' + formatDate(transaction.date) + '</td>');
@@ -151,10 +148,16 @@
                             tableBody.append(row);
                         });
 
-                        button.data('skip', skip + 20);
+                        // Uppdatera sidnummer för knappen
+                        $('#load-more').data('page', pageNo + 1);
+
+                        // Om alla transaktioner är laddade, dölja knappen
+                        if (data.length < 20) {
+                            $('#load-more').hide(); // Dölj knappen om inga fler transaktioner finns
+                        }
                     },
                     error: function () {
-                        alert("Kunde inte hämta fler transaktioner.");
+                        alert("An error occurred while loading more transactions.");
                     }
                 });
             });
@@ -164,5 +167,6 @@
                 return date.toLocaleDateString('sv-SE');
             }
         });
+
     </script>
 }
