@@ -90,16 +90,21 @@ namespace Services.Services
             customer.Country = customerDTO.Country;
             _customerRepo.Update(customer);
         }
+        // SKAPAT AV AI HIT
         public void DeleteCustomer(int customerId)
         {
-            var customer = _customerRepo.GetById(customerId);
-            if (customer == null)
-            {
-                throw new Exception("Customer not found");
-            }
             _customerRepo.Delete(customerId);
         }
-        // SKAPAT AV AI HIT
+        public void RestoreCustomer(int customerId)
+        {
+            var customer = _customerRepo.GetById(customerId);
+
+            if (customer != null)
+            {
+            customer.IsActive = true;
+            _customerRepo.Update(customer);
+            }
+        }
         public PagedResult<CustomerDTO> GetSortedCustomers(string sortColumn, string sortOrder, string q, int page)
         {
             var query = _customerRepo.GetAllCustomers()
