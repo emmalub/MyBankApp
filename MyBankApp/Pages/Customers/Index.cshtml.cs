@@ -6,14 +6,15 @@ using Services.Services.Interfaces;
 using static MyBankApp.ViewModels.CustomerViewModel;
 
 
+
 namespace MyBankApp.Pages.Customers
 {
     [Authorize(Roles = "Cashier")]
-    public class CustomersModel : PageModel
+    public class IndexModel : PageModel
     {
         private readonly ICustomerService _customerService;
 
-        public CustomersModel(ICustomerService customerService)
+        public IndexModel(ICustomerService customerService)
         {
             _customerService = customerService;
         }
@@ -57,12 +58,6 @@ namespace MyBankApp.Pages.Customers
             {
                 ErrorMessage = "No customer found with the given search criteria.";
             }
-
-            //var pagedResult = _customerService.GetSortedCustomers(SortColumn, SortOrder, q, pageNo, pageSize);
-
-
-            //Customers = CustomerMapper.MapToViewModel(pagedResult.Results);
-            //TotalPages = pagedResult.TotalPages;
 
         }
     }

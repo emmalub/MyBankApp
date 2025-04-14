@@ -2,3 +2,15 @@
 @model MyBankApp.Pages.Customers.DeleteModel
 @{
 }
+
+<h1>Delete Customer</h1>
+
+<p>Are you sure you want to delete this customer?</p>
+<p><strong>@Model.Customer.Givenname @Model.Customer.Surname</strong></p>
+
+<form method="post">
+    <input type="hidden" asp-for="Customer.Id" />
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a asp-page="./Index" class="btn btn-secondary">Cancel</a>
+</form>
+

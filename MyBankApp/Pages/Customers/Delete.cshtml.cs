@@ -12,8 +12,19 @@ namespace MyBankApp.Pages.Customers
     public class DeleteModel : PageModel
     {
         private readonly ICustomerService _customerService;
-        public void OnGet()
+
+        [BindProperty]
+        public CustomerDTO Customer { get; set; }
+        public int CustomerId { get; set; }
+
+        public DeleteModel(ICustomerService customerService)
         {
+            _customerService = customerService;
+        }
+
+        public void OnGet(int id)
+        {
+            Customer = _customerService.GetCustomerById(id);
         }
 
         public IActionResult OnPost(int customerId)
