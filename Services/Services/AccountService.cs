@@ -1,13 +1,7 @@
 ﻿using DataAccessLayer.DTOs;
-using DataAccessLayer.Models;
 using Microsoft.EntityFrameworkCore;
 using MyBankApp.Infrastructure.Paging;
 using Services.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using AutoMapper;
 using Services.Services.Interfaces;
 using Services.Repositories.Interfaces;
