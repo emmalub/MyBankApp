@@ -81,7 +81,7 @@ namespace Services.Repositories
         public int GetSwedishAccountCount()
         {
             return _dbContext.Accounts
-                          .Where(a => a.Dispositions.Any(d => d.Customer.Country == "Swedish"))
+                          .Where(a => a.Dispositions.Any(d => d.Customer.Country == "Sweden"))
                           .Count();
         }
 
