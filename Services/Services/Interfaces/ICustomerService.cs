@@ -13,9 +13,13 @@ namespace Services.Services.Interfaces
     public interface ICustomerService
     {
         PagedResult<CustomerDTO> GetSortedCustomers(string sortColumn, string sortOrder, string q, int page);
-
         Customer GetCustomerDetails(int customerId);
         Customer GetCustomerWithDispositions(int id);
+
+        CustomerDTO GetCustomerById(int customerId);
+        void CreateCustomer(CustomerDTO customer);
+        void UpdateCustomer(int customerId, CustomerDTO customer);
+        void DeleteCustomer(int customerId);
 
     }
 }

@@ -13,5 +13,9 @@ namespace Services.Repositories.Interfaces
         int GetCustomerCount();
         IQueryable<Customer> GetAllCustomers();
         int GetCustomerCountByCountry(string country);
+        Customer GetById(int customerId);
+        public void Add(Customer customer);
+        public void Update(Customer customer);
+        public void Delete(int customerId);
     }
 }

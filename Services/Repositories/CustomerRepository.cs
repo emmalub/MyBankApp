@@ -21,7 +21,37 @@ namespace Services.Repositories
         {
             _dbContext = dbContext;
         }
-      
+        public IQueryable<Customer> GetAllCustomers()
+        {
+            return _dbContext.Customers
+                .Where(c => c.IsActive);
+        }
+        public Customer GetById(int id)
+        {
+            return _dbContext.Customers
+                .FirstOrDefault(c => c.CustomerId == id);
+        }
+        public void Add(Customer customer)
+        {
+            _dbContext.Customers.Add(customer);
+            _dbContext.SaveChanges();
+        }
+        public void Update(Customer customer)
+        {
+            _dbContext.Customers.Update(customer);
+            _dbContext.SaveChanges();
+        }
+        public void Delete(int customerId)
+        {
+            var customer = _dbContext.Customers
+                .Find(customerId);
+            if (customer != null)
+            {
+                customer.IsActive = false;
+                _dbContext.SaveChanges();
+            }
+        }
+
         public int GetCustomerCount()
         {
             return _dbContext.Customers.Count();
@@ -33,10 +63,6 @@ namespace Services.Repositories
                 .Count();
         }
 
-        public IQueryable<Customer> GetAllCustomers()
-        {
-            return _dbContext.Customers.AsQueryable();
-        }
 
 
         public int GetSwedishCustomerCount()

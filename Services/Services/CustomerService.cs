@@ -14,19 +14,92 @@ namespace Services.Services
         private readonly IMapper _mapper;
         private readonly ICustomerRepository _customerRepo;
 
-       
+
         public CustomerService(IMapper mapper, ICustomerRepository repository)
         {
             _mapper = mapper;
             _customerRepo = repository;
         }
 
-        public List<CustomerDTO> GetAllCustomers()
+        public List<CustomerDTO> GetCustomers()
         {
-            var customers = _customerRepo.GetAllCustomers(); // Hämtar Customer-objekt
-            return _mapper.Map<List<CustomerDTO>>(customers); // Konverterar till CustomerDTO
+            var query = _customerRepo.GetAllCustomers()
+                 //.Where(c = c.CustomerId == id && c.IsActive)
+                 .Select(c => new CustomerDTO
+                 {
+                     Id = c.CustomerId,
+                     NationalId = c.NationalId,
+                     Givenname = c.Givenname,
+                     Surname = c.Surname,
+                     Streetaddress = c.Streetaddress,
+                     City = c.City,
+                     Country = c.Country,
+                     CountryCode = c.CountryCode,
+                     Birthday = c.Birthday,
+                     Telephonenumber = c.Telephonenumber,
+                     Telephonecountrycode = c.Telephonecountrycode,
+                     Emailaddress = c.Emailaddress,
+                     Gender = c.Gender,
+                 });
+            return query.ToList();
         }
 
+        public CustomerDTO GetCustomerById(int customerId)
+        {
+            var customer = _customerRepo.GetById(customerId);
+
+            if (customer == null)
+            {
+                return null;
+            }
+            var customerDTO = _mapper.Map<CustomerDTO>(customer);
+
+            return new CustomerDTO
+            {
+                Id = customer.CustomerId,
+                Givenname = customer.Givenname,
+                Surname = customer.Surname,
+                City = customer.City,
+                Country = customer.Country,
+            };
+        }
+        public void CreateCustomer(CustomerDTO customerDTO)
+        {
+            var customer = new Customer
+            {
+                Givenname = customerDTO.Givenname,
+                Surname = customerDTO.Surname,
+                City = customerDTO.City,
+                Country = customerDTO.Country,
+            };
+
+            _customerRepo.Add(customer);
+        }
+
+        //SKAPADE AV AI JUST NU
+        public void UpdateCustomer(int customerId, CustomerDTO customerDTO)
+        {
+            var customer = _customerRepo.GetById(customerDTO.Id);
+            if (customer == null)
+            {
+                throw new Exception("Customer not found");
+            }
+            customer.Givenname = customerDTO.Givenname;
+            customer.Surname = customerDTO.Surname;
+            customer.City = customerDTO.City;
+            customer.Country = customerDTO.Country;
+            _customerRepo.Update(customer);
+        }
+        public void DeleteCustomer(int customerId)
+        {
+            var customer = _customerRepo.GetById(customerId);
+            if (customer == null)
+            {
+                throw new Exception("Customer not found");
+            }
+            _customerRepo.Delete(customerId);
+        }
+        // SKAPAT AV AI HIT
         public PagedResult<CustomerDTO> GetSortedCustomers(string sortColumn, string sortOrder, string q, int page)
         {
             var query = _customerRepo.GetAllCustomers()
@@ -45,17 +118,17 @@ namespace Services.Services
 
                 query = query.Where(c =>
                 c.Id == id ||
-                c.Givenname.Contains(q) || 
-                c.Surname.Contains(q) || 
-                c.City.Contains(q) || 
+                c.Givenname.Contains(q) ||
+                c.Surname.Contains(q) ||
+                c.City.Contains(q) ||
                 c.Country.Contains(q));
             }
 
             switch (sortColumn)
             {
                 case "Id":
-                    query = (sortOrder == "asc") ? 
-                        query.OrderBy(c => c.Id) : 
+                    query = (sortOrder == "asc") ?
+                        query.OrderBy(c => c.Id) :
                         query.OrderByDescending(c => c.Id);
                     break;
 
@@ -68,22 +141,22 @@ namespace Services.Services
                     break;
 
                 case "Country":
-                    query = (sortOrder == "asc") ? 
-                        query.OrderBy(c => c.Country) : 
+                    query = (sortOrder == "asc") ?
+                        query.OrderBy(c => c.Country) :
                         query.OrderByDescending(c => c.Country);
                     break;
 
                 case "City":
-                    query = (sortOrder == "asc") ? 
-                        query.OrderBy(c => c.City) : 
+                    query = (sortOrder == "asc") ?
+                        query.OrderBy(c => c.City) :
                         query.OrderByDescending(c => c.City);
                     break;
 
                 default:
-                    query = query.OrderBy(c => c.Id); 
+                    query = query.OrderBy(c => c.Id);
                     break;
             }
-           
+
             return query.GetPaged(page, 50);
 
         }
