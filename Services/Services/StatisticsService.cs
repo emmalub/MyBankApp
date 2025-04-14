@@ -23,13 +23,13 @@ namespace Services.Services
         public int GetFinnishCustomerCount() => _customerRepo.GetCustomerCountByCountry("Finland");
 
 
-        public int GetDanishAccountCount() => _accountRepo.GetDanishAccountCount();
         public int GetSwedishAccountCount() => _accountRepo.GetSwedishAccountCount();
+        public int GetDanishAccountCount() => _accountRepo.GetDanishAccountCount();
         public int GetNorwegianAccountCount() => _accountRepo.GetNorwegianAccountCount();
         public int GetFinnishAccountCount() => _accountRepo.GetFinnishAccountCount();
 
-        public decimal GetDanishCapital() => _accountRepo.GetDanishCapital();
         public decimal GetSwedishCapital() => _accountRepo.GetSwedishCapital();
+        public decimal GetDanishCapital() => _accountRepo.GetDanishCapital();
         public decimal GetNorwegianCapital() => _accountRepo.GetNorwegianCapital();
         public decimal GetFinnishCapital() => _accountRepo.GetFinnishCapital();
 
