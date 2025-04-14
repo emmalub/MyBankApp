@@ -2,3 +2,24 @@
 @model MyBankApp.Pages.Customers.EditModel
 @{
 }
+
+<h1>Edit Customer</h1>
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="Customer.Givenname">Given Name</label>
+        <input asp-for="Customer.Givenname" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Customer.Surname">Surname</label>
+        <input asp-for="Customer.Surname" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Customer.City">City</label>
+        <input asp-for="Customer.City" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+</form>
