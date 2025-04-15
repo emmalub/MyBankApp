@@ -2,154 +2,165 @@
 @model MyBankApp.Pages.Customers.CustomerDetailsModel
 @{
 }
-<div class="container emp-profile">
 
-    <form method="post">
-        <div class="row d-flex justify-content-center">
-            <div class="col-md-4">
-                <div class="profile-img">
-                    <!--ev profilbild-->
-                </div>
-            </div>
-            <div class="column-md-5">
-                <div class="profile-work">
-                    <h2>Customer:</h2>
-                    <h1>
-                        @Model.Customer.Givenname @Model.Customer.Surname
-                    </h1>
-                    <h3>
-                        Total Balance: @Model.Customer.TotalBalance
-                    </h3>
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="accounts-tab" data-bs-toggle="tab" href="#accounts" role="tab" aria-controls="accounts" aria-selected="false">Accounts</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-10">
-                <div class="tab-content accounts-tab" id="myTabContent">
-                    <! -- About -->
-                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        <div class="row">
-                            <div class="col-md-2">
-                                <label>Customer Id</label>
-                            </div>
-                            <div class="col-md-4">
-                                <p>@Model.Customer.Id</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2">
-                                <label>Name</label>
-                            </div>
-                            <div class="col-md-4">
-                                <p>@Model.Customer.Givenname @Model.Customer.Surname</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2">
-                                <label>Email</label>
-                            </div>
-                            <div class="col-md-4">
-                                <p>@Model.Customer.Email</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2">
-                                <label>Phone</label>
-                            </div>
-                            <div class="col-md-4">
-                                <p>@Model.Customer.Phone</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2">
-                                <label>Address</label>
-                            </div>
-                            <div class="col-md-4">
-                                <p>@Model.Customer.Address</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2">
-                                <label>Gender</label>
-                            </div>
-                            <div class="col-md-4">
-                                <p>@Model.Customer.Gender</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2">
-                                <label>Social security</label>
-                            </div>
-                            <div class="col-md-4">
-                                <p>@Model.Customer.SocialSecurity</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2">
-                                <label>Age</label>
-                            </div>
-                            <div class="col-md-4">
-                                <p>@Model.Customer.Age</p>
-                            </div>
-                        </div>
+<section id="hero" class="hero section">
+    @* <img src="assets/img/hero-bg-abstract.jpg" alt="" data-aos="fade-in" class=""> *@
+
+
+    <div class="container emp-profile">
+
+        <form method="post">
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-4">
+                    <div class="profile-img">
+                        <!--ev profilbild-->
                     </div>
+                </div>
+                <div class="column-md-5">
+                    <div class="profile-work">
+                        <h2>Customer:</h2>
+                        <h1>
+                            @Model.Customer.Givenname @Model.Customer.Surname
+                        </h1>
+                        <h3>
+                            Total Balance: @Model.Customer.TotalBalance
+                        </h3>
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="accounts-tab" data-bs-toggle="tab" href="#accounts" role="tab" aria-controls="accounts" aria-selected="false">Accounts</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="tab-content accounts-tab" id="myTabContent">
+                        <! -- About -->
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label>Customer Id</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <p>@Model.Customer.Id</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label>Name</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <p>@Model.Customer.Givenname @Model.Customer.Surname</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label>Email</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <p>@Model.Customer.Email</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label>Phone</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <p>@Model.Customer.Phone</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label>Address</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <p>@Model.Customer.Address</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label>Gender</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <p>@Model.Customer.Gender</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label>Social security</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <p>@Model.Customer.SocialSecurity</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label>Age</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <p>@Model.Customer.Age</p>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="./Edit" class="profile-edit-btn"><i class="bi bi-pencil-square"></i> Edit</a>
 
-                    <!-- Accounts -->
-                    <div class="tab-pane fade" id="accounts" role="tabpanel" aria-labelledby="accounts-tab">
-                        <div class="row justify-content-start">
-                            <div class="col-md-6">
-                                <div class="table-responsive small-table">
-                                    <table class="table table-striped custom-table">
+                      
+                        <!-- Accounts -->
+                        <div class="tab-pane fade" id="accounts" role="tabpanel" aria-labelledby="accounts-tab">
+                            <div class="row justify-content-start">
+                                <div class="col-md-6">
+                                    <div class="table-responsive small-table">
+                                        <table class="table table-striped custom-table">
 
-                                        <tbody>
-                                            @foreach (var a in Model.Customer.Accounts)
-                                            {
-                                                <tr>
-                                                    <td>@a.AccountId</td>
-                                                    <td>@a.Balance</td>
-                                                    <td>
-                                                        <a asp-page="/Account/AccountIndex"
-                                                           asp-route-accountId="@a.AccountId"
-                                                           class="custom-btn fs-5">
-                                                            <i class="fa-solid fa-eye"></i>
-                                                        </a>
-                                                    </td>
-                                                    <td>
-                                                        <a asp-page="/Account/Withdraw"
-                                                           asp-route-accountId="@a.AccountId"
-                                                           asp-route-customerId="@Model.Customer.Id"
-                                                           class="custom-btn fs-5">
-                                                            <i class="bi bi-dash-circle-dotted"></i>
+                                            <tbody>
+                                                @foreach (var a in Model.Customer.Accounts)
+                                                {
+                                                    <tr>
+                                                        <td>@a.AccountId</td>
+                                                        <td>@a.Balance</td>
+                                                        <td>
+                                                            <a asp-page="/Account/AccountIndex"
+                                                               asp-route-accountId="@a.AccountId"
+                                                               class="custom-btn fs-5">
+                                                                <i class="fa-solid fa-eye"></i>
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            <a asp-page="/Account/Withdraw"
+                                                               asp-route-accountId="@a.AccountId"
+                                                               asp-route-customerId="@Model.Customer.Id"
+                                                               class="custom-btn fs-5">
+                                                                <i class="bi bi-dash-circle-dotted"></i>
 
-                                                        </a>
-                                                    </td>
-                                                    <td>
-                                                        <a asp-page="/Account/Deposit"
-                                                           asp-route-accountId="@a.AccountId"
-                                                           asp-route-customerId="@Model.Customer.Id"
-                                                           class="custom-btn fs5-">
-                                                            <i class="bi bi-plus-circle-dotted"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            }
-                                        </tbody>
-                                    </table>
+                                                            </a>
+                                                        </td>
+                                                        <td>
+                                                            <a asp-page="/Account/Deposit"
+                                                               asp-route-accountId="@a.AccountId"
+                                                               asp-route-customerId="@Model.Customer.Id"
+                                                               class="custom-btn fs5-">
+                                                                <i class="bi bi-plus-circle-dotted"></i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-    </form>
-    <br />
-    <a href="/Index" class="custom-btn fs-5"><i class="bi bi-arrow-return-left"></i>Back to Customers</a>
-</div>
+            </div>
 
+
+        </form>
+        <br />
+        <a href="/Index" class="custom-btn fs-5"><i class="bi bi-arrow-return-left"></i>Back to Customers</a>
+    </div>
+</section>

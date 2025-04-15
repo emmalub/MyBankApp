@@ -3,23 +3,31 @@
 @{
 }
 
-<h1>Edit Customer</h1>
+<section id="hero" class="hero section">
+    <img src="assets/img/hero-bg-abstract.jpg" alt="" data-aos="fade-in" class="">
 
-<form method="post">
-    <div class="form-group">
-        <label asp-for="Customer.Givenname">Given Name</label>
-        <input asp-for="Customer.Givenname" class="form-control" />
+    @* <div class="content"> *@
+
+    <div class="container">
+        <h1>Edit Customer</h1>
+
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="Customer.Givenname">Given Name</label>
+                <input asp-for="Customer.Givenname" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Customer.Surname">Surname</label>
+                <input asp-for="Customer.Surname" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Customer.City">City</label>
+                <input asp-for="Customer.City" class="form-control" />
+            </div>
+
+            <button type="submit" class="btn-get-started">Save Changes</button>
+        </form>
     </div>
-
-    <div class="form-group">
-        <label asp-for="Customer.Surname">Surname</label>
-        <input asp-for="Customer.Surname" class="form-control" />
-    </div>
-
-    <div class="form-group">
-        <label asp-for="Customer.City">City</label>
-        <input asp-for="Customer.City" class="form-control" />
-    </div>
-
-    <button type="submit" class="btn btn-primary">Save Changes</button>
-</form>
+</section>
