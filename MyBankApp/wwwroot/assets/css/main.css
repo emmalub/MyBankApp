@@ -535,8 +535,10 @@ h6 {
 --------------------------------------------------------------*/
 .custom-table {
     width: 100%;
-    min-width: unset;
+    /*    min-width: unset; */
+   table-layout: auto;
 }
+
 
 .small-table {
     max-width: 500px;
@@ -623,26 +625,37 @@ h6 {
         }
 
 /* ---------------------------------------------------------
+hanterar placeringen av knappen och sökfältet
+
+*/
+
+.header-actions {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    margin-bottom: 20px;
+}
+
+.search-form {
+    margin: 0;
+}
+
+
+
+.create-btn {
+    margin-left: 10px;
+    font-size: 18px;
+    color: var(--default-font)
+}
+    .create-btn:hover {
+        color: var(--accent-color);
+        text-decoration: none;
+    }
+
+
+/* ---------------------------------------------------------
     # Search form Styling
 */
-/*.search-form {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.search-input {
-    width: 250px;
-    padding: 8px 12px;
-    border: 2px solid #D4A5FF;*/ /* Din lila färg */
-/*border-radius: 5px;
-    outline: none;
-    transition: border-color 0.3s;
-}
-
-    .search-input:focus {
-        border-color: #FC6424;*/ /* Orange färg vid fokus */
-/*}*/
 
 .search-btn {
     background-color: #FC6424;
@@ -1846,7 +1859,7 @@ section,
 /*--------------------------------------------------------------
 # Team Section
 --------------------------------------------------------------*/
-.team .team-member {
+/*.team .team-member {
     background-color: var(--surface-color);
     overflow: hidden;
     border-radius: 5px;
@@ -1913,11 +1926,11 @@ section,
         opacity: 1;
         bottom: 15px;
     }
-
+*/
 /*--------------------------------------------------------------
 # Pricing Section
 --------------------------------------------------------------*/
-.pricing .pricing-item {
+/*.pricing .pricing-item {
     background-color: var(--surface-color);
     padding: 60px 40px;
     box-shadow: 0 3px 20px -2px rgba(0, 0, 0, 0.1);
@@ -2032,11 +2045,11 @@ section,
     .pricing .featured .buy-btn:hover {
         background: color-mix(in srgb, var(--background-color), transparent 92%);
     }
-
+*/
 /*--------------------------------------------------------------
 # Faq Section
 --------------------------------------------------------------*/
-.faq .faq-container .faq-item {
+/*.faq .faq-container .faq-item {
     background-color: var(--surface-color);
     position: relative;
     padding: 20px;
@@ -2117,12 +2130,12 @@ section,
     .faq .faq-container .faq-active .faq-toggle {
         transform: rotate(90deg);
         color: var(--accent-color);
-    }
+    }*/
 
 /*--------------------------------------------------------------
 # Contact Section
 --------------------------------------------------------------*/
-.contact .info-item + .info-item {
+/*.contact .info-item + .info-item {
     margin-top: 40px;
 }
 
@@ -2192,7 +2205,7 @@ section,
 
         .contact .php-email-form button[type=submit]:hover {
             background: color-mix(in srgb, var(--accent-color), transparent 20%);
-        }
+        }*/
 
 /*--------------------------------------------------------------
 # Portfolio Details Section
