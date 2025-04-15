@@ -17,5 +17,6 @@ namespace Services.Repositories.Interfaces
         public void Add(Customer customer);
         public void Update(Customer customer);
         public void Delete(int customerId);
+        public void SaveChanges();
     }
 }

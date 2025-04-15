@@ -13,6 +13,8 @@ namespace Services.Repositories.Interfaces
         AccountDTO GetById(int accountId);
         void UpdateAccount(Account account);
         void UpdateBalance(int accountId, decimal newBalance);
+        void Add(Account account);
+        void SaveChanges();
         IQueryable<Account> GetAllAccounts();
 
         int GetAccountCount();

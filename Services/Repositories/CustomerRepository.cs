@@ -51,6 +51,10 @@ namespace Services.Repositories
                 _dbContext.SaveChanges();
             }
         }
+        public void SaveChanges()
+        {
+            _dbContext.SaveChanges();
+        }
 
         public int GetCustomerCount()
         {
@@ -62,8 +66,6 @@ namespace Services.Repositories
                 .Where(c => c.Country == country)
                 .Count();
         }
-
-
 
         public int GetSwedishCustomerCount()
         {

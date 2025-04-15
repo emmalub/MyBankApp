@@ -38,6 +38,15 @@ namespace Services.Repositories
 
             return _mapper.Map<AccountDTO>(account);
         }
+        public void Add(Account account)
+        {
+            _dbContext.Accounts.Add(account);
+            _dbContext.SaveChanges();
+        }
+        public void SaveChanges()
+        {
+            _dbContext.SaveChanges();
+        }
         public void UpdateAccount(Account account)
         {
             var existingAccount = _dbContext.Accounts.FirstOrDefault(a => a.AccountId == account.AccountId);

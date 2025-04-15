@@ -13,12 +13,14 @@ namespace Services.Services
     {
         private readonly IMapper _mapper;
         private readonly ICustomerRepository _customerRepo;
+        private readonly IAccountRepository _accountRepo;
 
 
-        public CustomerService(IMapper mapper, ICustomerRepository repository)
+        public CustomerService(IMapper mapper, ICustomerRepository repository, IAccountRepository accountRepo)
         {
             _mapper = mapper;
             _customerRepo = repository;
+            _accountRepo = accountRepo;
         }
 
         public List<CustomerDTO> GetCustomers()
@@ -67,13 +69,38 @@ namespace Services.Services
         {
             var customer = new Customer
             {
+                Gender = customerDTO.Gender,
                 Givenname = customerDTO.Givenname,
                 Surname = customerDTO.Surname,
+                Streetaddress = customerDTO.Streetaddress,
                 City = customerDTO.City,
+                Zipcode = customerDTO.Zipcode,
                 Country = customerDTO.Country,
+                CountryCode = customerDTO.CountryCode,
+                Birthday = customerDTO.Birthday,
+                NationalId = customerDTO.NationalId,
+                Telephonecountrycode = customerDTO.Telephonecountrycode,
+                Telephonenumber = customerDTO.Telephonenumber,
+                Emailaddress = customerDTO.Emailaddress,
+                IsActive = true,
+            };
+            var account = new Account
+            {
+                Balance = 0,
+                Created = DateOnly.FromDateTime(DateTime.Now),
+                Frequency = "Monthly",
+                Dispositions = new List<Disposition> { new Disposition { Customer = customer } },
+                Loans = new List<Loan>(),
+                PermenentOrders = new List<PermenentOrder>(),
+                Transactions = new List<Transaction>(),
             };
 
+            customer.Dispositions.Add(new Disposition { Account = account });
+
             _customerRepo.Add(customer);
+            _accountRepo.Add(account);
+
+            _customerRepo.SaveChanges();
         }
 
         //SKAPADE AV AI JUST NU

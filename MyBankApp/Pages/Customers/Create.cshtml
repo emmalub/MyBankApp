@@ -9,24 +9,170 @@
 
         <h1>Create New Customer</h1>
 
-        <form method="post">
-            <div class="form-group">
-                <label asp-for="Customer.Givenname">Given Name</label>
-                <input asp-for="Customer.Givenname" class="form-control" />
-            </div>
+        <section class="h-100 h-custom gradient-custom-2">
+            <div class="container py-5 h-100">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-12">
+                        <div class="card card-registration card-registration-2" style="border-radius: 15px;">
+                            <div class="card-body p-0">
+                                <div class="row g-0">
+                                    <div class="col-lg-6">
+                                        <div class="p-5">
+                                            <h3 class="fw-normal mb-5" style="color: #432783;">General Infomation</h3>
 
-            <div class="form-group">
-                <label asp-for="Customer.Surname">Surname</label>
-                <input asp-for="Customer.Surname" class="form-control" />
-            </div>
+                                            <div class="row">
+                                                <div class="col-md-6 mb-4 pb-2">
 
-            <div class="form-group">
-                <label asp-for="Customer.City">City</label>
-                <input asp-for="Customer.City" class="form-control" />
-            </div>
+                                                    <div data-mdb-input-init class="form-outline">
+                                                        <input type="text" id="form3Examplev2" class="form-control form-control-lg" />
+                                                        <label class="form-label" for="form3Examplev2">First name</label>
+                                                    </div>
 
-            <button type="submit" class="btn-get-started">Create</button>
-        </form>
+                                                </div>
+                                                <div class="col-md-6 mb-4 pb-2">
+
+                                                    <div data-mdb-input-init class="form-outline">
+                                                        <input type="text" id="form3Examplev3" class="form-control form-control-lg" />
+                                                        <label class="form-label" for="form3Examplev3">Last name</label>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-4 pb-2">
+                                                <select data-mdb-select-init>
+                                                    <option value="1">Gender</option>
+                                                    <option value="2">Female</option>
+                                                    <option value="3">Male</option>
+                                                    <option value="4">Other</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="mb-4">
+                                                <div data-mdb-input-init class="form-outline form-white">
+                                                    <input type="text" id="form3Examplea9" class="form-control form-control-lg" />
+                                                    <label class="form-label" for="form3Examplea9">Email</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6 mb-4 pb-2 mb-md-0 pb-md-0">
+
+                                                    <div data-mdb-input-init class="form-outline">
+                                                        <input type="text" id="form3Examplev5" class="form-control form-control-lg" />
+                                                        <label class="form-label" for="form3Examplev5">Birth Date</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6 mb-4 pb-2 mb-md-0 pb-md-0">
+
+                                                    <div data-mdb-input-init class="form-outline">
+                                                        <input type="text" id="form3Examplev5" class="form-control form-control-lg" />
+                                                        <label class="form-label" for="form3Examplev5">National ID</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 bg-indigo text-white">
+                                        <div class="p-5">
+                                            <h3 class="fw-normal mb-5" style="color: #ffffff;">Contact Details</h3>
+
+                                            <div class="mb-4 pb-2">
+                                                <div data-mdb-input-init class="form-outline form-white">
+                                                    <input type="text" id="form3Examplea2" class="form-control form-control-lg" />
+                                                    <label class="form-label" for="form3Examplea2">Street + Nr</label>
+                                                </div>
+                                            </div>
+                                          
+
+                                            <div class="row">
+                                                <div class="col-md-5 mb-4 pb-2">
+
+                                                    <div data-mdb-input-init class="form-outline form-white">
+                                                        <input type="text" id="form3Examplea4" class="form-control form-control-lg" />
+                                                        <label class="form-label" for="form3Examplea4">Zip Code</label>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-7 mb-4 pb-2">
+
+                                                    <div data-mdb-input-init class="form-outline form-white">
+                                                        <input type="text" id="form3Examplea5" class="form-control form-control-lg" />
+                                                        <label class="form-label" for="form3Examplea5">City</label>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-4 pb-2">
+                                                <div data-mdb-input-init class="form-outline form-white">
+                                                    <input type="text" id="form3Examplea6" class="form-control form-control-lg" />
+                                                    <label class="form-label" for="form3Examplea6">Country</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-5 mb-4 pb-2">
+
+                                                    <div data-mdb-input-init class="form-outline form-white">
+                                                        <input type="text" id="form3Examplea7" class="form-control form-control-lg" />
+                                                        <label class="form-label" for="form3Examplea7">Code +</label>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-7 mb-4 pb-2">
+
+                                                    <div data-mdb-input-init class="form-outline form-white">
+                                                        <input type="text" id="form3Examplea8" class="form-control form-control-lg" />
+                                                        <label class="form-label" for="form3Examplea8">Phone Number</label>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-4">
+                                                <div data-mdb-input-init class="form-outline form-white">
+                                                    <input type="text" id="form3Examplea9" class="form-control form-control-lg" />
+                                                    <label class="form-label" for="form3Examplea9">Your Email</label>
+                                                </div>
+                                            </div>
+
+                                            <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-light btn-lg"
+                                                    data-mdb-ripple-color="dark">
+                                                Create
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        @* <form method="post"> *@
+        @*     <div class="form-group"> *@
+        @*         <label asp-for="Customer.Givenname">Given Name</label> *@
+        @*         <input asp-for="Customer.Givenname" class="form-control" /> *@
+        @*     </div> *@
+
+        @*     <div class="form-group"> *@
+        @*         <label asp-for="Customer.Surname">Surname</label> *@
+        @*         <input asp-for="Customer.Surname" class="form-control" /> *@
+        @*     </div> *@
+
+        @*     <div class="form-group"> *@
+        @*         <label asp-for="Customer.City">City</label> *@
+        @*         <input asp-for="Customer.City" class="form-control" /> *@
+        @*     </div> *@
+
+        @*     <button type="submit" class="btn-get-started">Create</button> *@
+        @* </form> *@
 
     </div>
 </section>
