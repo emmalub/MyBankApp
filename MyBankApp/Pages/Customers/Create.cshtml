@@ -107,7 +107,7 @@
                                                 <!-- Country -->
                                                 <div class="mb-4">
                                                     <div data-mdb-input-init class="form-outline">
-                                                        <select asp-for="Customer.Country" class="form-control form-control-lg">
+                                                        <select asp-for="Customer.Country" class="form-control form-control-lg" onchange="updateCountryCode()">
                                                             <option value="" disabled selected>Select Country</option>
                                                             <option value="Sweden">Sweden</option>
                                                             <option value="Norway">Norway</option>
@@ -119,7 +119,7 @@
                                                 </div>
                                                 <div class="mb-4">
                                                     <div data-mdb-input-init class="form-outline">
-                                                        <input type="text" id="countryCode" class="form-control form-control-lg" hidden />
+                                                        <input type="text" asp-for="Customer.CountryCode" id="countryCode" class="form-control form-control-lg" hidden />
                                                         <label class="form-label" for="countryCode">Country Code</label>
                                                     </div>
                                                 </div>
@@ -166,7 +166,6 @@
             "Finland": "FI"
         };
 
-        // Hitta landskoden baserat på valt land och sätt den i det dolda inputfältet
         var countryCodeInput = document.getElementById('countryCode');
         if (countryName in countryCodes) {
             countryCodeInput.value = countryCodes[countryName];
@@ -176,7 +175,6 @@
         }
     }
 </script>
-
 
 
 

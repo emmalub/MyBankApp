@@ -23,7 +23,7 @@ namespace MyBankApp.Pages.Customers
             var customer = _customerService.GetCustomerDetails(id);
             if (customer == null)
             {
-                return RedirectToPage("/Customer/Customers");
+                return RedirectToPage("/Customers/Index");
             }
 
             Customer = new CustomerViewModel

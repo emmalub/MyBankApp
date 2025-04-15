@@ -5,6 +5,7 @@ using Services.Repositories;
 using AutoMapper;
 using Services.Services.Interfaces;
 using Services.Repositories.Interfaces;
+using DataAccessLayer.Models;
 
 
 namespace Services.Services
@@ -118,6 +119,26 @@ namespace Services.Services
                     }).ToList()
             };
         }
-      
+
+        public void CreateAccount(Customer customer)
+        {
+            var account = new Account
+            {
+                Created = DateOnly.FromDateTime(DateTime.Now),
+                Balance = 0,
+                Frequency = "Monthly",
+            };
+            
+            var disposition = new Disposition
+            {
+                Customer = customer,
+                Account = account,
+                Type = "OWNER",
+            };
+
+            account.Dispositions.Add(disposition);
+
+            _accountRepo.Add(account);
+        }
     }
 }

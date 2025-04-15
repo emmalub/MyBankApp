@@ -32,7 +32,6 @@ namespace MyBankApp
             builder.Services.AddTransient<IAccountService, AccountService>();
             builder.Services.AddScoped<ITransactionService, TransactionService>();
             builder.Services.AddScoped<IStatisticsService, StatisticsService>();
-
             // Add AutoMapper
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             //mina slut//

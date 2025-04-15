@@ -14,13 +14,14 @@ namespace Services.Services
         private readonly IMapper _mapper;
         private readonly ICustomerRepository _customerRepo;
         private readonly IAccountRepository _accountRepo;
+        private readonly IAccountService _accountService;
 
-
-        public CustomerService(IMapper mapper, ICustomerRepository repository, IAccountRepository accountRepo)
+        public CustomerService(IMapper mapper, ICustomerRepository repository, IAccountRepository accountRepo, IAccountService accountService)
         {
             _mapper = mapper;
             _customerRepo = repository;
             _accountRepo = accountRepo;
+            _accountService = accountService;
         }
 
         public List<CustomerDTO> GetCustomers()
@@ -69,36 +70,42 @@ namespace Services.Services
         {
             var customer = new Customer
             {
-                Gender = customerDTO.Gender,
                 Givenname = customerDTO.Givenname,
                 Surname = customerDTO.Surname,
-                Streetaddress = customerDTO.Streetaddress,
                 City = customerDTO.City,
-                Zipcode = customerDTO.Zipcode,
                 Country = customerDTO.Country,
                 CountryCode = customerDTO.CountryCode,
-                Birthday = customerDTO.Birthday,
-                NationalId = customerDTO.NationalId,
                 Telephonecountrycode = customerDTO.Telephonecountrycode,
                 Telephonenumber = customerDTO.Telephonenumber,
                 Emailaddress = customerDTO.Emailaddress,
-                IsActive = true,
+                Streetaddress = customerDTO.Streetaddress,
+                Zipcode = customerDTO.Zipcode,
+                NationalId = customerDTO.NationalId,
+                Gender = customerDTO.Gender,
+                Birthday = customerDTO.Birthday,
+                IsActive = true
             };
-            var account = new Account
-            {
-                Balance = 0,
-                Created = DateOnly.FromDateTime(DateTime.Now),
-                Frequency = "Monthly",
-                Dispositions = new List<Disposition> { new Disposition { Customer = customer } },
-                Loans = new List<Loan>(),
-                PermenentOrders = new List<PermenentOrder>(),
-                Transactions = new List<Transaction>(),
-            };
-
-            customer.Dispositions.Add(new Disposition { Account = account });
 
             _customerRepo.Add(customer);
-            _accountRepo.Add(account);
+
+            _accountService.CreateAccount(customer);
+            //var account = new Account
+            //{
+            //    Created = DateOnly.FromDateTime(DateTime.Now),
+            //    Balance = 0, // Initiera med 0 eller ett standardvärde
+            //    Frequency = "Monthly" // Standardfrekvens för konto
+            //};
+            //_accountRepo.Add(account); 
+
+            //var disposition = new Disposition
+            //{
+            //    Customer = customer,  // Länka dispositionen till kunden
+            //    Account = account,    // Länka dispositionen till kontot
+            //    Type = "OWNER"      // Standardvärde för Type
+            //};
+
+            //account.Dispositions.Add(disposition);
+
 
             _customerRepo.SaveChanges();
         }

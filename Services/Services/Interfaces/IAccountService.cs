@@ -20,7 +20,12 @@ namespace Services.Services.Interfaces
     {
         PagedResult<AccountDTO> GetSortedAccounts(string sortColumn, string sortOrder, string q, int page);
         public AccountDTO GetAccountDetails(int accountId);
-        //public AccountDTO GetAccountById(int accountId);
-    
+        public void CreateAccount(Customer customer);
+        //public void UpdateAccount(int accountId, AccountDTO accountDTO);
+        //public void DeleteAccount(int accountId);
+        //public void RestoreAccount(int accountId);
+
+
+
     }
 }

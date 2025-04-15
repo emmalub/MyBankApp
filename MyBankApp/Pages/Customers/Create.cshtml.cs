@@ -17,32 +17,17 @@ namespace MyBankApp.Pages.Customers
         {
             _customerService = customerService;
         }
-      
-       
+
+
         public IActionResult OnPost()
         {
             Console.WriteLine("OnPost method called");
-          
+            foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+            {
+                Console.WriteLine(error.ErrorMessage);
+            }
             if (ModelState.IsValid)
             {
-                var customer = new Customer
-                {
-                    Givenname = Customer.Givenname,
-                    Surname = Customer.Surname,
-                    City = Customer.City,
-                    Country = Customer.Country,
-                    CountryCode = Customer.CountryCode,
-                    Telephonecountrycode = Customer.Telephonecountrycode,
-                    Telephonenumber = Customer.Telephonenumber,
-                    Emailaddress = Customer.Emailaddress,
-                    Streetaddress = Customer.Streetaddress,
-                    Zipcode = Customer.Zipcode,
-                    NationalId = Customer.NationalId,
-                    Gender = Customer.Gender,
-                    Birthday = Customer.Birthday,
-
-                    IsActive = true
-                };
                 _customerService.CreateCustomer(Customer);
 
                 TempData["SuccessMessage"] = "Customer has been created successfully!";
@@ -51,10 +36,6 @@ namespace MyBankApp.Pages.Customers
 
                 return RedirectToPage("/Customers/CustomerDetails", new { id = newCustomerId });
 
-            }
-            foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
-            {
-                Console.WriteLine(error.ErrorMessage);
             }
             return Page();
         }
