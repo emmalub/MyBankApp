@@ -34,10 +34,10 @@ namespace MyBankApp.Pages.Customers
                 Surname = customer.Surname,
                 Email = customer.Emailaddress,
                 Phone = customer.Telephonecountrycode + " " + customer.Telephonenumber,
-                Address = $"{customer.Streetaddress}, {customer.City}, {customer.Country}",
+                Streetaddress = $"{customer.Streetaddress}, {customer.City}, {customer.Country}",
                 Age = customer.Birthday != null ? DateTime.Now.Year - customer.Birthday.Value.Year : 0,
                 Gender = customer.Gender,
-                SocialSecurity = customer.NationalId,
+                NationalId = customer.NationalId,
                 Accounts = customer.Dispositions
                 .Where(d => d.Account != null)
                 .Select(d => new AccountViewModel

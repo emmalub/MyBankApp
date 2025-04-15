@@ -1,12 +1,9 @@
 ﻿@page
 @model MyBankApp.Pages.Customers.CreateModel
-@{
-}
 
 <section id="hero" class="hero section">
     <img src="assets/img/hero-bg-abstract.jpg" alt="" data-aos="fade-in" class="">
     <div class="container">
-
         <h1>Create New Customer</h1>
 
         <section class="h-100 h-custom gradient-custom-2">
@@ -15,164 +12,171 @@
                     <div class="col-12">
                         <div class="card card-registration card-registration-2" style="border-radius: 15px;">
                             <div class="card-body p-0">
-                                <div class="row g-0">
-                                    <div class="col-lg-6">
-                                        <div class="p-5">
-                                            <h3 class="fw-normal mb-5" style="color: #432783;">General Infomation</h3>
+                                <form method="post">
+                                    <div class="row g-0">
+                                        <div class="col-lg-6">
+                                            <div class="p-5">
+                                                <h3 class="fw-normal mb-5" style="color: #432783;">General Information</h3>
 
-                                            <div class="row">
-                                                <div class="col-md-6 mb-4 pb-2">
-
-                                                    <div data-mdb-input-init class="form-outline">
-                                                        <input type="text" id="form3Examplev2" class="form-control form-control-lg" />
-                                                        <label class="form-label" for="form3Examplev2">First name</label>
+                                                <!-- First Name -->
+                                                <div class="row">
+                                                    <div class="col-md-6 mb-4 pb-2">
+                                                        <div class="form-outline">
+                                                            <input type="text" id="form3Examplev2" class="form-control form-control-lg" asp-for="Customer.Givenname" />
+                                                            <label class="form-label" for="form3Examplev2">First name</label>
+                                                            <span asp-validation-for="Customer.Givenname" class="text-danger"></span>
+                                                        </div>
                                                     </div>
 
-                                                </div>
-                                                <div class="col-md-6 mb-4 pb-2">
-
-                                                    <div data-mdb-input-init class="form-outline">
-                                                        <input type="text" id="form3Examplev3" class="form-control form-control-lg" />
-                                                        <label class="form-label" for="form3Examplev3">Last name</label>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-
-                                            <div class="mb-4 pb-2">
-                                                <select data-mdb-select-init>
-                                                    <option value="1">Gender</option>
-                                                    <option value="2">Female</option>
-                                                    <option value="3">Male</option>
-                                                    <option value="4">Other</option>
-                                                </select>
-                                            </div>
-
-                                            <div class="mb-4">
-                                                <div data-mdb-input-init class="form-outline form-white">
-                                                    <input type="text" id="form3Examplea9" class="form-control form-control-lg" />
-                                                    <label class="form-label" for="form3Examplea9">Email</label>
-                                                </div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-md-6 mb-4 pb-2 mb-md-0 pb-md-0">
-
-                                                    <div data-mdb-input-init class="form-outline">
-                                                        <input type="text" id="form3Examplev5" class="form-control form-control-lg" />
-                                                        <label class="form-label" for="form3Examplev5">Birth Date</label>
+                                                    <!-- Last Name -->
+                                                    <div class="col-md-6 mb-4 pb-2">
+                                                        <div class="form-outline">
+                                                            <input type="text" id="form3Examplev3" class="form-control form-control-lg" asp-for="Customer.Surname" />
+                                                            <label class="form-label" for="form3Examplev3">Last name</label>
+                                                            <span asp-validation-for="Customer.Surname" class="text-danger"></span>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6 mb-4 pb-2 mb-md-0 pb-md-0">
 
-                                                    <div data-mdb-input-init class="form-outline">
-                                                        <input type="text" id="form3Examplev5" class="form-control form-control-lg" />
-                                                        <label class="form-label" for="form3Examplev5">National ID</label>
+                                                <!-- Gender -->
+                                                <div class="mb-4 pb-2">
+                                                    <select class="form-control form-control-lg" asp-for="Customer.Gender">
+                                                        <option value="Female">Female</option>
+                                                        <option value="Male">Male</option>
+                                                        <option value="Other">Other</option>
+                                                    </select>
+                                                    <span asp-validation-for="Customer.Gender" class="text-danger"></span>
+                                                </div>
+
+                                                <!-- Email -->
+                                                <div class="mb-4">
+                                                    <div class="form-outline form-white">
+                                                        <input type="text" id="form3Examplea9" class="form-control form-control-lg" asp-for="Customer.Emailaddress" />
+                                                        <label class="form-label" for="form3Examplea9">Email</label>
+                                                        <span asp-validation-for="Customer.Emailaddress" class="text-danger"></span>
                                                     </div>
                                                 </div>
-                                            </div>
 
+                                                <!-- Birth Date -->
+                                                <div class="row">
+                                                    <div class="col-md-6 mb-4 pb-2">
+                                                        <div class="form-outline">
+                                                            <input type="date" id="form3Examplev5" class="form-control form-control-lg" asp-for="Customer.Birthday" />
+                                                            <label class="form-label" for="form3Examplev5">Birth Date</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        <div class="col-md-6 mb-4 pb-2">
+                                            <div class="form-outline">
+                                                <input type="text" id="form3Examplea8" class="form-control form-control-lg" asp-for="Customer.NationalId" />
+                                                <label class="form-label" for="form3Examplea8">National ID</label>
+                                            </div>
+                                        </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 bg-indigo text-white">
+                                            <div class="p-5">
+                                                <h3 class="fw-normal mb-5" style="color: #ffffff;">Contact Details</h3>
+
+                                                <!-- Street Address -->
+                                                <div class="mb-4 pb-2">
+                                                    <div class="form-outline form-white">
+                                                        <input type="text" id="form3Examplea2" class="form-control form-control-lg" asp-for="Customer.Streetaddress" />
+                                                        <label class="form-label" for="form3Examplea2">Street + Nr</label>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Zip Code -->
+                                                <div class="row">
+                                                    <div class="col-md-5 mb-4 pb-2">
+                                                        <div class="form-outline form-white">
+                                                            <input type="text" id="form3Examplea4" class="form-control form-control-lg" asp-for="Customer.Zipcode" />
+                                                            <label class="form-label" for="form3Examplea4">Zip Code</label>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- City -->
+                                                    <div class="col-md-7 mb-4 pb-2">
+                                                        <div class="form-outline form-white">
+                                                            <input type="text" id="form3Examplea5" class="form-control form-control-lg" asp-for="Customer.City" />
+                                                            <label class="form-label" for="form3Examplea5">City</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Country -->
+                                                <div class="mb-4">
+                                                    <div data-mdb-input-init class="form-outline">
+                                                        <select asp-for="Customer.Country" class="form-control form-control-lg">
+                                                            <option value="" disabled selected>Select Country</option>
+                                                            <option value="Sweden">Sweden</option>
+                                                            <option value="Norway">Norway</option>
+                                                            <option value="Denmark">Denmark</option>
+                                                            <option value="Finland">Finland</option>
+                                                        </select>
+                                                        <label class="form-label" for="form3Examplea6">Country</label>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-4">
+                                                    <div data-mdb-input-init class="form-outline">
+                                                        <input type="text" id="countryCode" class="form-control form-control-lg" hidden />
+                                                        <label class="form-label" for="countryCode">Country Code</label>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Phone Number -->
+                                                <div class="row">
+                                                    <div class="col-md-3 mb-4 pb-2">
+                                                        <div class="form-outline form-white">
+                                                            <input type="text" id="form3Examplea7" class="form-control form-control-lg" asp-for="Customer.Telephonecountrycode" />
+                                                            <label class="form-label" for="form3Examplea7">Country Code</label>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Telephone Country Code -->
+                                                    <div class="col-md-7 mb-4 pb-2">
+                                                        <div class="form-outline form-white">
+                                                            <input type="text" id="form3Examplea8" class="form-control form-control-lg" asp-for="Customer.Telephonenumber" />
+                                                            <label class="form-label" for="form3Examplea8">Phone Number</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <button type="submit" class="btn-form">Create</button>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6 bg-indigo text-white">
-                                        <div class="p-5">
-                                            <h3 class="fw-normal mb-5" style="color: #ffffff;">Contact Details</h3>
-
-                                            <div class="mb-4 pb-2">
-                                                <div data-mdb-input-init class="form-outline form-white">
-                                                    <input type="text" id="form3Examplea2" class="form-control form-control-lg" />
-                                                    <label class="form-label" for="form3Examplea2">Street + Nr</label>
-                                                </div>
-                                            </div>
-                                          
-
-                                            <div class="row">
-                                                <div class="col-md-5 mb-4 pb-2">
-
-                                                    <div data-mdb-input-init class="form-outline form-white">
-                                                        <input type="text" id="form3Examplea4" class="form-control form-control-lg" />
-                                                        <label class="form-label" for="form3Examplea4">Zip Code</label>
-                                                    </div>
-
-                                                </div>
-                                                <div class="col-md-7 mb-4 pb-2">
-
-                                                    <div data-mdb-input-init class="form-outline form-white">
-                                                        <input type="text" id="form3Examplea5" class="form-control form-control-lg" />
-                                                        <label class="form-label" for="form3Examplea5">City</label>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-
-                                            <div class="mb-4 pb-2">
-                                                <div data-mdb-input-init class="form-outline form-white">
-                                                    <input type="text" id="form3Examplea6" class="form-control form-control-lg" />
-                                                    <label class="form-label" for="form3Examplea6">Country</label>
-                                                </div>
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-md-5 mb-4 pb-2">
-
-                                                    <div data-mdb-input-init class="form-outline form-white">
-                                                        <input type="text" id="form3Examplea7" class="form-control form-control-lg" />
-                                                        <label class="form-label" for="form3Examplea7">Code +</label>
-                                                    </div>
-
-                                                </div>
-                                                <div class="col-md-7 mb-4 pb-2">
-
-                                                    <div data-mdb-input-init class="form-outline form-white">
-                                                        <input type="text" id="form3Examplea8" class="form-control form-control-lg" />
-                                                        <label class="form-label" for="form3Examplea8">Phone Number</label>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-
-                                            <div class="mb-4">
-                                                <div data-mdb-input-init class="form-outline form-white">
-                                                    <input type="text" id="form3Examplea9" class="form-control form-control-lg" />
-                                                    <label class="form-label" for="form3Examplea9">Your Email</label>
-                                                </div>
-                                            </div>
-
-                                            <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-light btn-lg"
-                                                    data-mdb-ripple-color="dark">
-                                                Create
-                                            </button>
-
-                                        </div>
-                                    </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-
-        @* <form method="post"> *@
-        @*     <div class="form-group"> *@
-        @*         <label asp-for="Customer.Givenname">Given Name</label> *@
-        @*         <input asp-for="Customer.Givenname" class="form-control" /> *@
-        @*     </div> *@
-
-        @*     <div class="form-group"> *@
-        @*         <label asp-for="Customer.Surname">Surname</label> *@
-        @*         <input asp-for="Customer.Surname" class="form-control" /> *@
-        @*     </div> *@
-
-        @*     <div class="form-group"> *@
-        @*         <label asp-for="Customer.City">City</label> *@
-        @*         <input asp-for="Customer.City" class="form-control" /> *@
-        @*     </div> *@
-
-        @*     <button type="submit" class="btn-get-started">Create</button> *@
-        @* </form> *@
-
     </div>
 </section>
+
+<script>
+    function updateCountryCode() {
+        var countryName = document.querySelector('select[name="Customer.Country"]').value;
+        var countryCodes = {
+            "Sweden": "SE",
+            "Norway": "NO",
+            "Denmark": "DK",
+            "Finland": "FI"
+        };
+
+        // Hitta landskoden baserat på valt land och sätt den i det dolda inputfältet
+        var countryCodeInput = document.getElementById('countryCode');
+        if (countryName in countryCodes) {
+            countryCodeInput.value = countryCodes[countryName];
+        }
+        else {
+            countryCodeInput.value = "";
+        }
+    }
+</script>
+
+
+
+

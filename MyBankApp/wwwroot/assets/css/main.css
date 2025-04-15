@@ -1351,6 +1351,11 @@ section,
         overflow: hidden;
     }
 
+.hero form .form-control:focus {
+    outline: 2px solid #FF9C00; /* Justera till din önskade färg */
+    box-shadow: 0 0 10px rgba(255, 156, 0, 0.5);
+}
+
 @media (min-width: 640px) {
     .hero .icon-box:hover {
         transform: scale(1.08);
@@ -1923,6 +1928,26 @@ section,
     background-color: #432783;
     color: #fff;
 }
+
+.btn-form,
+.btn-form:focus {
+    color: var(--accent-color);
+    background: var(--contrast-color);
+    font-size: 18px;
+    font-weight: 700;
+    padding: 8px 35px;
+    margin: 0 0 0 0px;
+    border-radius: 6px;
+    border: none;
+    transition: 0.3s;
+}
+
+    .btn-form:hover,
+    .btn-form:focus:hover {
+        color: var(--contrast-color);
+        background: color-mix(in srgb, #FF9C00, transparent 15%);
+    }
+
 
 @media (min-width: 992px) {
     .card-registration-2 .bg-indigo {
