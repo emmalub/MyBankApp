@@ -55,7 +55,7 @@ namespace MyBankApp.Pages.Account
 
             if (status == ResponseCode.OK)
             {
-                return RedirectToPage("/Customer/CustomerDetails", new { id = CustomerId });
+                return RedirectToPage("/Customers/CustomerDetails", new { id = CustomerId });
             }
 
             if (status == ResponseCode.IncorrectAmount)

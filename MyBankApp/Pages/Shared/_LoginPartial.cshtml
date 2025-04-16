@@ -2,29 +2,41 @@
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
-<ul class="navbar-nav">
- 
-@if (SignInManager.IsSignedIn(User))
-{
-    <!-- Visas om användaren är inloggad -->
-    <li class="nav-item">
-        <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
-    </li>
-    <li class="nav-item">
-        <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
-            <button  type="submit" class="nav-link btn btn-link text-dark">Logout</button>
-        </form>
-    </li>
-    <span>Hello @User.Identity?.Name!</span>
-}
-else
-{
-    <!-- Visas om användaren inte är inloggad -->
-    @* <li class="nav-item"> *@
-    @*     <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a> *@
-    @* </li> *@
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
-    </li>
-}
-</ul>
+<section id="hero" class="hero section">
+
+    <img src="assets/img/hero-bg-abstract.jpg" alt="" data-aos="fade-in" class="">
+
+    <div class="container">
+        <div class="row justify-content-center" data-aos="zoom-out">
+            <div class="col-xl-7 col-lg-9 text-center">
+
+                <ul class="navbar-nav">
+
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <!-- Visas om användaren är inloggad -->
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
+                        </li>
+                        <li class="nav-item">
+                            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
+                                <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+                            </form>
+                        </li>
+                        <span>Hello @User.Identity?.Name!</span>
+                    }
+                    else
+                    {
+                        <!-- Visas om användaren inte är inloggad -->
+                        @* <li class="nav-item"> *@
+                        @*     <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a> *@
+                        @* </li> *@
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
