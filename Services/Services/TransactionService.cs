@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using DataAccessLayer.DTOs;
 using Services.Services.Interfaces;
 using Services.Repositories.Interfaces;
+using MyBankApp.Infrastructure.Paging;
 
 
 
@@ -35,16 +36,16 @@ namespace Services.Services
                 Type = t.Type,
                 Amount = t.Amount,
                 Balance = t.Balance,
-                Date = t.Date.ToDateTime(TimeOnly.MinValue)
+                Date = t.Date,
             }).ToList();
         }
 
         // NYTT 14/4
         public IQueryable<TransactionDTO> GetSortedTransactions(int accountId, string sortColumn, string sortOrder)
         {
-            var query = _transactionRepo.GetByAccountId(accountId).AsQueryable(); 
-            
-            
+            var query = _transactionRepo.GetByAccountId(accountId).AsQueryable();
+
+
             switch (sortColumn)
             {
                 case "Date":
@@ -68,7 +69,8 @@ namespace Services.Services
                 Type = t.Type,
                 Amount = t.Amount,
                 Balance = t.Balance,
-                Date = t.Date.ToDateTime(TimeOnly.MinValue)
+                Date = t.Date,
+                //Date = t.Date.ToDateTime(TimeOnly.MinValue)
             });
         }
         public List<TransactionDTO> PaginateTransactions(IQueryable<TransactionDTO> transactions, int pageNo)
@@ -95,7 +97,7 @@ namespace Services.Services
 
             if (accountDto == null)
                 return ResponseCode.AccountNotFound;
-            
+
             if (accountDto.Balance < amount)
                 return ResponseCode.BalanceTooLow;
 
@@ -131,7 +133,7 @@ namespace Services.Services
 
             if (amount < 100 || amount > 10000)
                 return ResponseCode.IncorrectAmount;
-           
+
             var account = _mapper.Map<Account>(accountDto);
 
             account.Balance += amount;
@@ -152,5 +154,22 @@ namespace Services.Services
             return ResponseCode.OK;
         }
 
+        public PagedResult<TransactionDTO> GetTransactionsByAccount(int accountNumber, int page, int pageSize)
+        {
+            var query = _transactionRepo.GetTransactionsByAccount(accountNumber);
+
+            var paged = query.GetPaged(page, pageSize);
+
+            return new PagedResult<TransactionDTO>
+            {
+                CurrentPage = paged.CurrentPage,
+                PageCount = paged.PageCount,
+                PageSize = paged.PageSize,
+                RowCount = paged.RowCount,
+                Results = _mapper.Map<List<TransactionDTO>>(paged.Results),
+            };
+        }
+
+       
     }
 }

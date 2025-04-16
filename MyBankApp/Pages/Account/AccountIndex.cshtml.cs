@@ -16,13 +16,14 @@ namespace MyBankApp.Pages.Account
         private readonly ITransactionService _transactionService;
 
         public AccountDTO Account { get; set; }
-        public List<TransactionDTO> Transactions { get; set; }
         public int TotalTransactions { get; set; }
         public int CurrentPage { get; set; }
+        public bool HasMorePages { get; set; }
         public int TotalPages { get; set; } = 1;
         public string SortColumn { get; set; }
         public string SortOrder { get; set; }
         private const int PageSize = 20;
+        public List<TransactionDTO> Transactions { get; set; } = new();
 
         public AccountIndexModel(IAccountService accountService, ITransactionService transactionService)
         {
@@ -42,19 +43,29 @@ namespace MyBankApp.Pages.Account
                 RedirectToPage("/Error");
                 return;
             }
+
             CurrentPage = pageNo < 1 ? 1 : pageNo;
             TotalTransactions = Account.Transactions.Count();
 
             var transactionsQuery = _transactionService.GetSortedTransactions(accountId, sortColumn, sortOrder);
-            Transactions = _transactionService.PaginateTransactions(transactionsQuery, pageNo);
+            var paged = _transactionService.GetTransactionsByAccount(accountId, pageNo, PageSize);
+
+            Transactions = paged.Results;
+            HasMorePages = pageNo < paged.PageCount;
+            CurrentPage = paged.CurrentPage;
+            TotalPages = paged.PageCount;
         }
 
     
         public JsonResult OnGetTransactions(int accountId, int pageNo)
         {
-            int skip = (pageNo - 1) * PageSize;
-            var transactions = _transactionService.GetTransactions(accountId, skip, PageSize);
-            return new JsonResult(transactions);
+            var paged = _transactionService.GetTransactionsByAccount(accountId, pageNo, 20);
+
+            return new JsonResult(new
+            {
+                transactions = paged.Results,
+                hasMorePages = pageNo < paged.PageCount
+            });
         }
     }
 }

@@ -112,7 +112,7 @@ namespace Services.Services
                 Transactions = account.Transactions
                     .Select(t => new TransactionDTO
                     {
-                        Date = t.Date.ToDateTime(new TimeOnly(0, 0)),
+                        Date = t.Date,
                         Amount = t.Amount,
                         Type = t.Type,
                         Balance = t.Balance,

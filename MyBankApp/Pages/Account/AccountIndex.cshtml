@@ -109,7 +109,8 @@
                 <!-- Button to load more transactions -->
                 @if (Model.TotalTransactions > Model.Transactions.Count)
                 {
-                    <button id="load-more" data-account-id="@Model.Account?.AccountId" class="btn btn-primary" data-page="2">Load More Transactions</button>
+                    @* <button id="load-more" data-account-id="@Model.Account?.AccountId" class="btn btn-primary" data-page="2">Load More Transactions</button> *@
+                    <button id="load-more" class="btn btn-primary">Load More Transactions</button>
                 }
             }
             else
@@ -125,52 +126,35 @@
 
 @section Scripts {
     <script>
-               $(document).ready(function () {
-            $('#load-more').click(function () {
-                var button = $(this);
-                var accountId = button.data('account-id');
-                var pageNo = button.data('page'); // Hämta den aktuella sidan
-                var skip = (pageNo - 1) * 20; // Beräkna hur många transaktioner vi ska hoppa över
+        let currentPage = @Model.CurrentPage;
+        const accountId = '@Model.Account?.AccountId'; // gör den till en sträng, säkrare
 
-                $.ajax({
-                    url: '/AccountIndex?handler=Transactions',
-                    type: 'GET',
-                    data: {
-                        accountId: accountId,
-                        pageNo: pageNo
-                    },
-                    success: function (data) {
-                        var tableBody = $('#transactions-table-body');
+        document.getElementById('load-more')?.addEventListener('click', function () {
+            currentPage++;
 
-                        // Lägg till nya transaktioner i tabellen
-                        data.forEach(function (transaction) {
-                            var row = $('<tr></tr>');
-                            row.append('<td>' + formatDate(transaction.date) + '</td>');
-                            row.append('<td>' + transaction.amount.toFixed(2) + ' kr</td>');
-                            row.append('<td>' + transaction.type + '</td>');
-                            row.append('<td>' + transaction.balance.toFixed(2) + ' kr</td>');
-                            tableBody.append(row);
-                        });
+        fetch(`?handler=Transactions&accountId=${accountId}&pageNo=${currentPage}`)
+        .then(res => res.json())
+                .then(data => {
+                    const container = document.getElementById('transactions-table-body');
 
-                        // Uppdatera sidnummer för knappen
-                        $('#load-more').data('page', pageNo + 1);
+                    data.transactions.forEach(tx => {
+                               const row = document.createElement('tr');
 
-                        // Om alla transaktioner är laddade, dölja knappen
-                        if (data.length < 20) {
-                            $('#load-more').hide(); // Dölj knappen om inga fler transaktioner finns
-                        }
-                    },
-                    error: function () {
-                        alert("An error occurred while loading more transactions.");
+                                row.innerHTML = `
+                                    <td>${tx.date}</td>
+                                    <td>${tx.amount}</td>
+                                    <td>${tx.type}</td>
+                                    <td>${tx.balance}</td>
+                                `;
+
+                                container.appendChild(row);
+                    });
+
+                    if (!data.hasMorePages) {
+                        document.getElementById('load-more').style.display = 'none';
                     }
-                });
-            });
-
-            function formatDate(isoString) {
-                const date = new Date(isoString);
-                return date.toLocaleDateString('sv-SE');
-            }
+                })
+                .catch(error => console.error('Kunde inte hämta transaktioner:', error));
         });
-
     </script>
 }

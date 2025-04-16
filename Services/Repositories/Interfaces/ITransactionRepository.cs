@@ -11,5 +11,6 @@ namespace Services.Repositories.Interfaces
     {
         void Add(Transaction transaction);
         List<Transaction> GetByAccountId(int accountId, int skip = 0, int take = 20);
+        IQueryable<Transaction> GetTransactionsByAccount(int accountNumber);
     }
 }

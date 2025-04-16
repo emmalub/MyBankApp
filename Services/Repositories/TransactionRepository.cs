@@ -34,6 +34,13 @@ namespace Services.Repositories
         {
             return _dbContext.Transactions.Count(t => t.AccountId == accountId);
         }
+
+        public IQueryable<Transaction> GetTransactionsByAccount(int accountNumber)
+        {
+            return _dbContext.Transactions
+                .Where(t => t.AccountId == accountNumber)
+                .OrderByDescending(t => t.Date);
+        }
     }
 
 }

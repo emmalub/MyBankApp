@@ -8,9 +8,9 @@ namespace DataAccessLayer.DTOs
 {
     public class TransactionDTO
     {
-        public DateTime Date { get; set; }
+        public DateOnly Date { get; set; }
         public decimal Amount { get; set; }
-        public string? Type { get; set; } // T.ex. "Deposit", "Withdrawal"
+        public string? Type { get; set; } 
         public decimal Balance { get; set; }
     }
 }
