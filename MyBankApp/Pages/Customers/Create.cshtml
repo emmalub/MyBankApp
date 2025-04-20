@@ -105,25 +105,29 @@
                                                 </div>
 
                                                 <!-- Country -->
-                                                <div class="mb-4">
-                                                    <div data-mdb-input-init class="form-outline">
-                                                        <select asp-for="Customer.Country" class="form-control form-control-lg" onchange="updateCountryCode()">
-                                                            <option value="" disabled selected>Select Country</option>
-                                                            <option value="Sweden">Sweden</option>
-                                                            <option value="Norway">Norway</option>
-                                                            <option value="Denmark">Denmark</option>
-                                                            <option value="Finland">Finland</option>
-                                                        </select>
-                                                        <label class="form-label" for="form3Examplea6">Country</label>
+                                                <div class="row mb-4">
+                                                    <div class="col-md-8">
+                                                        <div data-mdb-input-init class="form-outline">
+                                                            <select asp-for="Customer.Country" class="form-control form-control-lg" onchange="updateCountryCode()">
+                                                                <option value="" disabled selected>Select Country</option>
+                                                                <option value="Sweden">Sweden</option>
+                                                                <option value="Norway">Norway</option>
+                                                                <option value="Denmark">Denmark</option>
+                                                                <option value="Finland">Finland</option>
+                                                            </select>
+                                                            <label class="form-label">Country</label>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="mb-4">
-                                                    <div data-mdb-input-init class="form-outline">
-                                                        <input type="text" asp-for="Customer.CountryCode" id="countryCode" class="form-control form-control-lg" hidden />
-                                                        <label class="form-label" for="countryCode">Country Code</label>
-                                                    </div>
-                                                </div>
 
+                                                    <!-- Country Code -->
+                                                    <div class="col-md-4 d-flex align-items-end">
+                                                        <div class="form-outline w-100">
+                                                            <p id="visibleCountryCode" class="form-control-static text-white fw-bold mb-0">-</p>
+                                                            <label class="form-label">Country Code</label>
+                                                        </div>
+                                                    </div>
+                                                    <input type="hidden" asp-for="Customer.CountryCode" id="countryCode" />
+                                                </div>
                                                 <!-- Phone Number -->
                                                 <div class="row">
                                                     <div class="col-md-3 mb-4 pb-2">
@@ -172,13 +176,9 @@
             "Finland": "FI"
         };
 
-        var countryCodeInput = document.getElementById('countryCode');
-        if (countryName in countryCodes) {
-            countryCodeInput.value = countryCodes[countryName];
-        }
-        else {
-            countryCodeInput.value = "";
-        }
+       const countryCode = countryCodes[countryName] || "—";
+        document.getElementById('visibleCountryCode').textContent = countryCode;
+        document.getElementById('countryCode').value = countryCode;
     }
 </script>
 
