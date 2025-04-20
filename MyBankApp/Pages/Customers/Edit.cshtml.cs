@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Services.Services.Interfaces;
 using DataAccessLayer.DTOs;
+using MyBankApp.ViewModels;
 
 
 namespace MyBankApp.Pages.Customers
@@ -11,22 +12,30 @@ namespace MyBankApp.Pages.Customers
         private readonly ICustomerService _customerService;
         [BindProperty]
         public CustomerDTO Customer { get; set; }
-        public int CustomerId { get; set; }
+        //public int CustomerId { get; set; }
         public EditModel(ICustomerService customerService)
         {
             _customerService = customerService;
         }
-        public void OnGet(int id)
+        public IActionResult OnGet(int id)
         {
-            Customer = _customerService.GetCustomerById(id);
+            var customer = _customerService.GetCustomerById(id);
+            if (customer == null)
+            {
+                return RedirectToPage("/CustomerDetails");
+            }
+
+            Customer = customer;
+            return Page();
         }
+
         public IActionResult OnPost()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
-            _customerService.UpdateCustomer(CustomerId, Customer);
+            _customerService.UpdateCustomer(Customer.Id, Customer);
             return RedirectToPage("/Customers/Index");
         }
     }

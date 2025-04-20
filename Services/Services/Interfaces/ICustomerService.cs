@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DataAccessLayer.Models;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using MyBankApp.Infrastructure.Paging;
+using Services.Infrastructure.Paging;
 using DataAccessLayer.DTOs;
 
 namespace Services.Services.Interfaces

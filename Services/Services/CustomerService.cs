@@ -1,6 +1,6 @@
 ﻿using DataAccessLayer.Models;
 using Microsoft.EntityFrameworkCore;
-using MyBankApp.Infrastructure.Paging;
+using Services.Infrastructure.Paging;
 using DataAccessLayer.DTOs;
 using AutoMapper;
 using Services.Services.Interfaces;

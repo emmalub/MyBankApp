@@ -1,0 +1,71 @@
+﻿@page
+@model MyBankApp.Pages.Users.IndexModel
+@{
+}
+<section id="hero" class="hero section">
+    @* <img src="assets/img/hero-bg-abstract.jpg" alt="" data-aos="fade-in" class=""> *@
+    <div class="container">
+
+
+        <h1>Users</h1>
+
+    
+        <div class="table-responsive">
+
+            <table class="table table-striped custom-table">
+                <thead>
+
+                    <tr>
+                        <th scope="col">
+                            Id
+                            <a asp-page="/Users/Index"
+                               asp-route-sortColumn="Id"
+                               asp-route-sortOrder="asc"
+                               style="text-decoration:none">
+                                <i class="fa-solid fa-angle-up"></i>
+
+                            </a>
+                            <a asp-page="/Users/Index"
+                               asp-route-sortColumn="Id"
+                               asp-route-sortOrder="desc"
+                               style="text-decoration:none">
+                                <i class="fa-solid fa-angle-down"></i>
+                            </a>
+                        </th>
+                        <th scope="col">
+                            Name
+                            <a asp-page="/Users/Index"
+                               asp-route-sortColumn="Name"
+                               asp-route-sortOrder="asc"
+                               style="text-decoration:none">
+                                <i class="fa-solid fa-angle-up"></i>
+
+                            </a>
+                            <a asp-page="/Users/Index"
+                               asp-route-sortColumn="Name"
+                               asp-route-sortOrder="desc"
+                               style="text-decoration:none">
+                                <i class="fa-solid fa-angle-down"></i>
+                            </a>
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @* @foreach (var u in Model.Users) *@
+                    @* { *@
+                    @*     <tr> *@
+                    @*         <td>@u.Id</td> *@
+                    @*         <td>@u.Name</td> *@
+                           
+                    @*         @* <td> *@ 
+                    @*         @*     <a asp-page="/Users/Edit" asp-route-id="@c.Id" class="custom-btn fs-5"> *@ 
+                    @*         @*         <i class="fa-solid fa-eye"></i> *@ 
+                    @*         @*     </a> *@ 
+                    @*         @* </td> *@ 
+                    @*     </tr> *@
+                    @* } *@
+                    </table>
+                    </div>
+                    </div>
+                    </section>

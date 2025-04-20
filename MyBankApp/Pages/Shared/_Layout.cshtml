@@ -52,68 +52,51 @@
     <header id="header" class="header d-flex align-items-center sticky-top">
         <div class="container-fluid container-xl position-relative d-flex align-items-center">
 
-            <a href="/index" class="logo d-flex align-items-center me-auto">
-                <img src="~assets/img/PB-icon-s.png" alt="PeoplesBank">
-                @* <h1 class="sitename">Peoples Bank</h1> *@
-            </a>
+            <div class="d-flex align-items-center">
+                <a href="/index" class="logo d-flex align-items-center me-auto">
+                    <img src="/assets/img/PB-icon-s.png" alt="PeoplesBank">
+                </a>
+            </div>
 
-            <nav id="navmenu" class="navmenu">
-                <ul>
-                    <li><a href="/Index" class="active">Home<br></a></li>
-                    @if (User.IsInRole("Cashier"))
-                    {
-                        <li><a asp-page="/Customers/Index">Customers</a></li>
-                    }
-                    @if (User.IsInRole("Cashier") || User.IsInRole("Admin"))
-                    {
-                        <li><a href="/Account/Accounts">Accounts</a></li>
-                    }
-                    @* <li class="dropdown"> *@
-                    @*     <a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a> *@
-                        @* <ul> *@
-                        @*     <li><a href="#">Dropdown 1</a></li> *@
-                        @*     <li class="dropdown"> *@
-                        @*         <a href="#"><span>Deep Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a> *@
-                        @*         <ul> *@
-                        @*             <li><a href="#">Deep Dropdown 1</a></li> *@
-                        @*             <li><a href="#">Deep Dropdown 2</a></li> *@
-                        @*             <li><a href="#">Deep Dropdown 3</a></li> *@
-                        @*             <li><a href="#">Deep Dropdown 4</a></li> *@
-                        @*             <li><a href="#">Deep Dropdown 5</a></li> *@
-                        @*         </ul> *@
-                        @*     </li> *@
-                        @*     <li><a href="#">Dropdown 2</a></li> *@
-                        @*     <li><a href="#">Dropdown 3</a></li> *@
-                        @*     <li><a href="#">Dropdown 4</a></li> *@
-                        @* </ul> *@
-                @*     </li> *@
-                @* </ul> *@
-                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-            </nav>
+            <div class="flex-grow-1 d-flex justify-content-center">
+                <nav id="navmenu" class="navmenu">
+                    <ul>
+                        @if (User.IsInRole("Cashier"))
+                        {
+                            <li><a asp-page="/Customers/Index">Customers</a></li>
+                        }
+                        @if (User.IsInRole("Cashier") || User.IsInRole("Admin"))
+                        {
+                            <li><a asp-page="/Account/Accounts">Accounts</a></li>
+                        }
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li><a asp-page="/Users/Index">Users</a></li>
+                        }
+                    </ul>
+                    <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+                </nav>
+            </div>
 
 
-           
-                    @* <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a> *@
-            
+            <div class="d-flex align-items-center gap-2">
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <span>Hello @User.Identity?.Name!</span>
+                    <a class="btn-getstarted" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
 
+                    <form id="logout-form" asp-area="Identity" asp-page="/Account/Logout" method="post" style="display:none;">
+                        <input type="hidden" name="returnUrl" value="@Url.Page("/Index", new { area = "" })" />
+                    </form>
+                    @* <a class="btn-getstarted" href="/Identity/Account/Logout">Logout</a> *@
 
-            @if (SignInManager.IsSignedIn(User))
-            {
-                <span>Hello @User.Identity?.Name!</span>
-                <a class="btn-getstarted" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                }
+                else
+                {
+                    <a class="btn-getstarted" href="/Identity/Account/Login">Login</a>
+                }
 
-                <form id="logout-form" asp-area="Identity" asp-page="/Account/Logout" method="post" style="display:none;">
-                    <input type="hidden" name="returnUrl" value="@Url.Page("/Index", new { area = "" })" />
-                </form>
-                @* <a class="btn-getstarted" href="/Identity/Account/Logout">Logout</a> *@
-
-            }
-            else
-            {
-                <a class="btn-getstarted" href="/Identity/Account/Login">Login</a>
-            }
-
-
+            </div>
         </div>
     </header>
 

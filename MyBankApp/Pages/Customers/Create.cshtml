@@ -12,6 +12,7 @@
                     <div class="col-12">
                         <div class="card card-registration card-registration-2" style="border-radius: 15px;">
                             <div class="card-body p-0">
+
                                 <form method="post">
                                     <div class="row g-0">
                                         <div class="col-lg-6">
@@ -41,6 +42,7 @@
                                                 <!-- Gender -->
                                                 <div class="mb-4 pb-2">
                                                     <select class="form-control form-control-lg" asp-for="Customer.Gender">
+                                                        <option value="" disabled selected>Select Gender</option>
                                                         <option value="Female">Female</option>
                                                         <option value="Male">Male</option>
                                                         <option value="Other">Other</option>

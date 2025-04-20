@@ -105,7 +105,11 @@
                                     <p>@Model.Customer.Age</p>
                                 </div>
                             </div>
-                        <a href="./Edit" class="profile-edit-btn"><i class="bi bi-pencil-square"></i> Edit</a>
+                            <a asp-page="/Customers/Edit"
+                               asp-route-id="@Model.Customer.Id"
+                               class="profile-edit-btn">
+                                <i class="bi bi-pencil-square"></i> Edit
+                            </a>
                         </div>
 
                       

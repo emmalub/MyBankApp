@@ -1,6 +1,6 @@
 ﻿
 using DataAccessLayer.DTOs;
-using MyBankApp.Infrastructure.Paging;
+using Services.Infrastructure.Paging;
 
 namespace Services.Services.Interfaces
 {

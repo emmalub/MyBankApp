@@ -1,4 +1,4 @@
-﻿namespace MyBankApp.Infrastructure.Paging
+﻿namespace Services.Infrastructure.Paging
 {
     public abstract class PagedResultBase
     {

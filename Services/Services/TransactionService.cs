@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using DataAccessLayer.DTOs;
 using Services.Services.Interfaces;
 using Services.Repositories.Interfaces;
-using MyBankApp.Infrastructure.Paging;
+using Services.Infrastructure.Paging;
 
 
 

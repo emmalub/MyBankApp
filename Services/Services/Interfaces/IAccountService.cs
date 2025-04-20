@@ -1,6 +1,6 @@
 ﻿using DataAccessLayer.DTOs;
 using DataAccessLayer.Models;
-using MyBankApp.Infrastructure.Paging;
+using Services.Infrastructure.Paging;
 using System;
 using System.Collections.Generic;
 using System.Linq;

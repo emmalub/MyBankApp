@@ -21,7 +21,6 @@ namespace MyBankApp.Pages.Customers
 
         public IActionResult OnPost()
         {
-            Console.WriteLine("OnPost method called");
             foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
             {
                 Console.WriteLine(error.ErrorMessage);

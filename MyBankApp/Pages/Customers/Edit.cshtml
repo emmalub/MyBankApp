@@ -3,31 +3,180 @@
 @{
 }
 
+
 <section id="hero" class="hero section">
     <img src="assets/img/hero-bg-abstract.jpg" alt="" data-aos="fade-in" class="">
-
-    @* <div class="content"> *@
-
     <div class="container">
         <h1>Edit Customer</h1>
 
-        <form method="post">
-            <div class="form-group">
-                <label asp-for="Customer.Givenname">Given Name</label>
-                <input asp-for="Customer.Givenname" class="form-control" />
-            </div>
+        <section class="h-100 h-custom gradient-custom-2">
+            <div class="container py-5 h-100">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-12">
+                        <div class="card card-registration card-registration-2" style="border-radius: 15px;">
+                            <div class="card-body p-0">
 
-            <div class="form-group">
-                <label asp-for="Customer.Surname">Surname</label>
-                <input asp-for="Customer.Surname" class="form-control" />
-            </div>
+                                <form method="post">
+                                    <input type="hidden" asp-for="Customer.Id" />
+                                    <div class="row g-0">
+                                        <div class="col-lg-6">
+                                            <div class="p-5">
+                                                <h3 class="fw-normal mb-5" style="color: #432783;">General Information</h3>
 
-            <div class="form-group">
-                <label asp-for="Customer.City">City</label>
-                <input asp-for="Customer.City" class="form-control" />
-            </div>
+                                                <!-- First Name -->
+                                                <div class="row">
+                                                    <div class="col-md-6 mb-4 pb-2">
+                                                        <div class="form-outline">
+                                                            <input asp-for="Customer.Givenname" class="form-control" />                                                            <label class="form-label" for="form3Examplev2">First name</label>
+                                                        </div>
+                                                    </div>
 
-            <button type="submit" class="btn-get-started">Save Changes</button>
-        </form>
+                                                    <!-- Last Name -->
+                                                    <div class="col-md-6 mb-4 pb-2">
+                                                        <div class="form-outline">
+                                                            <input asp-for="Customer.Surname" class="form-control" />
+                                                            <label class="form-label" for="form3Examplev3">Last name</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Gender -->
+                                                <div class="mb-4 pb-2">
+                                                    <select class="form-control" asp-for="Customer.Gender">
+                                                        <option value="Female">Female</option>
+                                                        <option value="Male">Male</option>
+                                                        <option value="Other">Other</option>
+                                                    </select>
+                                                </div>
+
+                                                <!-- Email -->
+                                                <div class="mb-4">
+                                                    <div class="form-outline form-white">
+                                                        <input asp-for="Customer.Emailaddress" class="form-control" />
+                                                        <label class="form-label" for="form3Examplea9">Email</label>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Birth Date -->
+                                                <div class="row">
+                                                    <div class="col-md-6 mb-4 pb-2">
+                                                        <div class="form-outline">
+                                                            <input asp-for="Customer.Birthday" />
+                                                            <label class="form-label" for="form3Examplev5">Date of Birth</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 mb-4 pb-2">
+                                                    <div class="form-outline">
+                                                        <input asp-for="Customer.NationalId" class="form-control" />
+                                                        <label class="form-label" for="form3Examplea8">National ID</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 bg-indigo text-white">
+                                            <div class="p-5">
+                                                <h3 class="fw-normal mb-5" style="color: #ffffff;">Contact Details</h3>
+
+                                                <!-- Street Address -->
+                                                <div class="mb-4 pb-2">
+                                                    <div class="form-outline form-white">
+                                                        <input asp-for="Customer.Streetaddress" class="form-control" />
+                                                        <label class="form-label" for="form3Examplea2">Street + Nr</label>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Zip Code -->
+                                                <div class="row">
+                                                    <div class="col-md-5 mb-4 pb-2">
+                                                        <div class="form-outline form-white">
+                                                            <input asp-for="Customer.Zipcode" class="form-control" />
+                                                            <label class="form-label" for="form3Examplea4">Zip Code</label>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- City -->
+                                                    <div class="col-md-7 mb-4 pb-2">
+                                                        <div class="form-outline form-white">
+                                                            <input asp-for="Customer.City" class="form-control" />
+                                                            <label class="form-label" for="form3Examplea5">City</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Country -->
+                                                <div class="row mb-4">
+                                                    <div class="col-md-8">
+                                                        <div data-mdb-input-init class="form-outline">
+                                                            <select asp-for="Customer.Country" class="form-control form-control-lg" onchange="updateCountryCode()">
+                                                                <option value="" disabled selected>Select Country</option>
+                                                                <option value="Sweden">Sweden</option>
+                                                                <option value="Norway">Norway</option>
+                                                                <option value="Denmark">Denmark</option>
+                                                                <option value="Finland">Finland</option>
+                                                            </select>
+                                                            <label class="form-label">Country</label>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Country Code -->
+                                                    <div class="col-md-4 d-flex align-items-end">
+                                                        <div class="form-outline w-100">
+                                                            <p id="visibleCountryCode" class="form-control-static text-white fw-bold mb-0">-</p>
+                                                            <label class="form-label">Country Code</label>
+                                                        </div>
+                                                    </div>
+                                                    <input type="hidden" asp-for="Customer.CountryCode" id="countryCode" />
+                                                </div>
+                                                <!-- Phone Number -->
+                                                <div class="row">
+                                                    <div class="col-md-3 mb-4 pb-2">
+                                                        <div class="mb-4">
+                                                            @* <div data-mdb-input-init class="form-outline"> *@
+                                                            <select class="form-control form-control-lg" asp-for="Customer.Telephonecountrycode">
+                                                                <option value="45">+45</option>
+                                                                <option value="46">+46</option>
+                                                                <option value="47">+47</option>
+                                                                <option value="358">+358</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Telephone Country Code -->
+                                                    <div class="col-md-7 mb-4 pb-2">
+                                                        <div class="form-outline form-white">
+                                                            <input asp-for="Customer.Telephonenumber" class="form-control" />
+                                                            <label class="form-label" for="form3Examplea8">Phone Number</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <button type="submit" class="btn-form">Update</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
 </section>
+
+<script>
+    function updateCountryCode() {
+        var countryName = document.querySelector('select[name="Customer.Country"]').value;
+        var countryCodes = {
+            "Sweden": "SE",
+            "Norway": "NO",
+            "Denmark": "DK",
+            "Finland": "FI"
+        };
+
+       const countryCode = countryCodes[countryName] || "—";
+        document.getElementById('visibleCountryCode').textContent = countryCode;
+        document.getElementById('countryCode').value = countryCode;
+    }
+</script>
