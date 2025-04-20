@@ -53,7 +53,6 @@
                                                     <div class="form-outline form-white">
                                                         <input type="text" id="form3Examplea9" class="form-control form-control-lg" asp-for="Customer.Emailaddress" />
                                                         <label class="form-label" for="form3Examplea9">Email</label>
-                                                        <span asp-validation-for="Customer.Emailaddress" class="text-danger"></span>
                                                     </div>
                                                 </div>
 
@@ -62,7 +61,7 @@
                                                     <div class="col-md-6 mb-4 pb-2">
                                                         <div class="form-outline">
                                                             <input type="date" id="form3Examplev5" class="form-control form-control-lg" asp-for="Customer.Birthday" />
-                                                            <label class="form-label" for="form3Examplev5">Birth Date</label>
+                                                            <label class="form-label" for="form3Examplev5">Date of Birth</label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -83,6 +82,7 @@
                                                     <div class="form-outline form-white">
                                                         <input type="text" id="form3Examplea2" class="form-control form-control-lg" asp-for="Customer.Streetaddress" />
                                                         <label class="form-label" for="form3Examplea2">Street + Nr</label>
+                                                        <span asp-validation-for="Customer.Streetaddress" class="text-danger"></span>
                                                     </div>
                                                 </div>
 
@@ -92,6 +92,7 @@
                                                         <div class="form-outline form-white">
                                                             <input type="text" id="form3Examplea4" class="form-control form-control-lg" asp-for="Customer.Zipcode" />
                                                             <label class="form-label" for="form3Examplea4">Zip Code</label>
+                                                            <span asp-validation-for="Customer.Zipcode" class="text-danger"></span>
                                                         </div>
                                                     </div>
 
@@ -100,6 +101,7 @@
                                                         <div class="form-outline form-white">
                                                             <input type="text" id="form3Examplea5" class="form-control form-control-lg" asp-for="Customer.City" />
                                                             <label class="form-label" for="form3Examplea5">City</label>
+                                                            <span asp-validation-for="Customer.City" class="text-danger"></span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -116,6 +118,7 @@
                                                                 <option value="Finland">Finland</option>
                                                             </select>
                                                             <label class="form-label">Country</label>
+                                                            <span asp-validation-for="Customer.Country" class="text-danger"></span>
                                                         </div>
                                                     </div>
 
