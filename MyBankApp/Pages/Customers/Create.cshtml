@@ -66,12 +66,12 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                        <div class="col-md-6 mb-4 pb-2">
-                                            <div class="form-outline">
-                                                <input type="text" id="form3Examplea8" class="form-control form-control-lg" asp-for="Customer.NationalId" />
-                                                <label class="form-label" for="form3Examplea8">National ID</label>
-                                            </div>
-                                        </div>
+                                                <div class="col-md-6 mb-4 pb-2">
+                                                    <div class="form-outline">
+                                                        <input type="text" id="form3Examplea8" class="form-control form-control-lg" asp-for="Customer.NationalId" />
+                                                        <label class="form-label" for="form3Examplea8">National ID</label>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-lg-6 bg-indigo text-white">
@@ -127,9 +127,15 @@
                                                 <!-- Phone Number -->
                                                 <div class="row">
                                                     <div class="col-md-3 mb-4 pb-2">
-                                                        <div class="form-outline form-white">
-                                                            <input type="text" id="form3Examplea7" class="form-control form-control-lg" asp-for="Customer.Telephonecountrycode" />
-                                                            <label class="form-label" for="form3Examplea7">Country Code</label>
+                                                        <div class="mb-4">
+                                                            @* <div data-mdb-input-init class="form-outline"> *@
+                                                            <select class="form-control form-control-lg" asp-for="Customer.Telephonecountrycode">
+                                                                <option value="45">+45</option>
+                                                                <option value="46">+46</option>
+                                                                <option value="47">+47</option>
+                                                                <option value="358">+358</option>
+                                                            </select>
+                                                            <span asp-validation-for="Customer.Telephonecountrycode" class="text-danger"></span>
                                                         </div>
                                                     </div>
 

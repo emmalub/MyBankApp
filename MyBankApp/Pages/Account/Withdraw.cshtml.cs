@@ -59,6 +59,10 @@ namespace MyBankApp.Pages.Account
             {
                 ModelState.AddModelError("Amount", "The amount must be between 100 and 10,000.");
             }
+            if (status == ResponseCode.BalanceTooLow)
+            {
+                ModelState.AddModelError("Amount", "The amount is higher than the accounts balance.");
+            }
             else if (status == ResponseCode.AccountNotFound)
             {
                 ModelState.AddModelError("Account", "The account was not found.");
