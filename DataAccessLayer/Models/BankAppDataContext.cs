@@ -15,7 +15,6 @@ public partial class BankAppDataContext : IdentityDbContext
         : base(options)
     {
     }
-
     public virtual DbSet<Account> Accounts { get; set; }
 
     public virtual DbSet<Card> Cards { get; set; }

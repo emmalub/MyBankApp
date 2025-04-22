@@ -11,24 +11,26 @@ namespace Services.Services.Interfaces
     public interface IStatisticsService
     {
         // Kunder
-            int GetTotalCustomers();
-            int GetSwedishCustomerCount();
-            int GetNorwegianCustomerCount();
-            int GetDanishCustomerCount();
-            int GetFinnishCustomerCount();
+        int GetSwedishCustomerCount();
+        int GetNorwegianCustomerCount();
+        int GetDanishCustomerCount();
+        int GetFinnishCustomerCount();
 
-            // Konton
-            int GetSwedishAccountCount();
-            int GetDanishAccountCount();
-            int GetNorwegianAccountCount();
-            int GetFinnishAccountCount();
+        // Konton
+        int GetSwedishAccountCount();
+        int GetDanishAccountCount();
+        int GetNorwegianAccountCount();
+        int GetFinnishAccountCount();
 
-            // Kapital
-            decimal GetSwedishCapital();
-            decimal GetDanishCapital();
-            decimal GetNorwegianCapital();
-            decimal GetFinnishCapital();
+        // Kapital
+        decimal GetSwedishCapital();
+        decimal GetDanishCapital();
+        decimal GetNorwegianCapital();
+        decimal GetFinnishCapital();
 
-            int GetTotalAccounts();
-        }
+        int GetTotalCustomers();
+        int GetTotalAccounts();
+        decimal GetTotalCapital();
+        int GetTotalUserCount();
     }
+}

@@ -12,7 +12,7 @@ namespace Services.Mapping
             CreateMap<Customer, CustomerDTO>();
             CreateMap<Account, AccountDTO>();
             CreateMap<Transaction, TransactionDTO>();
-          
+                    
 
             CreateMap<AccountDTO, Account>()
            .ForMember(dest => dest.AccountId, opt => opt.MapFrom(src => src.AccountId))

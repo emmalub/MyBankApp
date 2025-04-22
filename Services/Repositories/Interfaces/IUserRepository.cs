@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataAccessLayer.DTOs;
+using DataAccessLayer.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace Services.Repositories.Interfaces
 {
-    public interface IStatisticsRepository
+    public interface IUserRepository
     {
-        int GetCustomerCountByCountry(string country);
-        int GetTotalCustomerCount();
-        int GetTotalUserCount();
     }
 }

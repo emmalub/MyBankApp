@@ -23,5 +23,9 @@ namespace Services.Repositories
         {
             return _dbContext.Customers.Count();
         }
+        public int GetTotalUserCount()
+        {
+            return _dbContext.Users.Count();
+        }
     }
 }

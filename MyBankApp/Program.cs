@@ -27,12 +27,13 @@ namespace MyBankApp
             builder.Services.AddScoped<IAccountRepository, AccountRepository>();
             builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
             builder.Services.AddScoped<IStatisticsRepository, StatisticsRepository>();
-
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
             // Register services
             builder.Services.AddTransient<ICustomerService, CustomerService>();
             builder.Services.AddTransient<IAccountService, AccountService>();
             builder.Services.AddScoped<ITransactionService, TransactionService>();
             builder.Services.AddScoped<IStatisticsService, StatisticsService>();
+            builder.Services.AddScoped<IUserService, UserService>();
             // Add AutoMapper
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             //mina slut//

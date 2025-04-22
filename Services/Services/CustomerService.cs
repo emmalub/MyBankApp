@@ -89,24 +89,6 @@ namespace Services.Services
             _customerRepo.Add(customer);
 
             _accountService.CreateAccount(customer);
-            //var account = new Account
-            //{
-            //    Created = DateOnly.FromDateTime(DateTime.Now),
-            //    Balance = 0, // Initiera med 0 eller ett standardvärde
-            //    Frequency = "Monthly" // Standardfrekvens för konto
-            //};
-            //_accountRepo.Add(account); 
-
-            //var disposition = new Disposition
-            //{
-            //    Customer = customer,  // Länka dispositionen till kunden
-            //    Account = account,    // Länka dispositionen till kontot
-            //    Type = "OWNER"      // Standardvärde för Type
-            //};
-
-            //account.Dispositions.Add(disposition);
-
-
             _customerRepo.SaveChanges();
         }
 
@@ -135,8 +117,8 @@ namespace Services.Services
 
             if (customer != null)
             {
-            customer.IsActive = true;
-            _customerRepo.Update(customer);
+                customer.IsActive = true;
+                _customerRepo.Update(customer);
             }
         }
         public PagedResult<CustomerDTO> GetSortedCustomers(string sortColumn, string sortOrder, string q, int page)
