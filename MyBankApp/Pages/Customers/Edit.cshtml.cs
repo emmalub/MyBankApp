@@ -12,7 +12,6 @@ namespace MyBankApp.Pages.Customers
         private readonly ICustomerService _customerService;
         [BindProperty]
         public CustomerDTO Customer { get; set; }
-        //public int CustomerId { get; set; }
         public EditModel(ICustomerService customerService)
         {
             _customerService = customerService;

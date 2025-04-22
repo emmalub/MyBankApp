@@ -6,10 +6,6 @@
         public int TotalCount { get; set; }
         public int TotalPages { get; set; }
 
-        //public IList<T> Results { get; set; }
-        //public PagedResult()
-        //{
-        //    Results = new List<T>();
-        //}
+      
     }
 }

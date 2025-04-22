@@ -1,6 +1,7 @@
 using Azure.Core;
 using DataAccessLayer.DTOs;
 using DataAccessLayer.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Data.SqlClient;
@@ -10,6 +11,8 @@ using Services.Services.Interfaces;
 
 namespace MyBankApp.Pages.Account
 {
+    [Authorize(Roles = "Cashier")]
+
     public class AccountIndexModel : PageModel
     {
         private readonly IAccountService _accountService;

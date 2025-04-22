@@ -10,10 +10,7 @@ using Services.Repositories.Interfaces;
 
 namespace Services.Repositories
 {
-    /// <summary>
-    /// Detta lager ansvarar för datalagring och hantering av CRUD-operationer.
-    /// </summary>
-    public class CustomerRepository : ICustomerRepository
+       public class CustomerRepository : ICustomerRepository
     {
         private readonly BankAppDataContext _dbContext;
 

@@ -69,40 +69,5 @@ namespace MyBankApp.Pages.Account
 
             return Page();
         }
-
-
-        //public IActionResult OnPost(int accountId, int customerId)
-        //{
-        //    CustomerId = customerId;
-
-        //    if (!ModelState.IsValid)
-        //        return Page();
-
-        //    var status = _transactionService.Deposit(accountId, Amount, Comment);
-
-        //    switch (status)
-        //    {
-        //        case ResponseCode.OK:
-        //            return RedirectToPage("/Customer", new { id = customerId });
-
-        //        case ResponseCode.IncorrectAmount:
-        //            ModelState.AddModelError("Amount", "The amount must be between 100 and 10,000.");
-        //            break;
-
-        //        case ResponseCode.CommentEmpty:
-        //            ModelState.AddModelError("Comment", "Please add a comment.");
-        //            break;
-
-        //        case ResponseCode.AccountNotFound:
-        //            ModelState.AddModelError(string.Empty, "The account was not found.");
-        //            break;
-
-        //        default:
-        //            ModelState.AddModelError(string.Empty, "An unknown error occurred.");
-        //            break;
-        //    }
-        //    return Page();
-        //}
-
     }
 }

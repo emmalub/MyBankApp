@@ -8,13 +8,7 @@ using static MyBankApp.ViewModels.AccountViewModel;
 
 namespace MyBankApp.Pages.Account
 {
-    //Nu har du möjlighet att bestämma vilka sidor dina user roles ha tillgång till...
-    //  På relevant sida lägg bara till koden:
-
-    //   [Authorize(Roles = "Admin")]
-    //eller...
-    //   [Authorize(Roles = "Cashier")]
-    [Authorize(Roles = "Cashier, Admin")]
+    [Authorize(Roles = "Cashier")]
     public class AccountsModel : PageModel
     {
         private readonly IAccountService _accountService;
@@ -38,7 +32,7 @@ namespace MyBankApp.Pages.Account
 
             SortColumn = sortColumn;
             SortOrder = sortOrder;
-            
+
             if (pageNo < 1)
                 pageNo = 1;
 
