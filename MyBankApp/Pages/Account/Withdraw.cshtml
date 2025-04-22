@@ -1,15 +1,26 @@
 ﻿@page
 @model MyBankApp.Pages.Account.WithdrawModel
 @{
+    ViewData["Title"] = "Withdraw";
+
 }
-<h1>Withdraw</h1>
-<h3>Balance: @Model.Balance kr</h3>
-<form method="post">
-    <div class="form-group">
-        <label asp-for="Amount">Amount</label>
-        <input class="form-control" asp-for="Amount" />
-        <span class="field-validation-error" asp-validation-for="Amount"></span>
+<section id="hero" class="hero section">
+    <div class="container mt-2">
+
+        <h1>Withdraw</h1>
+        <h3>Balance: @Model.Balance</h3>
+
+        <form method="post">
+            <div class="form-group mt-3">
+                <label asp-for="Amount">Amount</label>
+                <input class="form-control form-control-sm w-25" asp-for="Amount" />
+                <span class="field-validation-error" asp-validation-for="Amount"></span>
+            </div>
+            <button type="submit" class="btn-small">Withdraw</button>
+        </form>
+        <a asp-page="/Customers/CustomerDetails"
+           asp-route-id="@Request.Query["customerId"]"
+           class="btn-back">Back</a>
     </div>
-    <button type="submit" class="btn custom-btn">Withdraw</button>
-</form>
+</section>
 

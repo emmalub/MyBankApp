@@ -146,14 +146,15 @@
                                                             <a asp-page="/Account/Deposit"
                                                                asp-route-accountId="@a.AccountId"
                                                                asp-route-customerId="@Model.Customer.Id"
-                                                               class="custom-btn fs5-">
+                                                               class="custom-btn fs-5">
                                                                 <i class="bi bi-plus-circle-dotted"></i>
                                                             </a>
                                                         </td>
                                                         <td>
                                                             <a asp-page="/Account/Transfer"
-                                                               asp-route-fromAccountId="@a.AccountId"
-                                                               class="custom-btn fs5-">
+                                                               asp-route-fromAccount="@a.AccountId"
+                                                               asp-route-customerId="@Model.Customer.Id"
+                                                               class="custom-btn fs-5">
                                                                 <i class="bi bi-arrow-left-right"></i>
                                                             </a>
                                                         </td>

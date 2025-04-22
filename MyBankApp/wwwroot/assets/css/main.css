@@ -272,8 +272,10 @@ h6 {
             background: color-mix(in srgb, var(--accent-color), transparent 15%);
         }
 
-@media (max-width: 1200px) {
-    .header .logo {
+
+
+    @media (max-width: 1200px) {
+        .header .logo {
         order: 1;
     }
 
@@ -1273,6 +1275,45 @@ section,
 
     .hero .btn-get-started:hover {
         background: color-mix(in srgb, var(--accent-color), transparent 15%);
+    }
+
+.hero .btn-small,
+.hero .btn-small:focus {
+    color: var(--contrast-color);
+    background: var(--accent-color);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    display: inline-block;
+    padding: 8px 30px;
+    border-radius: 5px;
+    transition: 0.5s;
+    margin-top: 30px;
+    border: none;
+}
+
+    .hero .btn-small:hover,
+    .hero .btn-small:focus:hover {
+        background: color-mix(in srgb, var(--accent-color), transparent 15%);
+    }
+
+.hero .btn-back,
+.hero .btn-back:focus {
+    color: var(--contrast-color);
+    background: color-mix(in srgb, var(--accent-color), transparent 15%);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    display: inline-block;
+    padding: 8px 30px;
+    border-radius: 5px;
+    transition: 0.5s;
+    margin-top: 30px;
+}
+
+    .hero .btn-back:hover,
+    .hero .btn-back:focus:hover {
+        background: var(--accent-color);
     }
 
 .flag-icon-large {

@@ -15,19 +15,20 @@ namespace MyBankApp.Pages.Account
             _transactionService = transactionService;
             _accountService = accountService;
         }
+        [BindProperty(SupportsGet = true)]
+        public int CustomerId { get; set; }
         public decimal Balance { get; set; }
 
         [BindProperty]
         [Range(100, 10000, ErrorMessage = "Amount must be between 100-10,000.")]
         public decimal Amount { get; set; }
 
-        [BindProperty]
+        [BindProperty(SupportsGet = true)]
         public int FromAccount { get; set; }
 
         [BindProperty]
         public int ToAccount { get; set; }
 
-        [BindProperty]
         public string Message { get; set; }
         public void OnGet(int fromAccount)
         {
@@ -47,16 +48,22 @@ namespace MyBankApp.Pages.Account
         {
             if (!ModelState.IsValid)
             {
+            //foreach (var error in ModelState)
+            //{
+            //    foreach (var subError in error.Value.Errors)
+            //    {
+            //        Console.WriteLine($"ModelState error on '{error.Key}': {subError.ErrorMessage}");
+            //    }
+            //}
                 return Page();
             }
 
-        
             var result = _transactionService.Transfer(FromAccount, ToAccount, Amount);
            
             if (result == ResponseCode.OK)
             {
                 Message = "Transfer completed!";
-                return RedirectToPage("/Customers/CustomerDetails", new { id = ""});
+                return RedirectToPage("/Customers/CustomerDetails", new { id = CustomerId });
             }
 
             if (result == ResponseCode.BalanceTooLow)

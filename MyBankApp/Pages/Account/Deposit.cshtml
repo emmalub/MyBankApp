@@ -3,30 +3,22 @@
 @{
     ViewData["Title"] = "Deposit";
 }
-<div class="container mt-4">
-    <h2>Deposit</h2>
+<section id="hero" class="hero section">
+    <div class="container">
+    
+        <h2>Deposit</h2>
+        <h3>Balance: @Model.Balance</h3>
 
-    <h5 class="text-muted">Current Balance: <strong>@Model.Balance.ToString("C0")</strong></h5>
-
-    <form method="post">
-        <div class="form-group mt-3">
-            <label asp-for="Amount">Amount</label>
-            <input class="form-control" asp-for="Amount" />
-            <span class="field-validation-error" asp-validation-for="Amount"></span>
-        </div>
-        @* <div class="form-group mt-3"> *@
-        @*     <label asp-for="DepositDate">Date</label> *@
-        @*     <input class="form-control" asp-for="DepositDate" /> *@
-        @*     <span class="field-validation-error" asp-validation-for="DepositDate"></span> *@
-        @* </div> *@
-        @* <div class="form-group mt-3"> *@
-        @*     <label asp-for="Comment">Comment</label> *@
-        @*     <input class="form-control" asp-for="Comment" /> *@
-        @*     <span class="field-validation-error" asp-validation-for="Comment"></span> *@
-        @* </div> *@
-        <button type="submit" class="btn btn-primary">Deposit</button>
-    </form>
-    <a asp-page="/Customer" 
-    asp-route-id="@Request.Query["customerId"]" 
-    class="btn btn-secondary mt-3">Back</a>
-</div>
+        <form method="post">
+            <div class="form-group mt-1">
+                <label asp-for="Amount">Amount</label>
+                <input class="form-control form-control-sm w-25" asp-for="Amount" />
+                <span class="field-validation-error" asp-validation-for="Amount"></span>
+            </div>
+            <button type="submit" class="btn-small">Deposit</button>
+        </form>
+        <a asp-page="/Customers/CustomerDetails"
+           asp-route-id="@Request.Query["customerId"]"
+           class="btn-back">Back</a>
+    </div>
+</section>
