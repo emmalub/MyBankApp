@@ -1,11 +1,5 @@
 ﻿using AutoMapper;
 using DataAccessLayer.Models;
-using NuGet.Protocol.Core.Types;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DataAccessLayer.DTOs;
 using Services.Services.Interfaces;
 using Services.Repositories.Interfaces;
@@ -87,8 +81,63 @@ namespace Services.Services
         }
 
 
-        // SLUT NYTT 14/4
+        public ResponseCode Transfer(int fromAccountId, int toAccountId, decimal amount)
+        {
+            if (fromAccountId == toAccountId)
+            { 
+                return ResponseCode.SameAccount;
+            }
 
+            if (amount < 100 || amount > 10000)
+            {
+                return ResponseCode.IncorrectAmount;
+            }
+
+            var frontAccountDto = _accountRepo.GetById(fromAccountId);
+            var toAccountDto = _accountRepo.GetById(toAccountId);
+
+            if (frontAccountDto == null || toAccountDto == null)
+            {
+                return ResponseCode.AccountNotFound;
+            }
+
+            if (frontAccountDto.Balance < amount)
+            {
+                return ResponseCode.BalanceTooLow;
+            }
+            var frontAccount = _mapper.Map<Account>(frontAccountDto);
+            var toAccount = _mapper.Map<Account>(toAccountDto);
+
+            frontAccount.Balance -= amount;
+            toAccount.Balance += amount;
+
+            _accountRepo.UpdateAccount(frontAccount);
+            _accountRepo.UpdateAccount(toAccount);
+
+            var transactionFrom = new Transaction
+            {
+                AccountId = fromAccountId,
+                Amount = -amount,
+                Balance = frontAccount.Balance - amount,
+                Type = "Debit",
+                Operation = "Transfer to account " + toAccountId,
+                Date = DateOnly.FromDateTime(DateTime.UtcNow),
+            };
+
+            var transactionTo = new Transaction
+            {
+                AccountId = toAccountId,
+                Amount = amount,
+                Balance = toAccount.Balance + amount,
+                Type = "Credit",
+                Operation = "Transfer from account " + fromAccountId,
+                Date = DateOnly.FromDateTime(DateTime.UtcNow),
+            };
+
+            _transactionRepo.Add(transactionFrom);
+            _transactionRepo.Add(transactionTo);
+            return ResponseCode.OK;
+        }
 
 
         public ResponseCode Withdraw(int accountId, decimal amount)

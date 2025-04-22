@@ -12,7 +12,8 @@ public enum ResponseCode
     BalanceTooLow,
     IncorrectAmount,
     CommentEmpty,
-    AccountNotFound
+    AccountNotFound,
+    SameAccount,
 }
 namespace Services.Services.Interfaces
 {
