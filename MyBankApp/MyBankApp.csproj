@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="img\landingpage.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="wwwroot\assets\img\flagga-dk.jpg" />
     <None Include="wwwroot\assets\img\flagga-fi.png" />
     <None Include="wwwroot\assets\img\flagga-no.png" />
