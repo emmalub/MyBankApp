@@ -33,3 +33,27 @@ Identity Framework
 Bootstrap 5 (customized template)
 
 JavaScript & AJAX
+
+## System Architecture
+
+Presentation Layer: Razor Pages with ViewModels only (no database entities exposed in views).
+
+Service Layer: Contains business logic and uses DTOs.
+
+Data Access Layer: Includes DTOs, Repositories encapsulate database operations.
+
+## Getting Started
+
+Clone the repository.
+
+Update appsettings.json with your SQL Server connection string.
+
+Run the application. Data seeding will create roles and demo users.
+
+### Future Improvements
+
+Admin functionality for managing users (currently stubbed).
+
+Further UI enhancements and accessibility improvements.
+
+Unit and integration testing.
