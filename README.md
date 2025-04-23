@@ -1,5 +1,7 @@
 # Peoples Bank Web Application
 
+![Dashboard Screenshot](assets/ing/landingpage.png)
+
 This is a web-based banking system developed with ASP.NET Core Razor Pages. The application simulates a real-world bank environment and was built as part of a .NET full stack development course.
 
 ## Features
