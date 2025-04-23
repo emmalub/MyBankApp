@@ -16,21 +16,6 @@ namespace MyBankApp.ViewModels
         public List<TransactionDTO> Transactions { get; set; } = new();
         public virtual ICollection<Disposition> Dispositions { get; set; } = new List<Disposition>();
         public virtual ICollection<Loan> Loans { get; set; } = new List<Loan>();
-
-
-        // GÖR OM TILL AUTOMAPPER SEN
-        public static class AccountMapper
-        {
-            public static List<AccountViewModel> MapToViewModel(List<AccountDTO> accountDTOs)
-            {
-                return accountDTOs.Select(a => new AccountViewModel
-                {
-                    AccountId = a.AccountId,
-                    Balance = a.Balance,
-                    Created = a.Created,
-                    LoansTotal = a.LoansTotal
-                }).ToList();
-            }
-        }
+    
     }
 }

@@ -26,6 +26,9 @@ namespace MyBankApp.Pages.Account
         public int CustomerId { get; set; }
         public int AccountId { get; set; }
 
+        [BindProperty(SupportsGet = true)]
+        public string? SuccessMessage { get; set; }
+
         public void OnGet(int accountId, int customerId)
         {
             var account = _accountService.GetAccountDetails(accountId);
@@ -52,7 +55,7 @@ namespace MyBankApp.Pages.Account
 
             if (status == ResponseCode.OK)
             {
-                return RedirectToPage("/Customers/CustomerDetails", new { id = CustomerId });
+                return RedirectToPage("/Account/Withdraw", new { accountId = accountId, customerId = CustomerId, successMessage = "Withdraw successful!" });
             }
 
             if (status == ResponseCode.IncorrectAmount)

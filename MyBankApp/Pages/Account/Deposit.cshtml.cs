@@ -24,6 +24,10 @@ namespace MyBankApp.Pages.Account
         public int CustomerId { get; set; }
         public int AccountId { get; set; }
 
+        [BindProperty(SupportsGet = true)]
+        public string? SuccessMessage { get; set; }
+
+
         //[Required(ErrorMessage = "Please add a comment")]
         //[MinLength(5, ErrorMessage = "Comments must be at least 5 characters long")]
         //[MaxLength(250, ErrorMessage = "Comment cant be more than 250 characters long")]
@@ -55,7 +59,7 @@ namespace MyBankApp.Pages.Account
 
             if (status == ResponseCode.OK)
             {
-                return RedirectToPage("/Customers/CustomerDetails", new { id = CustomerId });
+                return RedirectToPage("/Account/Deposit", new { accountId = accountId, customerId = CustomerId, successMessage = "Deposit successful!" });
             }
 
             if (status == ResponseCode.IncorrectAmount)

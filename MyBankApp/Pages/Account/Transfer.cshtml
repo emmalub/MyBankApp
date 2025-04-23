@@ -4,9 +4,10 @@
     ViewData["Title"] = "Transfer";
 
 }
+<section class="content">
+    <div class="container mt-2">
 
-<section id="hero" class="hero section">
-        <div class="container mt-2">
+        @await Html.PartialAsync("_StatusMessage", Model.SuccessMessage)
 
         <h1>Transfer</h1>
         <div asp-validation-summary="All" class="text-danger mb-3"></div>
@@ -19,7 +20,7 @@
 
             <div class="form-group mt-3">
                 <label asp-for="ToAccount">To Account ID</label>
-                <input class="form-control form-control-sm w-25" asp-for="ToAccount" />
+                <input class="form-control form-control-sm w-25" asp-for="ToAccount" type="text" />
                 <span class="text-danger" asp-validation-for="ToAccount"></span>
             </div>
 
@@ -35,11 +36,6 @@
         <a asp-page="/Customers/CustomerDetails"
            asp-route-id="@Request.Query["customerId"]"
            class="btn-back">Back</a>
-
-        @if (!string.IsNullOrEmpty(Model.Message))
-        {
-            <div class="alert alert-success mt-3">@Model.Message</div>
-        }
     </div>
 </section>
 

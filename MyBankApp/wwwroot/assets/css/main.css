@@ -274,8 +274,8 @@ h6 {
 
 
 
-    @media (max-width: 1200px) {
-        .header .logo {
+@media (max-width: 1200px) {
+    .header .logo {
         order: 1;
     }
 
@@ -531,6 +531,83 @@ h6 {
                 display: block;
             }
 }
+/*--------------------------------------------------------------
+    Content Section
+--------------------------------------------------------------*/
+
+.content {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-image: url('assets/img/hero-bg-abstract.jpg');
+    background-color: var(--background-color);
+}
+
+
+    .content h1 {
+        font-size: 56px;
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+
+    .content h2 {
+        font-size: 22px;
+        font-weight: 600;
+        margin-bottom: 20px;
+        color: var(--heading-color);
+    }
+
+    .content h3 {
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 20px;
+    }
+
+    .content label {
+        font-weight: 600;
+        color: var(--accent-color);
+        margin-top: 7px;
+        font-size: 19px; /* Justera storlek för bättre läsbarhet */
+        display: inline-block;
+        margin-bottom: 5px; /* Mellanrum under etiketten */
+    }
+    .content .btn-small,
+    .content .btn-small:focus {
+        color: var(--contrast-color);
+        background: var(--accent-color);
+        font-weight: 600;
+        font-size: 15px;
+        letter-spacing: 0.5px;
+        display: inline-block;
+        padding: 8px 30px;
+        border-radius: 5px;
+        transition: 0.5s;
+        margin-top: 30px;
+        border: none;
+    }
+
+        .content .btn-small:hover,
+        .content .btn-small:focus:hover {
+            background: color-mix(in srgb, var(--accent-color), transparent 15%);
+        }
+
+    .content .btn-back,
+    .content .btn-back:focus {
+        color: var(--contrast-color);
+        background: color-mix(in srgb, var(--accent-color), transparent 35%);
+        font-weight: 600;
+        font-size: 15px;
+        letter-spacing: 0.5px;
+        display: inline-block;
+        padding: 8px 30px;
+        border-radius: 5px;
+        transition: 0.5s;
+        margin-top: 10px;
+    }
+
+        .content .btn-back:hover,
+        .content .btn-back:focus:hover {
+            background: var(--accent-color);
+        }
 
 /*--------------------------------------------------------------
     # Custom Table Styling
@@ -538,7 +615,7 @@ h6 {
 .custom-table {
     width: 100%;
     /*    min-width: unset; */
-   table-layout: auto;
+    table-layout: auto;
 }
 
 
@@ -548,83 +625,84 @@ h6 {
     margin: 0 auto;
     margin-left: -6%;
 }
-   
-        .custom-table thead tr, .custom-table thead th {
-        padding-bottom: 30px;
-        border-top: none;
-        border-bottom: none !important;
-        color: var(--accent-color);
+
+.custom-table thead tr, .custom-table thead th {
+    padding-bottom: 30px;
+    border-top: none;
+    border-bottom: none !important;
+    color: var(--accent-color);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .2rem;
+}
+
+.custom-table tbody th, .custom-table tbody td {
+    color: var(--default-font);
+    font-weight: 400;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    font-size: 15px;
+    border: none;
+    -webkit-transition: .3s all ease;
+    -o-transition: .3s all ease;
+    transition: .3s all ease;
+}
+
+    .custom-table tbody th small, .custom-table tbody td small {
+        color: rgba(255, 255, 255, 0.3);
+        font-weight: 300;
+    }
+
+    .custom-table tbody th a, .custom-table tbody td a {
+        color: rgba(255, 255, 255, 0.3);
+    }
+
+    .custom-table tbody th .more, .custom-table tbody td .more {
+        color: rgba(255, 255, 255, 0.3);
         font-size: 11px;
+        font-weight: 900;
         text-transform: uppercase;
         letter-spacing: .2rem;
     }
 
-    .custom-table tbody th, .custom-table tbody td {
-        color: var(--default-font);
-        font-weight: 400;
-        padding-bottom: 20px;
-        padding-top: 20px;
-        font-size: 15px;
-        border: none;
-        -webkit-transition: .3s all ease;
-        -o-transition: .3s all ease;
-        transition: .3s all ease;
+.custom-table tbody tr {
+    -webkit-transition: .3s all ease;
+    -o-transition: .3s all ease;
+    transition: .3s all ease;
+}
+
+    .custom-table tbody tr:hover td, .custom-table tbody tr:focus td {
+        color: var(--accent-color);
+        transform: scale(1.02);
+        transition: transform 0.3s ease-in-out;
     }
 
-        .custom-table tbody th small, .custom-table tbody td small {
-            color: rgba(255, 255, 255, 0.3);
-            font-weight: 300;
-        }
-
-        .custom-table tbody th a, .custom-table tbody td a {
-            color: rgba(255, 255, 255, 0.3);
-        }
-
-        .custom-table tbody th .more, .custom-table tbody td .more {
-            color: rgba(255, 255, 255, 0.3);
-            font-size: 11px;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: .2rem;
-        }
-
-    .custom-table tbody tr {
-        -webkit-transition: .3s all ease;
-        -o-transition: .3s all ease;
-        transition: .3s all ease;
+    .custom-table tbody tr:hover td, .custom-table tbody tr:focus p {
+        color: var(--accent-color);
     }
 
-        .custom-table tbody tr:hover td, .custom-table tbody tr:focus td {
-            color: var(--accent-color);
-            transform: scale(1.02);
-            transition: transform 0.3s ease-in-out;
-        }
-        .custom-table tbody tr:hover td, .custom-table tbody tr:focus p {
+        .custom-table tbody tr:hover td a, .custom-table tbody tr:focus td a {
             color: var(--accent-color);
         }
 
-            .custom-table tbody tr:hover td a, .custom-table tbody tr:focus td a {
-                color: var(--accent-color);
-            }
-
-            .custom-table tbody tr:hover td .more, .custom-table tbody tr:focus td .more {
-                color: var(--accent-color);
-            }
-
-    .custom-table .td-box-wrap {
-        padding: 0;
-    }
-
-    .custom-table .box {
-        background: #fff;
-        border-radius: 4px;
-        margin-top: 15px;
-        margin-bottom: 15px;
-    }
-
-        .custom-table .box td, .custom-table .box th {
-            border: none !important;
+        .custom-table tbody tr:hover td .more, .custom-table tbody tr:focus td .more {
+            color: var(--accent-color);
         }
+
+.custom-table .td-box-wrap {
+    padding: 0;
+}
+
+.custom-table .box {
+    background: #fff;
+    border-radius: 4px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+    .custom-table .box td, .custom-table .box th {
+        border: none !important;
+    }
 
 /* ---------------------------------------------------------
 hanterar placeringen av knappen och sökfältet
@@ -632,9 +710,9 @@ hanterar placeringen av knappen och sökfältet
 */
 
 .header-actions {
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 20px;
 }
 
@@ -649,6 +727,7 @@ hanterar placeringen av knappen och sökfältet
     font-size: 18px;
     color: var(--default-font)
 }
+
     .create-btn:hover {
         color: var(--accent-color);
         text-decoration: none;
@@ -718,25 +797,26 @@ hanterar placeringen av knappen och sökfältet
     color: var(--default-color);
 }
 
-.pagination-links a {
-    text-decoration: none; 
-    color: var(--default-color); 
-    margin: 0 5px; 
-    font-size: 14px;
-}
+    .pagination-links a {
+        text-decoration: none;
+        color: var(--default-color);
+        margin: 0 5px;
+        font-size: 14px;
+    }
 
-    .pagination-links a.active {
-        font-weight: bold; 
+        .pagination-links a.active {
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+    .pagination-links span {
+        margin: 0 5px;
+        font-size: 18px;
         color: var(--accent-color);
     }
 
-.pagination-links span {
-    margin: 0 5px;
-    font-size: 18px;
-    color: var(--accent-color);
-}
 .pagination-icon {
-    font-size: 18px; 
+    font-size: 18px;
     color: var(--accent-color);
 }
 
@@ -797,26 +877,29 @@ hanterar placeringen av knappen och sökfältet
     color: var(--accent-color);
     cursor: pointer;
 }
+
     .profile-edit-btn:hover {
         color: #FF9C00;
     }
 
-    .proile-rating span {
-        color: #495057;
-        font-size: 15px;
-        font-weight: 600;
-    }
+.proile-rating span {
+    color: #495057;
+    font-size: 15px;
+    font-weight: 600;
+}
 
 .profile-work h1 {
     margin-top: 20px;
     margin-bottom: 0;
     background: #fff;
 }
+
 .profile-work h2 {
     margin-top: -20%;
     margin-bottom: 20px;
     background: #fff;
 }
+
 .profile-work h3 {
     color: var(--default-font);
     font-size: 20px;
@@ -833,9 +916,9 @@ hanterar placeringen av knappen och sökfältet
 
     /* Justera aktiv tabb */
     .nav-tabs .nav-link.active {
-        color: #ffffff; 
-        background-color: var(--accent-color); 
-        border-bottom: 2px solid #432783; 
+        color: #ffffff;
+        background-color: var(--accent-color);
+        border-bottom: 2px solid #432783;
     }
 
     /* Hover-effekt för tabb */
@@ -843,38 +926,39 @@ hanterar placeringen av knappen och sökfältet
         color: #FF9C00;
         background-color: #f1f1f1;
     }
+
     .nav-tabs .nav-link.active:hover {
-        color: #ffffff; 
-        background-color: var(--accent-color); 
-        border-bottom: 2px solid #ff9c00; 
+        color: #ffffff;
+        background-color: var(--accent-color);
+        border-bottom: 2px solid #ff9c00;
     }
 
 .profile-head .nav-tabs {
     margin-bottom: 15%;
 }
-    /*.profile-head .nav-tabs .nav-link {
+/*.profile-head .nav-tabs .nav-link {
         color: var(--accent-color);*/ /* Färg på texten */
-        /*font-weight: 600;*/ /* Fetstil */
-        /*font-size: 16px;*/ /* Textstorlek */
-        /*text-transform: uppercase;*/ /* Gör texten versaler */
-        /*border: none;
+/*font-weight: 600;*/ /* Fetstil */
+/*font-size: 16px;*/ /* Textstorlek */
+/*text-transform: uppercase;*/ /* Gör texten versaler */
+/*border: none;
         border-radius: 0;
         padding: 12px 15px;*/ /* Padding för större klickyta */
-        /*background-color: transparent;
+/*background-color: transparent;
     }*/
 
-        /* Aktiv tabb */
-        /*.profile-head .nav-tabs .nav-link.active {
+/* Aktiv tabb */
+/*.profile-head .nav-tabs .nav-link.active {
             color: #fff;*/ /* Ändra textfärg på aktiv tabb */
-            /*border-bottom: 2px solid #432783;*/ /* En tydligare bottenlinje */
-            /*background-color: var(--primary-color);*/ /* Lägg till bakgrundsfärg för aktiv tabb */
-        /*}*/
+/*border-bottom: 2px solid #432783;*/ /* En tydligare bottenlinje */
+/*background-color: var(--primary-color);*/ /* Lägg till bakgrundsfärg för aktiv tabb */
+/*}*/
 
-        /* Hover-effekt för tabbar */
-        /*.profile-head .nav-tabs .nav-link:hover {
+/* Hover-effekt för tabbar */
+/*.profile-head .nav-tabs .nav-link:hover {
             color: #FF9C00 !important;*/ /* Färg när man hovrar */
-            /*background-color: rgba(0, 0, 0, 0.1);*/ /* Lätt grå bakgrund vid hover */
-        /*}*/
+/*background-color: rgba(0, 0, 0, 0.1);*/ /* Lätt grå bakgrund vid hover */
+/*}*/
 
 
 .accounts-tab label {
@@ -1195,7 +1279,7 @@ section,
 # Hero Section
 --------------------------------------------------------------*/
 .hero {
-/*    background-image: url('assets/img/hero-bg-abstract.jpg'); */
+    /*    background-image: url('assets/img/hero-bg-abstract.jpg'); */
     width: 100;
     min-height: calc(100vh - 100px);
     position: relative;
@@ -1235,6 +1319,7 @@ section,
         font-weight: 700;
         line-height: 72px;
     }
+
     .hero h2 {
         margin: 0;
         font-size: 36px;
@@ -1322,15 +1407,15 @@ section,
 
 .icon-box {
     text-align: center;
-    line-height: 150px; 
+    line-height: 150px;
 }
 
     .icon-box .flag-icon {
-        font-size: 100px; 
+        font-size: 100px;
     }
 
 .hero .icon-box {
-/*    background-color: var(--surface-color);*/
+    /*    background-color: var(--surface-color);*/
     padding: 50px 30px;
     position: relative;
     overflow: hidden;
@@ -1357,7 +1442,7 @@ section,
         text-align: center;
     }
 
-        .hero .icon-box .title {
+    .hero .icon-box .title {
         font-weight: 700;
         margin-bottom: 15px;
         font-size: 18px;
@@ -1406,6 +1491,11 @@ section,
             color: var(--accent-color);
         }
 }
+
+.section-top-adjust {
+    margin-top: -50px;
+}
+
 
 /*--------------------------------------------------------------
 # About Section
@@ -1779,6 +1869,7 @@ section,
     margin-right: 12px;
     margin-left: -25px;
 }
+
 .custom-btn p {
     font-size: 1rem;
     font-weight: 400;
@@ -1957,12 +2048,12 @@ section,
 }
 
 /*.gradient-custom-2 {*/
-    /* fallback for old browsers */
-    /*background: #a1c4fd;*/
-    /* Chrome 10-25, Safari 5.1-6 */
-    /*background: -webkit-linear-gradient(to right, rgba(161, 196, 253, 1), rgba(194, 233, 251, 1));*/
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    /*background: linear-gradient(to right, rgba(161, 196, 253, 1), rgba(194, 233, 251, 1))*/
+/* fallback for old browsers */
+/*background: #a1c4fd;*/
+/* Chrome 10-25, Safari 5.1-6 */
+/*background: -webkit-linear-gradient(to right, rgba(161, 196, 253, 1), rgba(194, 233, 251, 1));*/
+/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+/*background: linear-gradient(to right, rgba(161, 196, 253, 1), rgba(194, 233, 251, 1))*/
 
 
 .bg-indigo {

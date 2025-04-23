@@ -3,10 +3,12 @@
 @{
     ViewData["Title"] = "Deposit";
 }
-<section id="hero" class="hero section">
-    <div class="container">
-    
-        <h2>Deposit</h2>
+<section class="content">
+    <div class="container mt-2">
+
+        @await Html.PartialAsync("_StatusMessage", Model.SuccessMessage)
+
+        <h1>Deposit</h1>
         <h3>Balance: @Model.Balance</h3>
 
         <form method="post">

@@ -34,37 +34,16 @@ namespace Services.Services
             }).ToList();
         }
 
-        // NYTT 14/4
         public IQueryable<TransactionDTO> GetSortedTransactions(int accountId, string sortColumn, string sortOrder)
         {
             var query = _transactionRepo.GetByAccountId(accountId).AsQueryable();
 
-
-            switch (sortColumn)
-            {
-                case "Date":
-                    query = sortOrder == "asc" ? query.OrderBy(t => t.Date.ToDateTime(TimeOnly.MinValue)) : query.OrderByDescending(t => t.Date.ToDateTime(TimeOnly.MinValue));
-                    break;
-                case "Amount":
-                    query = sortOrder == "asc" ? query.OrderBy(t => t.Amount) : query.OrderByDescending(t => t.Amount);
-                    break;
-                case "Type":
-                    query = sortOrder == "asc" ? query.OrderBy(t => t.Type) : query.OrderByDescending(t => t.Type);
-                    break;
-                case "Balance":
-                    query = sortOrder == "asc" ? query.OrderBy(t => t.Balance) : query.OrderByDescending(t => t.Balance);
-                    break;
-                default:
-                    query = query.OrderBy(t => t.Date.ToDateTime(TimeOnly.MinValue));
-                    break;
-            }
             return query.Select(t => new TransactionDTO
             {
                 Type = t.Type,
                 Amount = t.Amount,
                 Balance = t.Balance,
                 Date = t.Date,
-                //Date = t.Date.ToDateTime(TimeOnly.MinValue)
             });
         }
         public List<TransactionDTO> PaginateTransactions(IQueryable<TransactionDTO> transactions, int pageNo)

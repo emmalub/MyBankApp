@@ -4,8 +4,10 @@
     ViewData["Title"] = "Withdraw";
 
 }
-<section id="hero" class="hero section">
+<section class="content">
     <div class="container mt-2">
+
+    @await Html.PartialAsync("_StatusMessage", Model.SuccessMessage)
 
         <h1>Withdraw</h1>
         <h3>Balance: @Model.Balance</h3>

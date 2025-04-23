@@ -26,6 +26,7 @@ namespace Services.Repositories
                 .AsNoTracking()
                 .Where(t => t.AccountId == accountId)
                 .OrderByDescending(t => t.Date)
+                .ThenBy(t => t.TransactionId)
                 .Skip(skip)
                 .Take(take)
                 .ToList();

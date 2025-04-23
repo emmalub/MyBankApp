@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
 using Services.Services.Interfaces;
+using Microsoft.Identity.Client;
 
 namespace MyBankApp.Pages.Account
 {
@@ -17,6 +18,7 @@ namespace MyBankApp.Pages.Account
         }
         [BindProperty(SupportsGet = true)]
         public int CustomerId { get; set; }
+        public int AccountId { get; set; }
         public decimal Balance { get; set; }
 
         [BindProperty]
@@ -29,7 +31,10 @@ namespace MyBankApp.Pages.Account
         [BindProperty]
         public int ToAccount { get; set; }
 
-        public string Message { get; set; }
+        [BindProperty(SupportsGet = true)]
+        public string? SuccessMessage { get; set; }
+
+
         public void OnGet(int fromAccount)
         {
             FromAccount = fromAccount;
@@ -48,13 +53,6 @@ namespace MyBankApp.Pages.Account
         {
             if (!ModelState.IsValid)
             {
-            //foreach (var error in ModelState)
-            //{
-            //    foreach (var subError in error.Value.Errors)
-            //    {
-            //        Console.WriteLine($"ModelState error on '{error.Key}': {subError.ErrorMessage}");
-            //    }
-            //}
                 return Page();
             }
 
@@ -62,8 +60,7 @@ namespace MyBankApp.Pages.Account
            
             if (result == ResponseCode.OK)
             {
-                Message = "Transfer completed!";
-                return RedirectToPage("/Customers/CustomerDetails", new { id = CustomerId });
+                return RedirectToPage("/Account/Transfer", new {fromAccount = FromAccount, customerId = CustomerId, successMessage = "Transfer completed!" });
             }
 
             if (result == ResponseCode.BalanceTooLow)
