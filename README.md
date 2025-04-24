@@ -59,4 +59,4 @@ Further UI enhancements and accessibility improvements.
 Unit and integration testing.
 
 ## Live Demo!
-Check out the live app here: [Peoples Bank on Azure]([https://yourapp.azurewebsites.net](https://peoplesbank-cughbwd6bgffe8ev.swedencentral-01.azurewebsites.net/)) 
+Check out the live app here: [Peoples Bank on Azure](https://peoplesbank-cughbwd6bgffe8ev.swedencentral-01.azurewebsites.net/)
