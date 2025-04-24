@@ -48,6 +48,16 @@ namespace MyBankApp
 
             var app = builder.Build();
 
+            // Behövs för Azure
+            using (var scope = app.Services.CreateScope())
+            {
+                var dbContext = scope.ServiceProvider.GetRequiredService<BankAppDataContext>();
+                if (dbContext.Database.IsRelational())
+                {
+                    dbContext.Database.Migrate();
+                }
+            }
+
             using (var scope = app.Services.CreateScope())
             {
                 scope.ServiceProvider.GetService<DataInitializer>().SeedData();
@@ -61,7 +71,6 @@ namespace MyBankApp
             else
             {
                 app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
