@@ -60,3 +60,13 @@ Unit and integration testing.
 
 ## Live Demo!
 Check out the live app here: [Peoples Bank on Azure](https://peoplesbank-cughbwd6bgffe8ev.swedencentral-01.azurewebsites.net/)
+Login: 
+
+As Admin:
+richard.chalk@admin.se
+pw: Abc123# 
+
+As Cashier:
+richard.chalk@cashier.se
+pw: Abc123#
+
