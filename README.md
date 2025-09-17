@@ -9,7 +9,7 @@ This is a web-based banking system developed with ASP.NET Core Razor Pages. The 
 ![Customers](MyBankApp/wwwroot/assets/img/PB2.png)
 
 ## Create new customer
-![Create New Customer](MyBankApp/wwwroot/assets/img/PB2.png)
+![Create New Customer](MyBankApp/wwwroot/assets/img/PB3.png)
 
 
 ## Features
