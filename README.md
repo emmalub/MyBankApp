@@ -2,6 +2,16 @@
 
 This is a web-based banking system developed with ASP.NET Core Razor Pages. The application simulates a real-world bank environment and was built as part of a .NET full stack development course.
 
+## Landingpage
+![Landingpage](img/PB1.png)
+
+## Customers
+![Customers](img/PB2.png)
+
+## Create new customer
+![Create New Customer](img/PB2.png)
+
+
 ## Features
 
 Customer Management: View, create, update, and delete customers.
